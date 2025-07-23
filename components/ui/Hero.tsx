@@ -17,12 +17,12 @@ export function Hero() {
     {
       icon: <Award className="w-10 h-10" />,
       title: '地域密着の医療',
-      description: 'かかりつけ医として幅広い診療に対応',
+      description: '2001年設立のかかりつけ医として幅広い診療に対応',
     },
     {
       icon: <Clock className="w-10 h-10" />,
       title: 'アクセス良好',
-      description: '川口元郷駅徒歩10分・駐車場完備',
+      description: '駐車場完備(軽1台・普通車10台)',
     },
   ]
 
@@ -52,14 +52,19 @@ export function Hero() {
       
       <div className="container mx-auto px-6 relative">
         <div className="max-w-5xl mx-auto text-center">
-          <h1 className="text-5xl md:text-7xl font-bold mb-8 leading-tight animate-fade-in">
-            <span className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent inline-block animate-gradient-x">地域に密着した</span>
-            <br />
-            <span className="text-foreground inline-block animate-fade-in-up" style={{ animationDelay: '200ms' }}>内科・消化器のかかりつけ医</span>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-8 leading-tight animate-fade-in">
+            <span className="text-foreground block">地域に密着した</span>
+            <span className="text-foreground block animate-fade-in-up" style={{ animationDelay: '200ms' }}>
+              <span className="md:hidden">
+                <span className="inline-block">内科・消化器内科の</span>
+                <span className="inline-block">かかりつけ医</span>
+              </span>
+              <span className="hidden md:inline">内科・消化器内科のかかりつけ医</span>
+            </span>
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed animate-fade-in-up" style={{ animationDelay: '400ms' }}>
-            日本消化器内視鏡学会・消化器病学会など複数の専門医資格を持つ院長が、<br />
-            胃腸のトラブルから生活習慣病まで幅広く診療します。
+            新井町内科消化器科クリニックでは、専門医資格を持つ医師が<br />
+            一般内科から消化器内科まで幅広く診療します。
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center mb-20 animate-fade-in-up" style={{ animationDelay: '600ms' }}>
             <Button size="lg" className="text-lg px-8 animate-bounce-in flex items-center gap-2" style={{ animationDelay: '800ms' }}>

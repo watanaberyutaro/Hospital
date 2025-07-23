@@ -2,13 +2,14 @@ import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Card } from '@/components/ui/Card'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 import { Users, Heart, Award, Building, Calendar, MapPin } from 'lucide-react'
+import { FutureUpdate } from '@/components/ui/FutureUpdate'
 
 export default function AboutPage() {
   const stats = [
-    { number: '30年', label: '開院からの歴史', icon: Calendar },
-    { number: '150名', label: '医療従事者', icon: Users },
-    { number: '15科', label: '診療科目', icon: Building },
-    { number: '200床', label: '病床数', icon: MapPin },
+    { number: '2001年', label: '設立', icon: Calendar },
+    { number: '3名', label: '医師', icon: Users },
+    { number: '2科', label: '診療科目', icon: Building },
+    { number: '11台', label: '駐車場', icon: MapPin },
   ]
 
   const features = [
@@ -54,12 +55,12 @@ export default function AboutPage() {
                 私たちの使命
               </h2>
               <p className="text-gray-600 dark:text-gray-300 mb-6">
-                地域医療センター病院は、1994年の開院以来、地域の皆様の健康と生命を守る使命を果たしてまいりました。
-                「患者様一人ひとりを大切に」を理念として、質の高い医療を提供し続けています。
+                新井町内科消化器科クリニックは、2001年の開院以来、地域の皆様の健康を守るかかりつけ医として診療を行ってまいりました。
+                「患者様一人ひとりに寄り添い、分かりやすい説明と丁寧な診療」をモットーに、内科・消化器内科の専門医が診療を提供しています。
               </p>
               <p className="text-gray-600 dark:text-gray-300 mb-6">
-                最新の医療技術と温かい人間性を兼ね備えた医療チームが、24時間365日体制で患者様の健康をサポートします。
-                地域の中核病院として、救急医療から専門医療まで幅広く対応し、皆様の信頼にお応えします。
+                特に内視鏡センターでは、上下部内視鏡検査（胃・大腸カメラ）を中心に、苦痛の少ない検査を心がけております。
+                採血、処方、総合健診、人間ドック（局所的）など、地域の皆様の健康管理をサポートします。
               </p>
             </div>
             <div className="grid grid-cols-2 gap-6">
@@ -114,24 +115,24 @@ export default function AboutPage() {
               </h3>
               <div className="space-y-4">
                 <div className="flex justify-between">
-                  <span className="text-gray-600 dark:text-gray-300">病院名</span>
-                  <span className="text-gray-900 dark:text-white">地域医療センター病院</span>
+                  <span className="text-gray-600 dark:text-gray-300">医院名</span>
+                  <span className="text-gray-900 dark:text-white">新井町内科消化器科クリニック</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600 dark:text-gray-300">開院</span>
-                  <span className="text-gray-900 dark:text-white">1994年4月</span>
+                  <span className="text-gray-600 dark:text-gray-300">設立</span>
+                  <span className="text-gray-900 dark:text-white">2001年</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600 dark:text-gray-300">病床数</span>
-                  <span className="text-gray-900 dark:text-white">200床</span>
+                  <span className="text-gray-600 dark:text-gray-300">経営形態</span>
+                  <span className="text-gray-900 dark:text-white">個人経営</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600 dark:text-gray-300">診療科</span>
-                  <span className="text-gray-900 dark:text-white">15科</span>
+                  <span className="text-gray-900 dark:text-white">一般内科・消化器内科</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600 dark:text-gray-300">職員数</span>
-                  <span className="text-gray-900 dark:text-white">約150名</span>
+                  <span className="text-gray-600 dark:text-gray-300">電話番号</span>
+                  <span className="text-gray-900 dark:text-white">048-222-0700</span>
                 </div>
               </div>
             </Card>
@@ -144,23 +145,21 @@ export default function AboutPage() {
                 <div>
                   <h4 className="font-medium text-gray-900 dark:text-white mb-2">住所</h4>
                   <p className="text-gray-600 dark:text-gray-300">
-                    〒106-0032<br />
-                    東京都港区六本木1-2-3<br />
-                    メディカルビル5階
+                    〒333-0849<br />
+                    埼玉県川口市新井町16-1
                   </p>
                 </div>
                 <div>
-                  <h4 className="font-medium text-gray-900 dark:text-white mb-2">電車でお越しの方</h4>
+                  <h4 className="font-medium text-gray-900 dark:text-white mb-2">メール</h4>
                   <p className="text-gray-600 dark:text-gray-300">
-                    東京メトロ日比谷線・都営大江戸線<br />
-                    六本木駅より徒歩3分
+                    araityounaikasyoukaki25@gmail.com
                   </p>
                 </div>
                 <div>
                   <h4 className="font-medium text-gray-900 dark:text-white mb-2">お車でお越しの方</h4>
                   <p className="text-gray-600 dark:text-gray-300">
-                    駐車場完備（30台）<br />
-                    ※診察券提示で2時間無料
+                    駐車場完備<br />
+                    軽自動車1台、普通車10台
                   </p>
                 </div>
               </div>

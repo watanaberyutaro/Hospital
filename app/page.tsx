@@ -39,13 +39,13 @@ export default function HomePage() {
     {
       icon: <Clock className="w-6 h-6" />,
       title: '診療時間',
-      description: '月火水金 9:00-12:30 / 16:00-18:30',
+      description: '9:00-12:30 / 15:00-18:00',
       href: '/schedule',
     },
     {
       icon: <MapPin className="w-6 h-6" />,
       title: 'アクセス',
-      description: '川口元郷駅徒歩10分・駐車場8台完備',
+      description: '埼玉県川口市新井町16-1・駐車場11台完備',
       href: '/access',
     },
     {
@@ -68,8 +68,8 @@ export default function HomePage() {
       image: 'https://images.unsplash.com/photo-1551076805-e1869033e561?w=800&h=600&fit=crop',
     },
     {
-      name: 'アレルギー科',
-      description: '花粉症・食物アレルギーなどの検査と治療',
+      name: '健康診断',
+      description: '総合健診・人間ドック(局所的)・各種検査',
       image: 'https://images.unsplash.com/photo-1631815589968-fdb09a223b1e?w=800&h=600&fit=crop',
     },
     {
@@ -131,9 +131,7 @@ export default function HomePage() {
                       <h3 className="text-xl font-semibold">植村 博之</h3>
                       <p className="text-sm text-muted-foreground mt-1">うえむら ひろゆき</p>
                       <div className="mt-3 space-y-1">
-                        <p className="text-sm text-muted-foreground">日本消化器病学会専門医</p>
-                        <p className="text-sm text-muted-foreground">日本消化器内視鏡学会専門医</p>
-                        <p className="text-sm text-muted-foreground">日本肝臓学会専門医</p>
+                        <p className="text-sm text-muted-foreground">医学博士</p>
                       </div>
                     </div>
                   </div>
@@ -143,8 +141,8 @@ export default function HomePage() {
                     地域の皆様、こんにちは。新井町内科消化器クリニック院長の植村博之です。
                   </p>
                   <p className="text-muted-foreground leading-relaxed">
-                    当クリニックは、地域の皆様の「かかりつけ医」として、内科全般から消化器疾患まで幅広く診療を行っております。
-                    特に消化器内視鏡検査においては、長年の経験と最新の技術を活かし、苦痛の少ない検査を心がけております。
+                    2001年に開院以来、地域の皆様の「かかりつけ医」として、内科全般から消化器疾患まで幅広く診療を行っております。
+                    特に内視鏡センターでは、上下部内視鏡検査において長年の経験と最新の技術を活かし、苦痛の少ない検査を心がけております。
                   </p>
                   <p className="text-muted-foreground leading-relaxed">
                     「患者様一人ひとりに寄り添い、分かりやすい説明と丁寧な診療」をモットーに、

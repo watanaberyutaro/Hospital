@@ -8,14 +8,16 @@ export function Footer() {
     { name: 'ホーム', href: '/' },
     { name: 'クリニック紹介', href: '/about' },
     { name: '診療内容', href: '/departments' },
+    { name: '医師紹介', href: '/doctors' },
     { name: '内視鏡センター', href: '/endoscopy' },
+    { name: '医療連携', href: '/partnerships' },
     { name: 'アクセス', href: '/access' },
   ]
 
   const departments = [
     { name: '一般内科', href: '/departments/internal-medicine' },
     { name: '消化器内科', href: '/departments/gastroenterology' },
-    { name: 'アレルギー科', href: '/departments/allergy' },
+    { name: '健康診断', href: '/departments/health-checkup' },
     { name: '胃カメラ検査', href: '/endoscopy/gastroscopy' },
     { name: '大腸カメラ検査', href: '/endoscopy/colonoscopy' },
   ]
@@ -44,12 +46,12 @@ export function Footer() {
                 <span className="text-white font-bold text-xl">A</span>
               </div>
               <div>
-                <h3 className="text-xl font-bold">新井町内科消化器クリニック</h3>
+                <h3 className="text-xl font-bold">新井町内科消化器科クリニック</h3>
                 <p className="text-sm text-white/70">Araichō Internal Medicine & Gastroenterology Clinic</p>
               </div>
             </div>
             <p className="text-white/80 mb-6 leading-relaxed">
-              消化器病・内視鏡・肝臓の専門医が、<br />
+              2001年設立。内科・消化器内科の専門医が、<br />
               地域のかかりつけ医として幅広く診療します。
             </p>
             <div className="flex space-x-3">
@@ -106,9 +108,8 @@ export function Footer() {
                   <MapPin className="w-4 h-4 text-primary" />
                 </div>
                 <div className="text-white/80">
-                  <p>〒332-0005</p>
+                  <p>〒333-0849</p>
                   <p>埼玉県川口市新井町16-1</p>
-                  <p>新井町交差点角</p>
                 </div>
               </div>
               <div className="flex items-center space-x-3 group">
@@ -121,16 +122,16 @@ export function Footer() {
                 <div className="p-2 bg-primary/20 rounded-lg group-hover:bg-primary/30 transition-colors">
                   <Mail className="w-4 h-4 text-primary" />
                 </div>
-                <span className="text-white/80">info@araichou-clinic.jp</span>
+                <span className="text-white/80">araityounaikasyoukaki25@gmail.com</span>
               </div>
               <div className="flex items-start space-x-3 group">
                 <div className="p-2 bg-primary/20 rounded-lg group-hover:bg-primary/30 transition-colors">
                   <Clock className="w-4 h-4 text-primary" />
                 </div>
                 <div className="text-white/80">
-                  <p>月火水金: 9:00-12:30 / 16:00-18:30</p>
-                  <p>木土: 9:00-12:30（午後休診）</p>
-                  <p>日祝: 休診</p>
+                  <p>診療時間: 9:00-12:30 / 15:00-18:00</p>
+                  <p>受付: 午前12:30まで、午後17:30まで</p>
+                  <p>休診: 日曜・祝日・その他</p>
                 </div>
               </div>
             </div>
@@ -139,7 +140,7 @@ export function Footer() {
 
         <div className="border-t border-white/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-white/60 text-sm">
-            © {currentYear} 新井町内科消化器クリニック. All rights reserved.
+            © {currentYear} 新井町内科消化器科クリニック. All rights reserved.
           </p>
           <div className="mt-4 md:mt-0">
             <img 

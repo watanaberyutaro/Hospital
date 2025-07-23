@@ -25,7 +25,7 @@ export default function AccessPage() {
       icon: <Car className="w-6 h-6" />,
       title: 'お車でお越しの方',
       content: [
-        'クリニック前後に患者様専用駐車場8台完備',
+        '患者様専用駐車場: 軽自動車1台、普通車10台完備',
         '新井町交差点角の建物です',
         '満車の場合は近隣のコインパーキングをご利用ください',
       ],
@@ -38,7 +38,7 @@ export default function AccessPage() {
         <div className="container mx-auto px-6">
           <SectionHeading
             title="アクセス"
-            subtitle="新井町内科消化器クリニックへの交通案内"
+            subtitle="新井町内科消化器科クリニックへの交通案内"
           />
         </div>
       </section>
@@ -56,11 +56,10 @@ export default function AccessPage() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div>
-                    <p className="text-lg font-semibold mb-2">新井町内科消化器クリニック</p>
+                    <p className="text-lg font-semibold mb-2">新井町内科消化器科クリニック</p>
                     <p className="text-muted-foreground">
-                      〒332-0005<br />
-                      埼玉県川口市新井町16-1<br />
-                      新井町交差点角
+                      〒333-0849<br />
+                      埼玉県川口市新井町16-1
                     </p>
                   </div>
                   <div className="space-y-2">
@@ -71,9 +70,8 @@ export default function AccessPage() {
                     <div className="flex items-start gap-2">
                       <Clock className="w-4 h-4 text-primary mt-0.5" />
                       <div className="text-sm">
-                        <p>月火水金: 9:00-12:30 / 16:00-18:30</p>
-                        <p>木土: 9:00-12:30（午後休診）</p>
-                        <p>日祝: 休診</p>
+                        <p>診療時間: 9:00-12:30(最終受付) / 15:00-18:00(最終受付17:30)</p>
+                        <p>休診日: 日曜・祝日・その他</p>
                       </div>
                     </div>
                   </div>
@@ -129,7 +127,9 @@ export default function AccessPage() {
               <Card className="p-6 bg-accent/5">
                 <h3 className="font-semibold mb-4">駐車場のご案内</h3>
                 <p className="text-muted-foreground text-sm mb-4">
-                  クリニック専用駐車場を8台分ご用意しております。
+                  クリニック専用駐車場をご用意しております。<br />
+                  軽自動車: 1台<br />
+                  普通車: 10台<br />
                   満車の場合は、お手数ですが近隣のコインパーキングをご利用ください。
                 </p>
                 <Button variant="outline" size="sm">
@@ -162,7 +162,7 @@ export default function AccessPage() {
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary">•</span>
-                  受付時間は診療終了時間の30分前までとなります
+                  受付時間は午前12:30まで、午後17:30までとなります
                 </li>
               </ul>
             </Card>

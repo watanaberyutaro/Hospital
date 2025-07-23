@@ -2,6 +2,7 @@ import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
+import { FutureUpdate } from '@/components/ui/FutureUpdate'
 import { 
   MapPin, 
   Phone, 
@@ -19,14 +20,14 @@ export default function ContactPage() {
       icon: Phone,
       title: '電話でのお問い合わせ',
       description: '一般的なお問い合わせや診療予約',
-      details: 'TEL: 03-1234-5678',
-      hours: '平日 9:00-17:00',
+      details: 'TEL: 048-222-0700',
+      hours: '診療時間内',
     },
     {
       icon: Mail,
       title: 'メールでのお問い合わせ',
       description: 'ご質問やご相談はメールでも受け付けています',
-      details: 'info@hospital.example.com',
+      details: 'araityounaikasyoukaki25@gmail.com',
       hours: '24時間受付（返信は平日のみ）',
     },
     {
@@ -34,14 +35,14 @@ export default function ContactPage() {
       title: '窓口でのお問い合わせ',
       description: '直接窓口でご相談いただけます',
       details: '1階総合受付',
-      hours: '平日 9:00-17:00',
+      hours: '診療時間内',
     },
     {
       icon: Calendar,
-      title: '診療予約',
-      description: '各科の診療予約を承ります',
-      details: '予約専用ダイヤル',
-      hours: '平日 9:00-17:00',
+      title: '診療予約について',
+      description: '現在予約外診療のみ(内視鏡検査を除く)',
+      details: '今後電子カルテ導入で予約可能予定',
+      hours: 'オンライン診療は今後検討中',
     },
   ]
 
@@ -49,14 +50,14 @@ export default function ContactPage() {
     {
       icon: Train,
       title: '電車でお越しの方',
-      description: '東京メトロ日比谷線・都営大江戸線',
-      details: '六本木駅より徒歩3分',
+      description: '埼玉高速鉄道 川口元郷駅',
+      details: '1番出口より徒歩10分',
     },
     {
       icon: Car,
       title: 'お車でお越しの方',
-      description: '駐車場完備（30台）',
-      details: '診察券提示で2時間無料',
+      description: '患者様専用駐車場完備',
+      details: '軽自動車1台、普通車10台',
     },
   ]
 
@@ -168,7 +169,7 @@ export default function ContactPage() {
                   className="w-full"
                   onClick={(e) => {
                     e.preventDefault()
-                    window.location.href = 'mailto:info@hospital.example.com?subject=お問い合わせ&body=お問い合わせ内容をこちらに記載してください'
+                    window.location.href = 'mailto:araityounaikasyoukaki25@gmail.com?subject=お問い合わせ&body=お問い合わせ内容をこちらに記載してください'
                   }}
                 >
                   送信する
@@ -179,7 +180,7 @@ export default function ContactPage() {
             <div className="space-y-8">
               <Card className="p-8">
                 <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
-                  病院情報
+                  クリニック情報
                 </h3>
                 <div className="space-y-4">
                   <div className="flex items-start space-x-3">
@@ -187,9 +188,8 @@ export default function ContactPage() {
                     <div>
                       <p className="font-medium text-gray-900 dark:text-white">住所</p>
                       <p className="text-gray-600 dark:text-gray-300">
-                        〒106-0032<br />
-                        東京都港区六本木1-2-3<br />
-                        メディカルビル5階
+                        〒333-0849<br />
+                        埼玉県川口市新井町16-1
                       </p>
                     </div>
                   </div>
@@ -198,7 +198,7 @@ export default function ContactPage() {
                     <Phone className="w-5 h-5 text-primary mt-0.5" />
                     <div>
                       <p className="font-medium text-gray-900 dark:text-white">電話番号</p>
-                      <p className="text-gray-600 dark:text-gray-300">TEL: 03-1234-5678</p>
+                      <p className="text-gray-600 dark:text-gray-300">TEL: 048-222-0700</p>
                     </div>
                   </div>
                   
@@ -206,7 +206,7 @@ export default function ContactPage() {
                     <Mail className="w-5 h-5 text-primary mt-0.5" />
                     <div>
                       <p className="font-medium text-gray-900 dark:text-white">メールアドレス</p>
-                      <p className="text-gray-600 dark:text-gray-300">info@hospital.example.com</p>
+                      <p className="text-gray-600 dark:text-gray-300">araityounaikasyoukaki25@gmail.com</p>
                     </div>
                   </div>
                   
@@ -215,9 +215,9 @@ export default function ContactPage() {
                     <div>
                       <p className="font-medium text-gray-900 dark:text-white">受付時間</p>
                       <p className="text-gray-600 dark:text-gray-300">
-                        平日: 9:00-17:00<br />
-                        土曜: 9:00-12:00<br />
-                        日祝: 休診
+                        診療時間: 9:00-12:30(最終受付)<br />
+                        15:00-18:00(最終受付17:30)<br />
+                        休診日: 日曜・祝日・その他
                       </p>
                     </div>
                   </div>
