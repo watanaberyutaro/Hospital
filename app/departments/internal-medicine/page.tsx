@@ -16,6 +16,7 @@ import {
 } from 'lucide-react'
 
 export default function InternalMedicinePage() {
+  // Updated: 2025-01-23
   const conditions = [
     '風邪・インフルエンザ',
     '発熱・頭痛',
