@@ -101,14 +101,18 @@ export default function AccessPage() {
 
             <div className="space-y-6">
               <Card className="p-0 overflow-hidden">
-                <div className="aspect-[4/3] bg-secondary/20 flex items-center justify-center">
-                  <div className="text-center p-8">
-                    <MapPin className="w-16 h-16 text-primary mx-auto mb-4" />
-                    <p className="text-xl font-semibold mb-2">地図</p>
-                    <p className="text-muted-foreground">
-                      Google マップで見る
-                    </p>
-                  </div>
+                <div className="aspect-[4/3] relative">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3237.945539283371!2d139.72086307586387!3d35.84960737260129!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60189315cf4c8b85%3A0x2f5c0e3b5e8b5c0a!2z44CSMzMzLTA4NDkg5Z-8546J55yM5bed5Y-j5biC5paw5LqV55S677yR77yW4oiS77yR!5e0!3m2!1sja!2sjp!4v1706077432123!5m2!1sja!2sjp"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="absolute inset-0"
+                    title="新井町内科消化器科クリニックの地図"
+                  />
                 </div>
               </Card>
 

@@ -182,7 +182,9 @@ export default function HomePage() {
                 <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
                 <p className="text-muted-foreground mb-6">{item.description}</p>
                 <Button variant="outline" size="sm" asChild>
-                  <a href={item.href}>詳細を見る</a>
+                  <a href={item.href}>
+                    {item.title === 'アクセス' ? '地図を見る' : '詳細を見る'}
+                  </a>
                 </Button>
               </Card>
             ))}
