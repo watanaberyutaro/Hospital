@@ -7,35 +7,6 @@ import { Clock, Users, Calendar } from 'lucide-react'
 // This would normally come from MDX files or a CMS
 const getDepartmentData = async (slug: string) => {
   const departments: { [key: string]: any } = {
-    'internal-medicine': {
-      title: '内科',
-      description: '総合内科として、幅広い疾患に対応しています。',
-      content: `
-        <h2>内科について</h2>
-        <p>当院の内科では、風邪や発熱などの急性疾患から、高血圧、糖尿病、脂質異常症などの生活習慣病まで、幅広い疾患に対応しています。</p>
-        
-        <h3>主な診療内容</h3>
-        <ul>
-          <li>一般内科（風邪、発熱、腹痛など）</li>
-          <li>生活習慣病（高血圧、糖尿病、脂質異常症）</li>
-          <li>循環器内科（心房細動、心不全など）</li>
-          <li>消化器内科（胃炎、肝機能障害など）</li>
-        </ul>
-      `,
-      doctors: [
-        { name: '田中 太郎', title: '内科部長', specialties: ['循環器内科', '糖尿病内科'] },
-        { name: '佐藤 花子', title: '内科医師', specialties: ['消化器内科', '内分泌内科'] },
-      ],
-      schedule: [
-        { day: '月曜日', morning: '9:00-12:00', afternoon: '14:00-17:00' },
-        { day: '火曜日', morning: '9:00-12:00', afternoon: '14:00-17:00' },
-        { day: '水曜日', morning: '9:00-12:00', afternoon: '休診' },
-        { day: '木曜日', morning: '9:00-12:00', afternoon: '14:00-17:00' },
-        { day: '金曜日', morning: '9:00-12:00', afternoon: '14:00-17:00' },
-        { day: '土曜日', morning: '9:00-12:00', afternoon: '休診' },
-        { day: '日曜日', morning: '休診', afternoon: '休診' },
-      ],
-    },
     'surgery': {
       title: '外科',
       description: '一般外科から専門的な手術まで、幅広く対応しています。',
