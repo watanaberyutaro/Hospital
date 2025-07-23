@@ -10,7 +10,9 @@ import {
   Users, 
   ClipboardCheck,
   Pill,
-  Calendar
+  Calendar,
+  AlertCircle,
+  Microscope
 } from 'lucide-react'
 
 export default function InternalMedicinePage() {
@@ -29,6 +31,21 @@ export default function InternalMedicinePage() {
     '花粉症',
   ]
 
+  const symptoms = [
+    {
+      category: '急性症状',
+      items: ['発熱', '頭痛', '咳・痰', '喉の痛み', '鼻水・鼻づまり'],
+    },
+    {
+      category: '慢性症状',
+      items: ['疲労感', 'めまい', '動悸', '息切れ', '浮腫み'],
+    },
+    {
+      category: '生活習慣病関連',
+      items: ['健診異常', '肥満', '高血圧', '高血糖', '高脂血症'],
+    },
+  ]
+
   const examinations = [
     {
       name: '血液検査',
@@ -38,7 +55,7 @@ export default function InternalMedicinePage() {
     {
       name: '尿検査',
       description: '腎臓の機能や糖尿病の有無などを確認します',
-      icon: Activity,
+      icon: Microscope,
     },
     {
       name: '心電図検査',
@@ -56,12 +73,12 @@ export default function InternalMedicinePage() {
     {
       name: '植村 博之',
       title: '院長',
-      qualification: '医学博士',
+      qualification: '医学博士・総合内科専門医',
     },
     {
       name: '植村 隼人',
       title: '副院長',
-      qualification: '内科認定医',
+      qualification: '内科認定医・糖尿病専門医',
     },
     {
       name: '植村 伶央',
@@ -99,10 +116,39 @@ export default function InternalMedicinePage() {
                     一般内科では、日常的によくある症状から生活習慣病まで、内科全般の診療を行っています。
                     「体調が悪いけれど、どの科を受診すればよいかわからない」という場合も、まずは一般内科にご相談ください。
                   </p>
+                  <p className="text-gray-600 dark:text-gray-300 mb-4">
+                    当院では、総合内科専門医・糖尿病専門医が在籍し、幅広い内科疾患に対して専門的な診療を提供しています。
+                    急性疾患から慢性疾患まで、患者様一人ひとりの症状に合わせた適切な治療を行います。
+                  </p>
                   <p className="text-gray-600 dark:text-gray-300">
                     必要に応じて専門的な検査や治療が必要な場合は、適切な診療科や連携医療機関をご紹介いたします。
-                    地域のかかりつけ医として、患者様の健康を総合的にサポートします。
                   </p>
+                </div>
+              </div>
+            </Card>
+
+            <Card className="p-8 mb-8 border-l-4 border-amber-500 bg-amber-50 dark:bg-amber-900/20">
+              <div className="flex items-start gap-3">
+                <AlertCircle className="w-6 h-6 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
+                <div>
+                  <h3 className="font-semibold text-lg mb-2">こんな症状はありませんか？</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    {symptoms.map((group, index) => (
+                      <div key={index}>
+                        <h4 className="font-medium text-sm text-amber-700 dark:text-amber-300 mb-2">
+                          {group.category}
+                        </h4>
+                        <ul className="space-y-1">
+                          {group.items.map((item, idx) => (
+                            <li key={idx} className="text-sm text-gray-600 dark:text-gray-300 flex items-center gap-2">
+                              <span className="w-1 h-1 bg-amber-600 dark:bg-amber-400 rounded-full" />
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </Card>
@@ -110,7 +156,7 @@ export default function InternalMedicinePage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
               <Card className="p-6">
                 <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                  <Pill className="w-5 h-5 text-primary" />
+                  <ClipboardCheck className="w-5 h-5 text-primary" />
                   主な対象疾患
                 </h3>
                 <div className="grid grid-cols-2 gap-2">
@@ -126,25 +172,28 @@ export default function InternalMedicinePage() {
               <Card className="p-6">
                 <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
                   <Calendar className="w-5 h-5 text-primary" />
-                  診療時間
+                  専門外来
                 </h3>
-                <div className="space-y-3">
-                  <div className="flex justify-between py-2 border-b">
-                    <span className="text-gray-600 dark:text-gray-300">午前</span>
-                    <span className="font-medium">9:00 - 12:30（最終受付）</span>
+                <div className="space-y-4">
+                  <div className="p-4 bg-secondary/20 rounded-lg">
+                    <h4 className="font-medium mb-1">生活習慣病外来</h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">
+                      高血圧・糖尿病・脂質異常症の専門的治療を行います
+                    </p>
                   </div>
-                  <div className="flex justify-between py-2 border-b">
-                    <span className="text-gray-600 dark:text-gray-300">午後</span>
-                    <span className="font-medium">15:00 - 18:00（最終受付 17:30）</span>
+                  <div className="p-4 bg-secondary/20 rounded-lg">
+                    <h4 className="font-medium mb-1">禁煙外来</h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">
+                      禁煙治療薬を用いた専門的な禁煙サポートを提供します
+                    </p>
                   </div>
-                  <div className="flex justify-between py-2">
-                    <span className="text-gray-600 dark:text-gray-300">休診日</span>
-                    <span className="font-medium">日曜・祝日・その他</span>
+                  <div className="p-4 bg-secondary/20 rounded-lg">
+                    <h4 className="font-medium mb-1">予防接種</h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">
+                      インフルエンザ・肺炎球菌など各種予防接種に対応します
+                    </p>
                   </div>
                 </div>
-                <p className="text-sm text-muted-foreground mt-4">
-                  ※現在は予約外診療のみ対応しております
-                </p>
               </Card>
             </div>
 
@@ -164,6 +213,12 @@ export default function InternalMedicinePage() {
                     </div>
                   </div>
                 ))}
+              </div>
+              <div className="mt-6 p-4 bg-primary/5 rounded-lg">
+                <p className="text-sm text-gray-600 dark:text-gray-300">
+                  ※より詳しい検査（CT・MRIなど）が必要な場合は、
+                  連携医療機関をご紹介いたします。
+                </p>
               </div>
             </Card>
 
@@ -186,15 +241,15 @@ export default function InternalMedicinePage() {
               </div>
             </Card>
 
-            <Card className="p-8 bg-primary/5">
-              <h3 className="text-xl font-semibold mb-4">受診をお勧めする症状</h3>
+            <Card className="p-8 bg-gradient-to-r from-primary/5 to-accent/5">
+              <h3 className="text-xl font-semibold mb-4">早期受診をお勧めします</h3>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
-                以下のような症状がある場合は、お早めにご相談ください：
+                内科疾患は早期発見・早期治療が重要です。以下のような症状がある場合は、お早めにご相談ください。
               </p>
-              <ul className="space-y-2 text-gray-600 dark:text-gray-300">
+              <ul className="space-y-2 text-gray-600 dark:text-gray-300 mb-6">
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
-                  <span>原因不明の発熱が続く</span>
+                  <span>発熱が3日以上続く</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
@@ -202,22 +257,26 @@ export default function InternalMedicinePage() {
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
+                  <span>胸の痛みや動悸がする</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-primary mt-1">•</span>
                   <span>健康診断で異常を指摘された</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
-                  <span>生活習慣病の管理・相談</span>
+                  <span>体重の急激な増減がある</span>
                 </li>
               </ul>
-              <div className="mt-6 flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-4">
                 <Button asChild>
                   <a href="tel:048-222-0700">
                     電話で相談する
                   </a>
                 </Button>
                 <Button variant="outline" asChild>
-                  <a href="/access">
-                    アクセス情報を見る
+                  <a href="/contact">
+                    お問い合わせ
                   </a>
                 </Button>
               </div>
