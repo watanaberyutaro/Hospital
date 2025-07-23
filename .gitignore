@@ -44,4 +44,4 @@ temp/
 storybook-static/
 
 # Lighthouse CI
-.lighthouseci/
+.lighthouseci/backups/
