@@ -1,33 +1,159 @@
+'use client'
+
 import { Hero } from '@/components/ui/Hero'
 import { Card } from '@/components/ui/Card'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Button } from '@/components/ui/Button'
-import { Calendar, Clock, MapPin, Phone } from 'lucide-react'
+import { Calendar, Clock, MapPin, Phone, Thermometer, Stethoscope, Heart, AlertCircle } from 'lucide-react'
+import NewsSection from '@/components/NewsSection'
+import { useState, useEffect } from 'react'
+
+interface SpecialHoliday {
+  id: string
+  date: string
+  reason: string
+  createdAt: string
+}
+
+interface HolidaysData {
+  regularHolidays: {
+    weekdays: number[]
+    description: string
+  }
+  specialHolidays: SpecialHoliday[]
+}
 
 export default function HomePage() {
-  const newsItems = [
+  const [holidays, setHolidays] = useState<HolidaysData>({
+    regularHolidays: { weekdays: [0, 3], description: "毎週水曜日・日曜日" },
+    specialHolidays: []
+  })
+
+  useEffect(() => {
+    fetch('/api/holidays')
+      .then(res => res.json())
+      .then(data => setHolidays(data))
+      .catch(err => console.error('Failed to fetch holidays:', err))
+  }, [])
+  const medicalServices = [
     {
-      id: 1,
-      title: 'インフルエンザワクチン接種開始のお知らせ',
-      date: '2024-10-15',
-      category: 'お知らせ',
-      excerpt: '今年度のインフルエンザワクチン接種を開始しました。ご予約はお電話にて承っております。',
+      icon: <Stethoscope className="w-8 h-8" />,
+      title: '内科診療',
+      description: '川口市で予約なし対応可能。かぜ、発熱、頭痛、生活習慣病など日常的な健康問題にすぐに対応。地域の「かかりつけ医」として親身に診療いたします。',
     },
     {
-      id: 2,
-      title: 'マイナ保険証の利用について',
-      date: '2024-09-20',
-      category: '診療案内',
-      excerpt: '当院ではマイナンバーカードの健康保険証利用に対応しております。',
+      icon: <Thermometer className="w-8 h-8" />,
+      title: '発熱外来',
+      description: '川口市で発熱症状にすぐに対応。予約なしでも安心して受診できる体制を整えています。感染対策も万全です。',
     },
     {
-      id: 3,
-      title: '胃・大腸内視鏡検査のご案内',
-      date: '2024-09-01',
-      category: '検査案内',
-      excerpt: '専門医による苦痛の少ない内視鏡検査を実施しています。鎮静剤の使用も可能です。',
+      icon: <Heart className="w-8 h-8" />,
+      title: '胃カメラ検査',
+      description: '川口市の消化器内科専門医による苦痛の少ない内視鏡検査。鎮静剤使用も可能で、早期発見・早期治療に努めます。',
     },
   ]
+
+  const scheduleInfo = {
+    regular: [
+      { day: '月・火・木・金', morning: '9:00 - 12:30', afternoon: '15:00 - 18:00' },
+      { day: '土', morning: '9:00 - 12:30', afternoon: '休診' },
+    ],
+    holidays: '水曜日・日曜日・祝日',
+    note: '※受付は診療終了の30分前まで',
+  }
+
+  // カレンダー用のデータ生成
+  const getCurrentMonthCalendar = () => {
+    const today = new Date()
+    const year = today.getFullYear()
+    const month = today.getMonth()
+    const firstDay = new Date(year, month, 1)
+    const lastDay = new Date(year, month + 1, 0)
+    const startDate = new Date(firstDay)
+    startDate.setDate(startDate.getDate() - firstDay.getDay())
+    
+    const weeks = []
+    let week = []
+    let currentDate = new Date(startDate)
+    let safeguard = 0 // 無限ループ防止
+    
+    while (currentDate <= lastDay || week.length > 0) {
+      if (safeguard++ > 42) break // カレンダーの最大マス数（6週間）を超えたら終了
+      
+      if (week.length === 7) {
+        weeks.push(week)
+        week = []
+        if (currentDate > lastDay && week.length === 0) break
+      }
+      
+      if (currentDate.getMonth() === month) {
+        const dayOfWeek = currentDate.getDay()
+        const dateString = `${year}-${String(month + 1).padStart(2, '0')}-${String(currentDate.getDate()).padStart(2, '0')}`
+        
+        // 定休日チェック
+        const isRegularHoliday = holidays.regularHolidays.weekdays.includes(dayOfWeek)
+        
+        // 臨時休業日チェック
+        const isSpecialHoliday = holidays.specialHolidays.some(h => h.date === dateString)
+        const specialHolidayReason = holidays.specialHolidays.find(h => h.date === dateString)?.reason
+        
+        const isToday = currentDate.toDateString() === today.toDateString()
+        
+        week.push({
+          date: currentDate.getDate(),
+          dateString,
+          isCurrentMonth: true,
+          isHoliday: isRegularHoliday || isSpecialHoliday,
+          isSpecialHoliday,
+          specialHolidayReason,
+          isToday,
+          dayOfWeek,
+        })
+      } else if (currentDate > lastDay && week.length > 0) {
+        // 最終週の空きマスを埋める
+        week.push({
+          date: '',
+          dateString: '',
+          isCurrentMonth: false,
+          isHoliday: false,
+          isSpecialHoliday: false,
+          specialHolidayReason: '',
+          isToday: false,
+          dayOfWeek: currentDate.getDay(),
+        })
+      }
+      
+      currentDate.setDate(currentDate.getDate() + 1)
+    }
+    
+    if (week.length > 0 && week.length < 7) {
+      // 最終週が7日未満の場合、空きマスで埋める
+      while (week.length < 7) {
+        week.push({
+          date: '',
+          dateString: '',
+          isCurrentMonth: false,
+          isHoliday: false,
+          isSpecialHoliday: false,
+          specialHolidayReason: '',
+          isToday: false,
+          dayOfWeek: week.length,
+        })
+      }
+      weeks.push(week)
+    }
+    
+    return {
+      year,
+      month,
+      weeks,
+      monthName: new Date(year, month).toLocaleDateString('ja-JP', { month: 'long' }),
+    }
+  }
+  
+  const calendarData = getCurrentMonthCalendar()
+  const weekDays = ['日', '月', '火', '水', '木', '金', '土']
+
 
   const quickAccess = [
     {
@@ -59,23 +185,23 @@ export default function HomePage() {
   const departments = [
     {
       name: '一般内科',
-      description: 'かぜ、発熱、生活習慣病管理など日常的な健康問題に対応',
-      image: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&h=600&fit=crop',
+      description: '川口市で予約なし対応。かぜ、発熱、生活習慣病管理など日常的な健康問題にすぐに診察',
+      image: '/images/doctor.jpg',
     },
     {
       name: '消化器内科',
-      description: '胃痛・腹痛、便通異常、肝胆膵疾患の専門的な診断治療',
-      image: 'https://images.unsplash.com/photo-1551076805-e1869033e561?w=800&h=600&fit=crop',
+      description: '川口市の消化器内科専門医。胃痛・腹痛、便通異常、肝胆膵疾患にすぐに対応',
+      image: '/images/内視鏡センター個室.jpg',
     },
     {
       name: '健康診断',
-      description: '総合健診・人間ドック(局所的)・各種検査',
-      image: 'https://images.unsplash.com/photo-1631815589968-fdb09a223b1e?w=800&h=600&fit=crop',
+      description: '川口市で即日対応可能な健康診断。総合健診・人間ドック(局所的)・各種検査',
+      image: '/images/建物2.jpg',
     },
     {
       name: '内視鏡検査',
-      description: '苦痛の少ない胃・大腸カメラ、ポリープ切除にも対応',
-      image: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=800&h=600&fit=crop',
+      description: '川口市の内視鏡専門医による苦痛の少ない胃・大腸カメラ。予約制でポリープ切除にも対応',
+      image: '/images/内視鏡センター.jpg',
     },
   ]
 
@@ -83,11 +209,186 @@ export default function HomePage() {
     <div className="min-h-screen">
       <Hero />
       
+      <section className="py-16 bg-gradient-to-b from-primary/5 to-background">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">川口市で予約なし・すぐに対応する内科クリニック</h2>
+            <p className="text-lg text-muted-foreground">
+              予約なしで即日診察可能。内科診療から専門的な消化器検査まで、川口市の皆様にすぐに対応いたします
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {medicalServices.map((service, index) => (
+              <Card key={index} className="p-8 text-center hover:shadow-lg transition-shadow bg-white/50 backdrop-blur">
+                <div className="flex justify-center mb-4 text-primary">
+                  {service.icon}
+                </div>
+                <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
+                <p className="text-muted-foreground leading-relaxed">{service.description}</p>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 bg-gradient-to-b from-background to-secondary/10">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            <div>
+              <SectionHeading 
+                title="診療時間・休診日"
+                subtitle="川口市で予約なしでも対応・予約優先で待ち時間短縮"
+                align="left"
+              />
+              <div className="space-y-6">
+                <Card className="p-6 bg-white/80 backdrop-blur">
+                  <h4 className="font-semibold text-lg mb-4 flex items-center gap-2">
+                    <Calendar className="w-5 h-5 text-primary" />
+                    {calendarData.year}年 {calendarData.monthName}
+                  </h4>
+                  <div className="overflow-hidden rounded-lg border">
+                    <table className="w-full">
+                      <thead>
+                        <tr className="bg-secondary/50">
+                          {weekDays.map((day, index) => (
+                            <th key={index} className={`py-2 text-sm font-medium ${index === 0 || index === 3 ? 'text-red-500' : ''}`}>
+                              {day}
+                            </th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {calendarData.weeks.map((week, weekIndex) => (
+                          <tr key={weekIndex}>
+                            {week.map((day, dayIndex) => (
+                              <td key={dayIndex} className="border-t p-2 text-center relative">
+                                {day.isCurrentMonth && (
+                                  <div className="relative">
+                                    <div className={`
+                                      inline-flex items-center justify-center w-8 h-8 rounded-full text-sm
+                                      ${day.isToday ? 'bg-primary text-white font-bold' : ''}
+                                      ${day.isHoliday && !day.isToday ? 'text-red-500' : ''}
+                                      ${!day.isHoliday && !day.isToday ? 'text-foreground' : ''}
+                                      ${day.isSpecialHoliday ? 'ring-2 ring-orange-400' : ''}
+                                    `}
+                                    title={day.specialHolidayReason || ''}>
+                                      {day.date}
+                                    </div>
+                                    {day.isHoliday && (
+                                      <div className={`absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full ${day.isSpecialHoliday ? 'bg-orange-500' : 'bg-red-500'}`}></div>
+                                    )}
+                                  </div>
+                                )}
+                              </td>
+                            ))}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  <div className="mt-4 flex items-center gap-4 text-sm flex-wrap">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                      <span className="text-muted-foreground">定休日</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
+                      <span className="text-muted-foreground">臨時休業</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 bg-primary rounded-full"></div>
+                      <span className="text-muted-foreground">本日</span>
+                    </div>
+                  </div>
+                </Card>
+                
+                <Card className="p-6 bg-white/80 backdrop-blur">
+                  <div className="space-y-6">
+                    <div>
+                      <h4 className="font-semibold text-lg mb-4 flex items-center gap-2">
+                        <Clock className="w-5 h-5 text-primary" />
+                        診療時間
+                      </h4>
+                      <div className="space-y-3">
+                        {scheduleInfo.regular.map((schedule, index) => (
+                          <div key={index} className="flex justify-between items-center py-2 border-b">
+                            <span className="font-medium">{schedule.day}</span>
+                            <div className="text-sm">
+                              <span className="mr-4">午前 {schedule.morning}</span>
+                              <span>午後 {schedule.afternoon}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-lg mb-2">休診日</h4>
+                      <p className="text-muted-foreground">{scheduleInfo.holidays}</p>
+                      <p className="text-sm text-muted-foreground mt-2">{scheduleInfo.note}</p>
+                    </div>
+                    <Button size="lg" className="w-full" asChild>
+                      <a href="tel:048-222-0700">
+                        <Phone className="w-4 h-4 mr-2" />
+                        電話で予約する
+                      </a>
+                    </Button>
+                  </div>
+                </Card>
+              </div>
+            </div>
+            
+            <div>
+              <SectionHeading 
+                title="アクセス"
+                subtitle="川口市新井町・駐車場11台完備・バリアフリー対応"
+                align="left"
+              />
+              <Card className="p-8 bg-white/80 backdrop-blur">
+                <div className="space-y-6">
+                  <div>
+                    <h4 className="font-semibold text-lg mb-4 flex items-center gap-2">
+                      <MapPin className="w-5 h-5 text-primary" />
+                      新井町内科消化器クリニック
+                    </h4>
+                    <div className="space-y-3 text-muted-foreground">
+                      <p>〒332-0031</p>
+                      <p>埼玉県川口市新井町16-1</p>
+                      <p className="font-medium text-foreground">TEL: 048-222-0700</p>
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <p className="flex items-start gap-2">
+                      <span className="text-primary mt-1">•</span>
+                      <span className="text-sm">川口元郷駅より徒歩10分・川口駅東口より徒歩15分</span>
+                    </p>
+                    <p className="flex items-start gap-2">
+                      <span className="text-primary mt-1">•</span>
+                      <span className="text-sm">無料駐車場11台完備</span>
+                    </p>
+                    <p className="flex items-start gap-2">
+                      <span className="text-primary mt-1">•</span>
+                      <span className="text-sm">エレベーター・バリアフリー対応</span>
+                    </p>
+                  </div>
+                  <Button variant="outline" size="lg" className="w-full" asChild>
+                    <a href="/access">
+                      詳しい地図を見る
+                    </a>
+                  </Button>
+                </div>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <NewsSection />
+
       <section className="py-20 bg-gradient-to-b from-background to-secondary/20">
         <div className="container mx-auto px-6">
           <SectionHeading 
             title="診療内容"
-            subtitle="内科・消化器内科・アレルギー科の専門医が幅広く対応いたします"
+            subtitle="川口市の内科・消化器内科。予約なしですぐに対応・専門医が幅広く診療"
           />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {departments.map((dept, index) => (
@@ -124,8 +425,12 @@ export default function HomePage() {
               <div className="flex flex-col md:flex-row gap-8 items-start">
                 <div className="md:w-1/3">
                   <div className="relative">
-                    <div className="w-48 h-48 mx-auto rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                      <span className="text-4xl font-bold text-primary">院長</span>
+                    <div className="w-48 h-48 mx-auto rounded-2xl overflow-hidden shadow-lg">
+                      <img 
+                        src="/images/院長.jpg" 
+                        alt="院長 植村博之"
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                     <div className="mt-4 text-center">
                       <h3 className="text-xl font-semibold">植村 博之</h3>
@@ -141,7 +446,7 @@ export default function HomePage() {
                     地域の皆様、こんにちは。新井町内科消化器クリニック院長の植村博之です。
                   </p>
                   <p className="text-muted-foreground leading-relaxed">
-                    2001年に開院以来、地域の皆様の「かかりつけ医」として、内科全般から消化器疾患まで幅広く診療を行っております。
+                    2001年に川口市新井町で開院以来、地域の皆様の「かかりつけ医」として、予約なしですぐに対応できる体制で内科全般から消化器疾患まで幅広く診療を行っております。
                     特に内視鏡センターでは、上下部内視鏡検査において長年の経験と最新の技術を活かし、苦痛の少ない検査を心がけております。
                   </p>
                   <p className="text-muted-foreground leading-relaxed">
@@ -160,74 +465,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-20 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/3 h-full opacity-10">
-          <img 
-            src="https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=800&h=1200&fit=crop" 
-            alt="医療イメージ"
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <div className="container mx-auto px-6 relative">
-          <SectionHeading 
-            title="クイックアクセス"
-            subtitle="よくご利用いただく機能へのご案内"
-          />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {quickAccess.map((item, index) => (
-              <Card key={index} className="text-center p-8 group">
-                <div className="flex justify-center mb-6 text-primary p-4 bg-primary/10 rounded-2xl w-fit mx-auto group-hover:bg-primary/20 transition-colors">
-                  {item.icon}
-                </div>
-                <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
-                <p className="text-muted-foreground mb-6">{item.description}</p>
-                <Button variant="outline" size="sm" asChild>
-                  <a href={item.href}>
-                    {item.title === 'アクセス' ? '地図を見る' : '詳細を見る'}
-                  </a>
-                </Button>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 bg-gradient-to-b from-secondary/20 to-background">
-        <div className="container mx-auto px-6">
-          <SectionHeading 
-            title="最新のお知らせ"
-            subtitle="クリニックからの重要なお知らせをご確認ください"
-          />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {newsItems.map((item) => (
-              <Card key={item.id} className="overflow-hidden group hover:shadow-xl transition-all duration-300">
-                <div className="p-6">
-                  <div className="flex items-center gap-2 mb-4">
-                    <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-medium">
-                      {item.category}
-                    </span>
-                    <span className="text-muted-foreground text-sm">{item.date}</span>
-                  </div>
-                  <h3 className="font-semibold text-xl mb-3 line-clamp-2 group-hover:text-primary transition-colors">
-                    {item.title}
-                  </h3>
-                  <p className="text-muted-foreground mb-4 line-clamp-3">
-                    {item.excerpt}
-                  </p>
-                  <Button variant="ghost" size="sm" className="group-hover:text-primary" asChild>
-                    <a href={`/news/${item.id}`}>続きを読む →</a>
-                  </Button>
-                </div>
-              </Card>
-            ))}
-          </div>
-          <div className="text-center mt-12">
-            <Button size="lg" asChild>
-              <a href="/news">すべてのお知らせを見る</a>
-            </Button>
-          </div>
-        </div>
-      </section>
     </div>
   )
 }

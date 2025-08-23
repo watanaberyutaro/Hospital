@@ -14,7 +14,7 @@ export default function EndoscopyPage() {
         'ピロリ菌検査も同時実施可能',
         '検査時間約5〜10分',
       ],
-      image: 'https://images.unsplash.com/photo-1581595220892-b0739db3ba8c?w=800&h=600&fit=crop',
+      image: '/images/内視鏡センター.jpg',
     },
     {
       title: '大腸カメラ（下部消化管内視鏡検査）',
@@ -25,7 +25,7 @@ export default function EndoscopyPage() {
         '下剤の服用法を個別指導',
         '検査時間約15〜30分',
       ],
-      image: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=800&h=600&fit=crop',
+      image: '/images/内視鏡センター個室.jpg',
     },
   ]
 

@@ -1,0 +1,10 @@
+{
+  "regularHolidays": {
+    "weekdays": [
+      0,
+      3
+    ],
+    "description": "毎週水曜日・日曜日"
+  },
+  "specialHolidays": []
+}
