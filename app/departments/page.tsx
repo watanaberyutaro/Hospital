@@ -106,11 +106,6 @@ export default function DepartmentsPage() {
                     </div>
                   </div>
                   
-                  <Button asChild className="w-full">
-                    <Link href={`/departments/${dept.slug}`}>
-                      詳細を見る
-                    </Link>
-                  </Button>
                 </div>
               </Card>
             ))}
