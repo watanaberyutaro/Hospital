@@ -43,12 +43,12 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           <div>
             <div className="flex items-center space-x-4 mb-6">
-              <div className="relative w-14 h-14 flex-shrink-0">
+              <div className="relative w-20 h-20 flex-shrink-0 bg-white rounded-xl shadow-lg p-2">
                 <Image
                   src="/images/Logo.png"
                   alt="新井町内科消化器科クリニック ロゴ"
                   fill
-                  className="object-contain"
+                  className="object-contain p-1"
                 />
               </div>
               <div>

@@ -44,12 +44,12 @@ export function Header() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between py-4">
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative w-10 h-10 md:w-12 md:h-12 flex-shrink-0">
+            <div className="relative w-14 h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 flex-shrink-0 bg-white rounded-xl shadow-md p-1">
               <Image
                 src="/images/Logo.png"
                 alt="新井町内科消化器科クリニック ロゴ"
                 fill
-                className="object-contain group-hover:scale-105 transition-transform duration-300"
+                className="object-contain group-hover:scale-110 transition-transform duration-300 p-1"
                 priority
               />
             </div>
