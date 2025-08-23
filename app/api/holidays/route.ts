@@ -1,16 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server'
-import fs from 'fs/promises'
-import path from 'path'
-
-const HOLIDAYS_FILE = path.join(process.cwd(), 'public', 'data', 'holidays.json')
+import { storage } from '@/lib/storage'
 
 export async function GET() {
   try {
-    const data = await fs.readFile(HOLIDAYS_FILE, 'utf-8')
-    const holidays = JSON.parse(data)
+    const holidays = await storage.getHolidays()
+    
+    // デフォルト値を確保
+    if (!holidays.regularHolidays) {
+      holidays.regularHolidays = { weekdays: [0, 3], description: "毎週水曜日・日曜日" }
+    }
+    if (!holidays.specialHolidays) {
+      holidays.specialHolidays = []
+    }
+    
     return NextResponse.json(holidays)
   } catch (error) {
-    console.error('Error reading holidays file:', error)
+    console.error('Error reading holidays:', error)
     return NextResponse.json({ 
       regularHolidays: { weekdays: [0, 3], description: "毎週水曜日・日曜日" },
       specialHolidays: []
@@ -23,15 +28,14 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     
     // Read existing data
-    let holidays
-    try {
-      const data = await fs.readFile(HOLIDAYS_FILE, 'utf-8')
-      holidays = JSON.parse(data)
-    } catch {
-      holidays = { 
-        regularHolidays: { weekdays: [0, 3], description: "毎週水曜日・日曜日" },
-        specialHolidays: []
-      }
+    let holidays = await storage.getHolidays()
+    
+    // デフォルト値を確保
+    if (!holidays.regularHolidays) {
+      holidays.regularHolidays = { weekdays: [0, 3], description: "毎週水曜日・日曜日" }
+    }
+    if (!holidays.specialHolidays) {
+      holidays.specialHolidays = []
     }
     
     // Add new special holiday
@@ -44,12 +48,21 @@ export async function POST(request: NextRequest) {
     
     holidays.specialHolidays.push(newHoliday)
     
-    // Save to file
-    await fs.writeFile(HOLIDAYS_FILE, JSON.stringify(holidays, null, 2))
+    // Save to storage
+    await storage.saveHolidays(holidays)
     
     return NextResponse.json({ success: true, holiday: newHoliday })
   } catch (error) {
     console.error('Error saving holiday:', error)
+    const envInfo = storage.getEnvironmentInfo()
+    
+    if (envInfo.isVercel && !envInfo.hasBlobToken) {
+      return NextResponse.json({ 
+        error: 'Vercel Blob Storageの設定が必要です。環境変数 BLOB_READ_WRITE_TOKEN を設定してください。',
+        info: 'https://vercel.com/docs/storage/vercel-blob を参照してください。'
+      }, { status: 503 })
+    }
+    
     return NextResponse.json({ error: 'Failed to save holiday' }, { status: 500 })
   }
 }
@@ -64,18 +77,26 @@ export async function DELETE(request: NextRequest) {
     }
     
     // Read existing data
-    const data = await fs.readFile(HOLIDAYS_FILE, 'utf-8')
-    const holidays = JSON.parse(data)
+    const holidays = await storage.getHolidays()
     
     // Remove the holiday
     holidays.specialHolidays = holidays.specialHolidays.filter((h: any) => h.id !== id)
     
-    // Save to file
-    await fs.writeFile(HOLIDAYS_FILE, JSON.stringify(holidays, null, 2))
+    // Save to storage
+    await storage.saveHolidays(holidays)
     
     return NextResponse.json({ success: true })
   } catch (error) {
     console.error('Error deleting holiday:', error)
+    const envInfo = storage.getEnvironmentInfo()
+    
+    if (envInfo.isVercel && !envInfo.hasBlobToken) {
+      return NextResponse.json({ 
+        error: 'Vercel Blob Storageの設定が必要です。',
+        info: 'https://vercel.com/docs/storage/vercel-blob'
+      }, { status: 503 })
+    }
+    
     return NextResponse.json({ error: 'Failed to delete holiday' }, { status: 500 })
   }
 }

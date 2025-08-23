@@ -1,15 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import fs from 'fs/promises';
-import path from 'path';
-
-const NEWS_FILE_PATH = path.join(process.cwd(), 'public', 'data', 'news.json');
+import { storage } from '@/lib/storage';
 
 export async function GET() {
   try {
-    const data = await fs.readFile(NEWS_FILE_PATH, 'utf-8');
-    const { news } = JSON.parse(data);
+    const newsData = await storage.getNews();
     
-    const sortedNews = news.sort((a: any, b: any) => 
+    const sortedNews = newsData.news.sort((a: any, b: any) => 
       new Date(b.date).getTime() - new Date(a.date).getTime()
     );
     
@@ -23,8 +19,7 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const data = await fs.readFile(NEWS_FILE_PATH, 'utf-8');
-    const newsData = JSON.parse(data);
+    const newsData = await storage.getNews();
     
     const newItem = {
       id: Date.now().toString(),
@@ -35,11 +30,21 @@ export async function POST(request: NextRequest) {
     
     newsData.news.push(newItem);
     
-    await fs.writeFile(NEWS_FILE_PATH, JSON.stringify(newsData, null, 2));
+    await storage.saveNews(newsData);
     
     return NextResponse.json({ success: true, data: newItem });
   } catch (error) {
     console.error('Error adding news:', error);
+    const envInfo = storage.getEnvironmentInfo();
+    
+    // Vercel環境でBlobトークンが設定されていない場合のエラーメッセージ
+    if (envInfo.isVercel && !envInfo.hasBlobToken) {
+      return NextResponse.json({ 
+        error: 'Vercel Blob Storageの設定が必要です。環境変数 BLOB_READ_WRITE_TOKEN を設定してください。',
+        info: 'https://vercel.com/docs/storage/vercel-blob を参照してください。'
+      }, { status: 503 });
+    }
+    
     return NextResponse.json({ error: 'Failed to add news' }, { status: 500 });
   }
 }

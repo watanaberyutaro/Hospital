@@ -1,8 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import fs from 'fs/promises';
-import path from 'path';
-
-const NEWS_FILE_PATH = path.join(process.cwd(), 'public', 'data', 'news.json');
+import { storage } from '@/lib/storage';
 
 export async function PUT(
   request: NextRequest,
@@ -10,8 +7,7 @@ export async function PUT(
 ) {
   try {
     const body = await request.json();
-    const data = await fs.readFile(NEWS_FILE_PATH, 'utf-8');
-    const newsData = JSON.parse(data);
+    const newsData = await storage.getNews();
     
     const index = newsData.news.findIndex((item: any) => item.id === params.id);
     
@@ -25,11 +21,20 @@ export async function PUT(
       updatedAt: new Date().toISOString()
     };
     
-    await fs.writeFile(NEWS_FILE_PATH, JSON.stringify(newsData, null, 2));
+    await storage.saveNews(newsData);
     
     return NextResponse.json({ success: true, data: newsData.news[index] });
   } catch (error) {
     console.error('Error updating news:', error);
+    const envInfo = storage.getEnvironmentInfo();
+    
+    if (envInfo.isVercel && !envInfo.hasBlobToken) {
+      return NextResponse.json({ 
+        error: 'Vercel Blob Storageの設定が必要です。',
+        info: 'https://vercel.com/docs/storage/vercel-blob'
+      }, { status: 503 });
+    }
+    
     return NextResponse.json({ error: 'Failed to update news' }, { status: 500 });
   }
 }
@@ -39,8 +44,7 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
-    const data = await fs.readFile(NEWS_FILE_PATH, 'utf-8');
-    const newsData = JSON.parse(data);
+    const newsData = await storage.getNews();
     
     const index = newsData.news.findIndex((item: any) => item.id === params.id);
     
@@ -50,11 +54,20 @@ export async function DELETE(
     
     newsData.news.splice(index, 1);
     
-    await fs.writeFile(NEWS_FILE_PATH, JSON.stringify(newsData, null, 2));
+    await storage.saveNews(newsData);
     
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Error deleting news:', error);
+    const envInfo = storage.getEnvironmentInfo();
+    
+    if (envInfo.isVercel && !envInfo.hasBlobToken) {
+      return NextResponse.json({ 
+        error: 'Vercel Blob Storageの設定が必要です。',
+        info: 'https://vercel.com/docs/storage/vercel-blob'
+      }, { status: 503 });
+    }
+    
     return NextResponse.json({ error: 'Failed to delete news' }, { status: 500 });
   }
 }
