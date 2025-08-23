@@ -10,7 +10,7 @@ export function middleware(request: NextRequest) {
     // /admin/login または /admin/login/ の場合
     if (pathname === '/admin/login' || pathname === '/admin/login/') {
       if (authCookie?.value === 'true') {
-        return NextResponse.redirect(new URL('/admin/news', request.url));
+        return NextResponse.redirect(new URL('/admin', request.url));
       }
       return NextResponse.next();
     }
