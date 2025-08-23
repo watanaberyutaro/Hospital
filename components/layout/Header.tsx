@@ -45,7 +45,7 @@ export function Header() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between py-4">
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative w-14 h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 flex-shrink-0 bg-sky-100 rounded-xl shadow-md p-0.5 border border-sky-200">
+            <div className="relative w-14 h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 flex-shrink-0 bg-sky-100 rounded-xl shadow-md p-[5px] border border-sky-200">
               <Image
                 src="/images/Logo.png"
                 alt="新井町内科消化器科クリニック ロゴ"
