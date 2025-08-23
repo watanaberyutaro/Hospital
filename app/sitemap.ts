@@ -33,7 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         sitemap.push({
           url: `${baseUrl}/news/${article.id}`,
           lastModified: new Date(article.date),
-          changeFrequency: 'monthly',
+          changeFrequency: 'weekly' as const,
           priority: 0.6,
         })
       })

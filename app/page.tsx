@@ -238,7 +238,7 @@ export default function HomePage() {
               <SectionHeading 
                 title="診療時間・休診日"
                 subtitle="川口市で予約なしでも対応・予約優先で待ち時間短縮"
-                align="left"
+                center={false}
               />
               <div className="space-y-6">
                 <Card className="p-6 bg-white/80 backdrop-blur">
@@ -341,7 +341,7 @@ export default function HomePage() {
               <SectionHeading 
                 title="アクセス"
                 subtitle="川口市新井町・駐車場11台完備・バリアフリー対応"
-                align="left"
+                center={false}
               />
               <Card className="p-8 bg-white/80 backdrop-blur">
                 <div className="space-y-6">
