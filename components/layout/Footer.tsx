@@ -49,7 +49,7 @@ export function Footer() {
                   src="/images/Logo.png"
                   alt="新井町内科消化器科クリニック ロゴ"
                   fill
-                  className="object-contain"
+                  className="object-contain p-2"
                 />
               </div>
               <div>

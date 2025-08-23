@@ -50,7 +50,7 @@ export function Header() {
                 src="/images/Logo.png"
                 alt="新井町内科消化器科クリニック ロゴ"
                 fill
-                className="object-contain group-hover:scale-110 transition-transform duration-300"
+                className="object-contain group-hover:scale-110 transition-transform duration-300 p-2"
                 priority
               />
             </div>
