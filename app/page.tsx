@@ -214,32 +214,32 @@ export default function HomePage() {
       <section className="py-16 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
         <div className="container mx-auto px-6">
           <SectionHeading 
-            title="こんな方にお勧めです"
-            subtitle="初めての方も安心して受診いただけます"
+            title="こんな症状でお困りの方へ"
+            subtitle="どんな症状でもお気軽にご相談ください"
           />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
             <Card className="p-6">
-              <h3 className="font-bold text-lg mb-2">初めて受診される方</h3>
+              <h3 className="font-bold text-lg mb-2">胃腸の不調がある方</h3>
               <p className="text-sm text-muted-foreground">
-                予約なしでも受診可能。急な体調不良でもすぐに対応いたします。
+                胃痛、胸やけ、便秘、下痢など消化器症状の診断と治療を行います。
               </p>
             </Card>
             <Card className="p-6">
-              <h3 className="font-bold text-lg mb-2">健診で異常を指摘された方</h3>
+              <h3 className="font-bold text-lg mb-2">健康診断で要精密検査の方</h3>
               <p className="text-sm text-muted-foreground">
-                肝機能異常（GPT高値）、胸部X線の影など、詳しい検査と治療を行います。
+                肝機能異常、血糖値異常、コレステロール値など精密検査と治療を行います。
               </p>
             </Card>
             <Card className="p-6">
-              <h3 className="font-bold text-lg mb-2">40歳以上の方</h3>
+              <h3 className="font-bold text-lg mb-2">生活習慣病が心配な方</h3>
               <p className="text-sm text-muted-foreground">
-                特定健診、がん検診など、生活習慣病の早期発見・予防に力を入れています。
+                高血圧、糖尿病、脂質異常症などの早期発見と継続的な管理を行います。
               </p>
             </Card>
             <Card className="p-6">
-              <h3 className="font-bold text-lg mb-2">急な不整脈でお困りの方</h3>
+              <h3 className="font-bold text-lg mb-2">風邪や体調不良の方</h3>
               <p className="text-sm text-muted-foreground">
-                心電図検査をすぐに実施。循環器疾患の診断と治療を行います。
+                発熱、咳、のどの痛みなど、急な体調不良にも迅速に対応いたします。
               </p>
             </Card>
           </div>
