@@ -1,0 +1,36 @@
+{
+  "news": [
+    {
+      "id": "2",
+      "title": "インフルエンザ予防接種のご案内",
+      "content": "インフルエンザ予防接種を実施しております。ご希望の方は受付までお申し出ください。",
+      "category": "診療案内",
+      "date": "2024-10-01",
+      "summary": "",
+      "thumbnail": "",
+      "tags": [],
+      "isPinned": false,
+      "isImportant": false,
+      "author": "管理者",
+      "viewCount": 0,
+      "createdAt": "2024-10-01T10:00:00.000Z",
+      "updatedAt": "2024-10-01T10:00:00.000Z"
+    },
+    {
+      "id": "3",
+      "title": "診療時間変更のお知らせ",
+      "content": "12月20日(水)は院長の学会参加のため、午後の診療を休診とさせていただきます。",
+      "category": "診療時間変更",
+      "date": "2024-12-10",
+      "summary": "",
+      "thumbnail": "",
+      "tags": [],
+      "isPinned": false,
+      "isImportant": false,
+      "author": "管理者",
+      "viewCount": 0,
+      "createdAt": "2024-12-10T08:00:00.000Z",
+      "updatedAt": "2024-12-10T08:00:00.000Z"
+    }
+  ]
+}

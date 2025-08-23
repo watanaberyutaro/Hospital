@@ -27,7 +27,9 @@
       "Bash(cat:*)",
       "Bash(git config:*)",
       "Bash(find:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(echo:*)",
+      "Bash(pkill:*)"
     ],
     "deny": []
   }

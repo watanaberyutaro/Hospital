@@ -1,222 +1,302 @@
-import Link from 'next/link'
-import { SectionHeading } from '@/components/ui/SectionHeading'
-import { Card } from '@/components/ui/Card'
-import { Button } from '@/components/ui/Button'
-import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
-import { Pagination } from '@/components/ui/Pagination'
-import { FutureUpdate } from '@/components/ui/FutureUpdate'
-import { Calendar, Tag, ArrowRight, Bell, FileText, Heart } from 'lucide-react'
+'use client';
+
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { Calendar, Tag as TagIcon, Eye, Clock, Pin, AlertCircle, Search, Filter } from 'lucide-react';
+
+interface NewsItem {
+  id: string;
+  title: string;
+  content: string;
+  summary: string;
+  category: string;
+  date: string;
+  thumbnail: string;
+  tags: string[];
+  isPinned: boolean;
+  isImportant: boolean;
+  author: string;
+  viewCount: number;
+  createdAt: string;
+  updatedAt: string;
+}
 
 export default function NewsPage() {
-  const newsItems = [
-    {
-      id: 1,
-      title: '年末年始の診療について',
-      excerpt: '12月29日（日）から1月3日（金）まで休診とさせていただきます。1月4日（土）より通常診療を開始いたします。',
-      date: '2025-12-15',
-      category: 'お知らせ',
-      slug: 'year-end-schedule',
-      featured: true,
-    },
-    {
-      id: 2,
-      title: '電子カルテ導入による予約システム開始予定',
-      excerpt: '電子カルテ導入に伴い、オンライン予約システムを開始予定です。現在は予約外診療（内視鏡検査を除く）のみ対応しております。',
-      date: '2025-11-20',
-      category: 'お知らせ',
-      slug: 'reservation-system',
-      featured: false,
-      hasFutureUpdate: true,
-    },
-    {
-      id: 3,
-      title: '看護師募集のお知らせ',
-      excerpt: '当院では看護師を若干名募集しております。詳細はお電話にてお問い合わせください。',
-      date: '2025-11-01',
-      category: '採用情報',
-      slug: 'nurse-recruitment',
-      featured: false,
-    },
-    {
-      id: 4,
-      title: 'インフルエンザワクチン接種開始',
-      excerpt: '今年度のインフルエンザワクチン接種を開始しました。ご希望の方はお電話にてご予約ください。',
-      date: '2025-10-15',
-      category: '診療案内',
-      slug: 'influenza-vaccine',
-      featured: false,
-    },
-    {
-      id: 5,
-      title: '健康コラム：生活習慣病の予防について',
-      excerpt: '生活習慣病は日々の生活習慣の改善により予防することができます。適度な運動と食事管理が重要です。',
-      date: '2025-10-01',
-      category: '健康情報',
-      slug: 'health-column',
-      featured: false,
-      hasFutureUpdate: true,
-    },
-    {
-      id: 6,
-      title: 'マイナ保険証の利用について',
-      excerpt: '当院ではマイナンバーカードの健康保険証利用に対応しております。受付にてカードリーダーをご利用ください。',
-      date: '2025-09-20',
-      category: '診療案内',
-      slug: 'mynumber-card',
-      featured: false,
-    },
-  ]
+  const [news, setNews] = useState<NewsItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState('すべて');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedTag, setSelectedTag] = useState('');
 
-  const categories = [
-    { name: 'すべて', count: 6 },
-    { name: 'お知らせ', count: 2 },
-    { name: '診療案内', count: 2 },
-    { name: '健康情報', count: 1 },
-    { name: '採用情報', count: 1 },
-  ]
+  useEffect(() => {
+    fetchNews();
+  }, []);
 
-  const featuredNews = newsItems.find(item => item.featured)
-  const regularNews = newsItems.filter(item => !item.featured)
+  const fetchNews = async () => {
+    try {
+      const response = await fetch('/api/news');
+      const data = await response.json();
+      setNews(data.news);
+    } catch (error) {
+      console.error('Error fetching news:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  return (
-    <div className="min-h-screen bg-white dark:bg-gray-900">
-      <div className="bg-primary-50 dark:bg-primary-900 py-16">
-        <div className="container mx-auto px-4">
-          <Breadcrumbs items={[{ label: 'お知らせ' }]} />
-          <SectionHeading 
-            title="お知らせ・最新情報"
-            subtitle="クリニックからの重要なお知らせと健康情報をお届けします"
-          />
+  const getCategoryColor = (category: string) => {
+    switch (category) {
+      case '重要なお知らせ':
+        return 'bg-red-100 text-red-800 border-red-200';
+      case '診療時間変更':
+        return 'bg-yellow-100 text-yellow-800 border-yellow-200';
+      case '休診情報':
+        return 'bg-orange-100 text-orange-800 border-orange-200';
+      case '診療案内':
+        return 'bg-blue-100 text-blue-800 border-blue-200';
+      case 'イベント':
+        return 'bg-purple-100 text-purple-800 border-purple-200';
+      case '健康情報':
+        return 'bg-green-100 text-green-800 border-green-200';
+      default:
+        return 'bg-gray-100 text-gray-800 border-gray-200';
+    }
+  };
+
+  const categories = ['すべて', '重要なお知らせ', '診療案内', '診療時間変更', '休診情報', 'イベント', '健康情報', 'その他'];
+  
+  // Extract all unique tags
+  const allTags = Array.from(new Set(news.flatMap(item => item.tags || [])));
+
+  // Filter news based on category, search query, and tag
+  let filteredNews = news;
+  
+  if (selectedCategory !== 'すべて') {
+    filteredNews = filteredNews.filter(item => item.category === selectedCategory);
+  }
+  
+  if (searchQuery) {
+    filteredNews = filteredNews.filter(item => 
+      item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (item.summary && item.summary.toLowerCase().includes(searchQuery.toLowerCase()))
+    );
+  }
+  
+  if (selectedTag) {
+    filteredNews = filteredNews.filter(item => 
+      item.tags && item.tags.includes(selectedTag)
+    );
+  }
+
+  // Sort: pinned first, then by date
+  filteredNews.sort((a, b) => {
+    if (a.isPinned && !b.isPinned) return -1;
+    if (!a.isPinned && b.isPinned) return 1;
+    return new Date(b.date).getTime() - new Date(a.date).getTime();
+  });
+
+  // Strip HTML tags for display
+  const stripHtml = (html: string) => {
+    const tmp = document.createElement('div');
+    tmp.innerHTML = html;
+    return tmp.textContent || tmp.innerText || '';
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+        <div className="container mx-auto px-4 py-16">
+          <h1 className="text-4xl font-bold text-center mb-12">お知らせ一覧</h1>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div key={i} className="bg-white rounded-xl shadow-md overflow-hidden animate-pulse">
+                <div className="h-48 bg-gray-200"></div>
+                <div className="p-6">
+                  <div className="h-4 bg-gray-200 rounded w-3/4 mb-3"></div>
+                  <div className="h-3 bg-gray-200 rounded w-full mb-2"></div>
+                  <div className="h-3 bg-gray-200 rounded w-5/6"></div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
+    );
+  }
 
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-            <div className="lg:col-span-3">
-              {featuredNews && (
-                <Card className="mb-8 overflow-hidden">
-                  <div className="md:flex">
-                    <div className="md:w-1/3 bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-800 dark:to-primary-900 p-8 flex items-center justify-center">
-                      <div className="text-center">
-                        <div className="text-primary text-4xl font-bold mb-2">注目</div>
-                        <div className="text-gray-600 dark:text-gray-300">FEATURED</div>
-                      </div>
-                    </div>
-                    <div className="md:w-2/3 p-8">
-                      <div className="flex items-center gap-4 mb-4">
-                        <span className="bg-primary text-white px-3 py-1 rounded-full text-sm">
-                          {featuredNews.category}
-                        </span>
-                        <span className="text-gray-500 dark:text-gray-400 text-sm flex items-center gap-1">
-                          <Calendar className="w-4 h-4" />
-                          {featuredNews.date}
-                        </span>
-                      </div>
-                      <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                        {featuredNews.title}
-                      </h2>
-                      <p className="text-gray-600 dark:text-gray-300 mb-4">
-                        {featuredNews.excerpt}
-                      </p>
-                      {featuredNews.hasFutureUpdate && (
-                        <div className="mb-4">
-                          <FutureUpdate />
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+      <div className="container mx-auto px-4 py-16">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold mb-4">お知らせ一覧</h1>
+          <Link href="/" className="text-green-600 hover:text-green-700">
+            ← トップページに戻る
+          </Link>
+        </div>
+
+        <div className="max-w-7xl mx-auto">
+          {/* Search and Filter Section */}
+          <div className="bg-white rounded-xl shadow-md p-6 mb-8">
+            <div className="flex flex-col md:flex-row gap-4 mb-6">
+              <div className="flex-1">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                  <input
+                    type="text"
+                    placeholder="お知らせを検索..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  />
+                </div>
+              </div>
+              <button className="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
+                <Filter className="w-4 h-4" />
+                フィルター
+              </button>
+            </div>
+
+            {/* Categories */}
+            <div className="mb-4">
+              <div className="flex flex-wrap gap-2">
+                {categories.map((category) => (
+                  <button
+                    key={category}
+                    onClick={() => setSelectedCategory(category)}
+                    className={`px-4 py-2 rounded-full transition-all ${
+                      selectedCategory === category
+                        ? 'bg-green-600 text-white shadow-md transform scale-105'
+                        : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+                    }`}
+                  >
+                    {category}
+                    {category === 'すべて' && (
+                      <span className="ml-2 text-xs bg-white/20 px-2 py-0.5 rounded-full">
+                        {news.length}
+                      </span>
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Tags */}
+            {allTags.length > 0 && (
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <TagIcon className="w-4 h-4 text-gray-500" />
+                  <span className="text-sm text-gray-600">タグ:</span>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  <button
+                    onClick={() => setSelectedTag('')}
+                    className={`text-sm px-3 py-1 rounded-full transition-colors ${
+                      !selectedTag
+                        ? 'bg-green-100 text-green-700'
+                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    }`}
+                  >
+                    すべて
+                  </button>
+                  {allTags.map((tag) => (
+                    <button
+                      key={tag}
+                      onClick={() => setSelectedTag(tag)}
+                      className={`text-sm px-3 py-1 rounded-full transition-colors ${
+                        selectedTag === tag
+                          ? 'bg-green-100 text-green-700'
+                          : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                      }`}
+                    >
+                      #{tag}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Results count */}
+          <div className="mb-6 text-sm text-gray-600">
+            {filteredNews.length}件のお知らせが見つかりました
+          </div>
+
+          {filteredNews.length === 0 ? (
+            <div className="text-center py-12 bg-white rounded-xl shadow-md">
+              <p className="text-gray-500">該当するお知らせはありません</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredNews.map((item) => (
+                <Link key={item.id} href={`/news/${item.id}`} className="group">
+                  <article className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden h-full flex flex-col">
+                    <div className="p-6 flex-1 flex flex-col">
+                      {(item.isPinned || item.isImportant) && (
+                        <div className="flex gap-2 mb-3">
+                          {item.isPinned && (
+                            <span className="bg-blue-500 text-white p-1.5 rounded-full shadow">
+                              <Pin className="w-3 h-3" />
+                            </span>
+                          )}
+                          {item.isImportant && (
+                            <span className="bg-red-500 text-white p-1.5 rounded-full shadow">
+                              <AlertCircle className="w-3 h-3" />
+                            </span>
+                          )}
                         </div>
                       )}
-                      <Button asChild>
-                        <Link href={`/news/${featuredNews.slug}`}>
-                          詳細を見る
-                          <ArrowRight className="w-4 h-4 ml-2" />
-                        </Link>
-                      </Button>
-                    </div>
-                  </div>
-                </Card>
-              )}
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {regularNews.map((item) => (
-                  <Card key={item.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-                    <div className="p-6">
                       <div className="flex items-center gap-2 mb-3">
-                        <span className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 py-1 rounded-full text-xs">
+                        <span className={`text-xs px-2 py-1 rounded-full border ${getCategoryColor(item.category)}`}>
                           {item.category}
                         </span>
-                        <span className="text-gray-500 dark:text-gray-400 text-xs flex items-center gap-1">
+                        <span className="text-xs text-gray-500 flex items-center gap-1">
                           <Calendar className="w-3 h-3" />
                           {item.date}
                         </span>
                       </div>
-                      <h3 className="font-semibold text-lg mb-3 line-clamp-2">
+                      
+                      <h2 className="text-lg font-bold mb-2 line-clamp-2 group-hover:text-green-600 transition-colors">
                         {item.title}
-                      </h3>
-                      <p className="text-gray-600 dark:text-gray-300 text-sm mb-3 line-clamp-3">
-                        {item.excerpt}
+                      </h2>
+                      
+                      <p className="text-gray-600 text-sm line-clamp-3 mb-4 flex-1">
+                        {item.summary || stripHtml(item.content)}
                       </p>
-                      {item.hasFutureUpdate && (
-                        <div className="mb-3">
-                          <FutureUpdate />
+                      
+                      {item.tags && item.tags.length > 0 && (
+                        <div className="flex flex-wrap gap-1 mb-3">
+                          {item.tags.slice(0, 3).map((tag) => (
+                            <span key={tag} className="text-xs bg-gray-100 px-2 py-1 rounded">
+                              #{tag}
+                            </span>
+                          ))}
+                          {item.tags.length > 3 && (
+                            <span className="text-xs text-gray-500">+{item.tags.length - 3}</span>
+                          )}
                         </div>
                       )}
-                      <Button variant="outline" size="sm" asChild>
-                        <Link href={`/news/${item.slug}`}>
-                          続きを読む
-                          <ArrowRight className="w-4 h-4 ml-1" />
-                        </Link>
-                      </Button>
+                      
+                      <div className="flex items-center justify-between text-xs text-gray-500 pt-3 border-t">
+                        <span className="flex items-center gap-1">
+                          <Eye className="w-3 h-3" />
+                          {item.viewCount || 0}
+                        </span>
+                        {item.updatedAt !== item.createdAt && (
+                          <span className="flex items-center gap-1">
+                            <Clock className="w-3 h-3" />
+                            更新済み
+                          </span>
+                        )}
+                      </div>
                     </div>
-                  </Card>
-                ))}
-              </div>
-
-              <div className="mt-12">
-                <Pagination currentPage={1} totalPages={3} baseUrl="/news" />
-              </div>
+                  </article>
+                </Link>
+              ))}
             </div>
-
-            <div className="lg:col-span-1">
-              <Card className="p-6 mb-6">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                  カテゴリー
-                </h3>
-                <div className="space-y-2">
-                  {categories.map((category) => (
-                    <button
-                      key={category.name}
-                      className="w-full flex items-center justify-between p-2 text-left hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors"
-                    >
-                      <span className="text-gray-700 dark:text-gray-300">
-                        {category.name}
-                      </span>
-                      <span className="text-gray-500 dark:text-gray-400 text-sm">
-                        {category.count}
-                      </span>
-                    </button>
-                  ))}
-                </div>
-              </Card>
-
-              <Card className="p-6">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                  将来の予定
-                </h3>
-                <div className="space-y-3">
-                  <div className="p-3 bg-amber-50 dark:bg-amber-900/20 rounded-lg">
-                    <FutureUpdate message="メールマガジン機能は今後実装予定です" />
-                  </div>
-                  <div className="p-3 bg-amber-50 dark:bg-amber-900/20 rounded-lg">
-                    <FutureUpdate message="LINE公式アカウントは準備中です" />
-                  </div>
-                  <div className="p-3 bg-amber-50 dark:bg-amber-900/20 rounded-lg">
-                    <FutureUpdate message="SNS連携機能は今後追加予定です" />
-                  </div>
-                </div>
-              </Card>
-            </div>
-          </div>
+          )}
         </div>
-      </section>
+      </div>
     </div>
-  )
+  );
 }

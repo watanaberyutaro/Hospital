@@ -1,0 +1,318 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import { Calendar, Trash2, Plus, X } from 'lucide-react'
+import { Button } from '@/components/ui/Button'
+import { Card } from '@/components/ui/Card'
+
+interface SpecialHoliday {
+  id: string
+  date: string
+  reason: string
+  createdAt: string
+}
+
+interface HolidaysData {
+  regularHolidays: {
+    weekdays: number[]
+    description: string
+  }
+  specialHolidays: SpecialHoliday[]
+}
+
+export default function AdminHolidaysPage() {
+  const router = useRouter()
+  const [holidays, setHolidays] = useState<HolidaysData>({
+    regularHolidays: { weekdays: [0, 3], description: "毎週水曜日・日曜日" },
+    specialHolidays: []
+  })
+  const [isAddingHoliday, setIsAddingHoliday] = useState(false)
+  const [newHolidayDate, setNewHolidayDate] = useState('')
+  const [newHolidayReason, setNewHolidayReason] = useState('')
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetchHolidays()
+  }, [])
+
+  const fetchHolidays = async () => {
+    try {
+      const response = await fetch('/api/holidays')
+      const data = await response.json()
+      setHolidays(data)
+    } catch (error) {
+      console.error('Failed to fetch holidays:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleAddHoliday = async () => {
+    if (!newHolidayDate) return
+
+    try {
+      const response = await fetch('/api/holidays', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          date: newHolidayDate,
+          reason: newHolidayReason || '臨時休業'
+        })
+      })
+
+      if (response.ok) {
+        fetchHolidays()
+        setIsAddingHoliday(false)
+        setNewHolidayDate('')
+        setNewHolidayReason('')
+      }
+    } catch (error) {
+      console.error('Failed to add holiday:', error)
+    }
+  }
+
+  const handleDeleteHoliday = async (id: string) => {
+    if (!confirm('この臨時休業日を削除しますか？')) return
+
+    try {
+      const response = await fetch(`/api/holidays?id=${id}`, {
+        method: 'DELETE'
+      })
+
+      if (response.ok) {
+        fetchHolidays()
+      }
+    } catch (error) {
+      console.error('Failed to delete holiday:', error)
+    }
+  }
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString)
+    return date.toLocaleDateString('ja-JP', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      weekday: 'long'
+    })
+  }
+
+  const sortedSpecialHolidays = [...holidays.specialHolidays].sort((a, b) => 
+    new Date(a.date).getTime() - new Date(b.date).getTime()
+  )
+
+  const futureHolidays = sortedSpecialHolidays.filter(h => 
+    new Date(h.date) >= new Date(new Date().toDateString())
+  )
+
+  const pastHolidays = sortedSpecialHolidays.filter(h => 
+    new Date(h.date) < new Date(new Date().toDateString())
+  )
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-center justify-center h-64">
+            <div className="text-gray-500">読み込み中...</div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-8">
+      <div className="max-w-6xl mx-auto">
+        <div className="flex justify-between items-center mb-8">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+              休診日管理
+            </h1>
+            <p className="text-gray-600 dark:text-gray-400">
+              定休日と臨時休業日を管理します
+            </p>
+          </div>
+          <div className="flex gap-4">
+            <Button
+              variant="outline"
+              onClick={() => router.push('/admin/news')}
+            >
+              お知らせ管理
+            </Button>
+            <Button
+              variant="outline"
+              onClick={() => router.push('/admin')}
+            >
+              管理画面トップ
+            </Button>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <Card className="p-6">
+            <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+              <Calendar className="w-5 h-5 text-primary" />
+              定休日
+            </h2>
+            <div className="space-y-4">
+              <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                <p className="text-lg font-medium mb-2">
+                  {holidays.regularHolidays.description}
+                </p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  ※ 祝日も休診となります
+                </p>
+              </div>
+            </div>
+          </Card>
+
+          <Card className="p-6">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-semibold flex items-center gap-2">
+                <Calendar className="w-5 h-5 text-primary" />
+                臨時休業日
+              </h2>
+              {!isAddingHoliday && (
+                <Button
+                  size="sm"
+                  onClick={() => setIsAddingHoliday(true)}
+                >
+                  <Plus className="w-4 h-4 mr-1" />
+                  追加
+                </Button>
+              )}
+            </div>
+
+            {isAddingHoliday && (
+              <div className="mb-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                <div className="space-y-3">
+                  <div>
+                    <label className="block text-sm font-medium mb-1">
+                      日付 <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="date"
+                      value={newHolidayDate}
+                      onChange={(e) => setNewHolidayDate(e.target.value)}
+                      min={new Date().toISOString().split('T')[0]}
+                      className="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-1">
+                      理由（任意）
+                    </label>
+                    <input
+                      type="text"
+                      value={newHolidayReason}
+                      onChange={(e) => setNewHolidayReason(e.target.value)}
+                      placeholder="例：院内研修のため"
+                      className="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                    />
+                  </div>
+                  <div className="flex gap-2">
+                    <Button
+                      size="sm"
+                      onClick={handleAddHoliday}
+                      disabled={!newHolidayDate}
+                    >
+                      追加
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => {
+                        setIsAddingHoliday(false)
+                        setNewHolidayDate('')
+                        setNewHolidayReason('')
+                      }}
+                    >
+                      <X className="w-4 h-4 mr-1" />
+                      キャンセル
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <div className="space-y-2">
+              {futureHolidays.length > 0 ? (
+                <>
+                  <p className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
+                    今後の臨時休業日
+                  </p>
+                  {futureHolidays.map((holiday) => (
+                    <div
+                      key={holiday.id}
+                      className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
+                    >
+                      <div>
+                        <p className="font-medium">{formatDate(holiday.date)}</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">
+                          {holiday.reason}
+                        </p>
+                      </div>
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        onClick={() => handleDeleteHoliday(holiday.id)}
+                        className="text-red-500 hover:text-red-600"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  ))}
+                </>
+              ) : (
+                <p className="text-gray-500 dark:text-gray-400 text-center py-4">
+                  臨時休業日はありません
+                </p>
+              )}
+
+              {pastHolidays.length > 0 && (
+                <>
+                  <p className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2 mt-4">
+                    過去の臨時休業日
+                  </p>
+                  {pastHolidays.slice(0, 3).map((holiday) => (
+                    <div
+                      key={holiday.id}
+                      className="flex justify-between items-center p-3 bg-gray-100 dark:bg-gray-800 rounded-lg opacity-60"
+                    >
+                      <div>
+                        <p className="font-medium text-sm">{formatDate(holiday.date)}</p>
+                        <p className="text-xs text-gray-600 dark:text-gray-400">
+                          {holiday.reason}
+                        </p>
+                      </div>
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        onClick={() => handleDeleteHoliday(holiday.id)}
+                        className="text-red-500 hover:text-red-600"
+                      >
+                        <Trash2 className="w-3 h-3" />
+                      </Button>
+                    </div>
+                  ))}
+                </>
+              )}
+            </div>
+          </Card>
+        </div>
+
+        <Card className="mt-8 p-6">
+          <h2 className="text-xl font-semibold mb-4">使い方</h2>
+          <div className="space-y-3 text-sm text-gray-600 dark:text-gray-400">
+            <p>• 定休日（毎週水曜日・日曜日・祝日）は自動的にカレンダーに反映されます</p>
+            <p>• 臨時休業日を追加すると、トップページのカレンダーに赤色で表示されます</p>
+            <p>• 臨時休業日は理由を添えることができます（例：院内研修、設備点検など）</p>
+            <p>• 過去の臨時休業日は自動的にグレーアウトされますが、手動で削除も可能です</p>
+          </div>
+        </Card>
+      </div>
+    </div>
+  )
+}
