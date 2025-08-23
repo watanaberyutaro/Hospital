@@ -62,6 +62,13 @@ export default function AboutPage() {
                 特に内視鏡センターでは、上下部内視鏡検査（胃・大腸カメラ）を中心に、苦痛の少ない検査を心がけております。
                 採血、処方、総合健診、人間ドック（局所的）など、地域の皆様の健康管理をサポートします。
               </p>
+              <div className="rounded-lg overflow-hidden shadow-lg">
+                <img 
+                  src="/images/建物2.jpg" 
+                  alt="新井町内科消化器クリニック施設"
+                  className="w-full h-auto object-cover"
+                />
+              </div>
             </div>
             <div className="grid grid-cols-2 gap-6">
               {stats.map((stat, index) => (
@@ -82,6 +89,45 @@ export default function AboutPage() {
 
       <section className="py-16 bg-gray-50 dark:bg-gray-800">
         <div className="container mx-auto px-4">
+          <SectionHeading 
+            title="施設紹介"
+            subtitle="充実した医療設備"
+          />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div className="rounded-lg overflow-hidden shadow-lg">
+              <img 
+                src="/images/オペ.jpg" 
+                alt="手術室"
+                className="w-full h-64 object-cover"
+              />
+              <div className="p-4 bg-white dark:bg-gray-700">
+                <h4 className="font-semibold text-gray-900 dark:text-white">手術室</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">最新の設備を備えた清潔な手術室</p>
+              </div>
+            </div>
+            <div className="rounded-lg overflow-hidden shadow-lg">
+              <img 
+                src="/images/内視鏡センター.jpg" 
+                alt="内視鏡センター"
+                className="w-full h-64 object-cover"
+              />
+              <div className="p-4 bg-white dark:bg-gray-700">
+                <h4 className="font-semibold text-gray-900 dark:text-white">内視鏡センター</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">最新の内視鏡システムを完備</p>
+              </div>
+            </div>
+            <div className="rounded-lg overflow-hidden shadow-lg">
+              <img 
+                src="/images/art.jpg" 
+                alt="院内アート"
+                className="w-full h-64 object-cover"
+              />
+              <div className="p-4 bg-white dark:bg-gray-700">
+                <h4 className="font-semibold text-gray-900 dark:text-white">癒しの空間</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">患者様がリラックスできる環境</p>
+              </div>
+            </div>
+          </div>
           <SectionHeading 
             title="私たちの特徴"
             subtitle="患者様に選ばれる理由"
