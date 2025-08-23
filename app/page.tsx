@@ -392,7 +392,7 @@ export default function HomePage() {
           />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {departments.map((dept, index) => (
-              <Card key={index} className="overflow-hidden group cursor-pointer">
+              <Card key={index} className="overflow-hidden group">
                 <div className="aspect-[4/3] relative overflow-hidden">
                   <img 
                     src={dept.image} 
@@ -404,9 +404,6 @@ export default function HomePage() {
                 </div>
                 <div className="p-6">
                   <p className="text-muted-foreground">{dept.description}</p>
-                  <Button variant="ghost" size="sm" className="mt-4 group-hover:text-primary" asChild>
-                    <a href={`/departments/${dept.name}`}>詳しく見る →</a>
-                  </Button>
                 </div>
               </Card>
             ))}
