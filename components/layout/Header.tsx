@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Menu, X, Phone, Clock, MapPin } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 
@@ -43,8 +44,14 @@ export function Header() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between py-4">
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-primary to-primary/80 rounded-2xl flex items-center justify-center shadow-lg shadow-primary/20 group-hover:shadow-xl group-hover:shadow-primary/30 transition-all duration-300 group-hover:scale-105 flex-shrink-0">
-              <span className="text-white font-bold text-lg md:text-xl">A</span>
+            <div className="relative w-10 h-10 md:w-12 md:h-12 flex-shrink-0">
+              <Image
+                src="/images/Logo.png"
+                alt="新井町内科消化器科クリニック ロゴ"
+                fill
+                className="object-contain group-hover:scale-105 transition-transform duration-300"
+                priority
+              />
             </div>
             <div className="hidden sm:block">
               <h1 className="text-lg md:text-xl lg:text-2xl font-bold text-foreground group-hover:text-primary transition-colors leading-tight">

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { MapPin, Phone, Mail, Clock, Facebook, Twitter, Instagram, Youtube } from 'lucide-react'
 
 export function Footer() {
@@ -42,8 +43,13 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           <div>
             <div className="flex items-center space-x-4 mb-6">
-              <div className="w-14 h-14 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center shadow-lg">
-                <span className="text-white font-bold text-xl">A</span>
+              <div className="relative w-14 h-14 flex-shrink-0">
+                <Image
+                  src="/images/Logo.png"
+                  alt="新井町内科消化器科クリニック ロゴ"
+                  fill
+                  className="object-contain"
+                />
               </div>
               <div>
                 <h3 className="text-xl font-bold">新井町内科消化器科クリニック</h3>
