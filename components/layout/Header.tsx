@@ -13,8 +13,9 @@ export function Header() {
     { name: 'ホーム', href: '/' },
     { name: 'クリニック紹介', href: '/about' },
     { name: '診療内容', href: '/departments' },
-    { name: '医師紹介', href: '/doctors' },
+    { name: '症状・検査', href: '/symptoms' },
     { name: '内視鏡センター', href: '/endoscopy' },
+    { name: 'よくある質問', href: '/faq' },
     { name: 'アクセス', href: '/access' },
   ]
 
@@ -30,7 +31,7 @@ export function Header() {
               </div>
               <div className="hidden sm:flex items-center gap-2 whitespace-nowrap group">
                 <Clock className="w-4 h-4 text-primary group-hover:scale-110 transition-transform flex-shrink-0" />
-                <span className="text-muted-foreground group-hover:text-primary transition-colors">9:00-12:30 / 15:00-18:00</span>
+                <span className="text-muted-foreground group-hover:text-primary transition-colors">9:00-12:30 / 15:00-17:30</span>
               </div>
               <div className="hidden lg:flex items-center gap-2 whitespace-nowrap group">
                 <MapPin className="w-4 h-4 text-primary group-hover:scale-110 transition-transform flex-shrink-0" />

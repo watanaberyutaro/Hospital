@@ -55,10 +55,11 @@ export default function HomePage() {
 
   const scheduleInfo = {
     regular: [
-      { day: '月・火・木・金', morning: '9:00 - 12:30', afternoon: '15:00 - 18:00' },
+      { day: '月・火・木・金', morning: '9:00 - 12:30', afternoon: '15:00 - 17:30' },
+      { day: '水', morning: '9:00 - 12:30', afternoon: '休診' },
       { day: '土', morning: '9:00 - 12:30', afternoon: '休診' },
     ],
-    holidays: '水曜日・日曜日・祝日',
+    holidays: '日曜日・祝日',
     note: '※受付は診療終了の30分前まで',
   }
 
@@ -208,6 +209,46 @@ export default function HomePage() {
   return (
     <div className="min-h-screen">
       <Hero />
+      
+      {/* ターゲット層向けセクション */}
+      <section className="py-16 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
+        <div className="container mx-auto px-6">
+          <SectionHeading 
+            title="こんな方にお勧めです"
+            subtitle="初めての方も安心して受診いただけます"
+          />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+            <Card className="p-6">
+              <div className="text-3xl mb-4">🏥</div>
+              <h3 className="font-bold text-lg mb-2">初めて受診される方</h3>
+              <p className="text-sm text-muted-foreground">
+                予約なしでも受診可能。急な体調不良でもすぐに対応いたします。
+              </p>
+            </Card>
+            <Card className="p-6">
+              <div className="text-3xl mb-4">📋</div>
+              <h3 className="font-bold text-lg mb-2">健診で異常を指摘された方</h3>
+              <p className="text-sm text-muted-foreground">
+                肝機能異常（GPT高値）、胸部X線の影など、詳しい検査と治療を行います。
+              </p>
+            </Card>
+            <Card className="p-6">
+              <div className="text-3xl mb-4">👥</div>
+              <h3 className="font-bold text-lg mb-2">40歳以上の方</h3>
+              <p className="text-sm text-muted-foreground">
+                特定健診、がん検診など、生活習慣病の早期発見・予防に力を入れています。
+              </p>
+            </Card>
+            <Card className="p-6">
+              <div className="text-3xl mb-4">💓</div>
+              <h3 className="font-bold text-lg mb-2">急な不整脈でお困りの方</h3>
+              <p className="text-sm text-muted-foreground">
+                心電図検査をすぐに実施。循環器疾患の診断と治療を行います。
+              </p>
+            </Card>
+          </div>
+        </div>
+      </section>
       
       <section className="py-16 bg-gradient-to-b from-primary/5 to-background">
         <div className="container mx-auto px-6">

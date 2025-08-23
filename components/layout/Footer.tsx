@@ -9,10 +9,11 @@ export function Footer() {
     { name: 'ホーム', href: '/' },
     { name: 'クリニック紹介', href: '/about' },
     { name: '診療内容', href: '/departments' },
-    { name: '医師紹介', href: '/doctors' },
+    { name: '症状・検査', href: '/symptoms' },
     { name: '内視鏡センター', href: '/endoscopy' },
-    { name: '医療連携', href: '/partnerships' },
+    { name: 'よくある質問', href: '/faq' },
     { name: 'アクセス', href: '/access' },
+    { name: 'プライバシーポリシー', href: '/privacy' },
   ]
 
   const departments = [
@@ -135,9 +136,9 @@ export function Footer() {
                   <Clock className="w-4 h-4 text-primary" />
                 </div>
                 <div className="text-white/80">
-                  <p>診療時間: 9:00-12:30 / 15:00-18:00</p>
+                  <p>診療時間: 9:00-12:30 / 15:00-17:30</p>
                   <p>受付: 午前12:30まで、午後17:30まで</p>
-                  <p>休診: 日曜・祝日・その他</p>
+                  <p>休診: 水曜午後・土曜午後・日曜・祝日</p>
                 </div>
               </div>
             </div>
