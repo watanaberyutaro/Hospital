@@ -1,4 +1,4 @@
-import { put, get, list, del } from '@vercel/blob';
+import { put, list, del } from '@vercel/blob';
 import fs from 'fs/promises';
 import path from 'path';
 
