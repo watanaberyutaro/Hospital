@@ -214,7 +214,7 @@ export default function HomePage() {
       <section className="py-16 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
         <div className="container mx-auto px-6">
           <SectionHeading 
-            title="こんな症状でお困りの方へ"
+            title="このような方はぜひご相談ください"
             subtitle="初めての方も安心して受診いただけます"
           />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
