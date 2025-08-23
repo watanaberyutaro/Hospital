@@ -16,6 +16,10 @@ export interface NewsItem {
   isImportant?: boolean;
   createdAt?: string;
   updatedAt?: string;
+  author?: string;
+  viewCount?: number;
+  summary?: string;
+  thumbnail?: string;
 }
 
 export interface Holiday {

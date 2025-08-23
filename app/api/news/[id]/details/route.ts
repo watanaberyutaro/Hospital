@@ -8,7 +8,7 @@ export async function GET(
   try {
     const newsData = await storage.getNews();
     
-    const item = newsData.news.find((n: any) => n.id === params.id);
+    const item = newsData.news.find((n) => n.id === params.id);
     
     if (!item) {
       return NextResponse.json({ error: 'News not found' }, { status: 404 });
