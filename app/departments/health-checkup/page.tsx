@@ -1,109 +1,108 @@
+import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
-import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
-import { FutureUpdate } from '@/components/ui/FutureUpdate'
+import Link from 'next/link'
 import { 
-  Heart, 
-  ClipboardCheck, 
-  Activity, 
-  Shield, 
-  Users, 
-  FileText,
-  CheckCircle,
+  Heart,
+  CheckCircle, 
+  Clock, 
+  Shield,
+  Phone,
+  AlertCircle,
+  ClipboardCheck,
   Calendar,
-  AlertCircle
+  Users,
+  FileText
 } from 'lucide-react'
 
 export default function HealthCheckupPage() {
   const checkupTypes = [
     {
-      name: '特定健診',
-      target: '40歳～74歳の方',
-      description: 'メタボリックシンドロームに着目した健診',
-      icon: Heart,
+      title: '特定健康診査',
+      target: '40歳～74歳の国民健康保険加入者',
+      content: '身体測定、血圧測定、血液検査、尿検査、心電図など',
+      price: '無料～1,000円程度（自治体により異なる）'
+    },
+    {
+      title: '企業健診',
+      target: '企業・事業所にお勤めの方',
+      content: '労働安全衛生法に基づく定期健康診断',
+      price: '企業契約により異なります'
+    },
+    {
+      title: '川口市がん検診',
+      target: '川口市在住の対象年齢の方',
+      content: '胃がん、大腸がん、肺がん検診',
+      price: '各検診500円～1,500円（年齢により無料）'
+    },
+    {
+      title: '人間ドック（局所的）',
+      target: '健康状態を詳しく調べたい方',
+      content: '基本検査＋腹部超音波、胃カメラ、腫瘍マーカーなど',
+      price: '30,000円～（検査内容により異なる）'
+    }
+  ]
+
+  const examinations = [
+    {
+      category: '基本検査',
       items: [
-        '身体計測（身長・体重・BMI・腹囲）',
+        '身体測定（身長・体重・BMI・腹囲）',
         '血圧測定',
-        '血液検査（脂質・血糖・肝機能）',
-        '尿検査',
-        '心電図検査（医師の判断により実施）',
-      ],
-    },
-    {
-      name: '企業健診',
-      target: '企業にお勤めの方',
-      description: '労働安全衛生法に基づく定期健康診断',
-      icon: Shield,
-      items: [
-        '問診・診察',
-        '身体計測',
         '視力・聴力検査',
-        '胸部レントゲン検査',
-        '血液検査',
-        '尿検査',
-        '心電図検査',
-      ],
+        '尿検査（蛋白・糖・潜血）'
+      ]
     },
     {
-      name: '人間ドック（局所的）',
-      target: '健康管理を重視される方',
-      description: '特定の臓器や部位に特化した精密検査',
-      icon: Activity,
+      category: '血液検査',
       items: [
-        '消化器ドック（胃・大腸内視鏡）',
-        '肝臓精密検査',
-        '腹部エコー検査',
-        '腫瘍マーカー検査',
-        '詳細な血液検査',
-      ],
+        '肝機能検査（AST・ALT・γ-GTP）',
+        '脂質検査（中性脂肪・HDL・LDLコレステロール）',
+        '血糖検査（空腹時血糖・HbA1c）',
+        '腎機能検査（クレアチニン・尿酸）',
+        '貧血検査（赤血球・ヘモグロビン）'
+      ]
     },
+    {
+      category: '画像検査',
+      items: [
+        '胸部レントゲン検査',
+        '心電図検査',
+        '腹部超音波検査（オプション）',
+        '胃内視鏡検査（オプション）'
+      ]
+    }
   ]
 
-  const optionalTests = [
+  const features = [
     {
-      name: '胃がん検診',
-      description: '胃カメラまたはバリウム検査',
-      price: <FutureUpdate message="料金は今後掲載予定" />,
+      icon: ClipboardCheck,
+      title: '充実した検査項目',
+      description: '基本検査から精密検査まで幅広く対応'
     },
     {
-      name: '大腸がん検診',
-      description: '便潜血検査（2日法）',
-      price: <FutureUpdate message="料金は今後掲載予定" />,
+      icon: Users,
+      title: '経験豊富な医師',
+      description: '専門医による正確な診断と丁寧な説明'
     },
     {
-      name: '肝炎ウイルス検査',
-      description: 'B型・C型肝炎の検査',
-      price: <FutureUpdate message="料金は今後掲載予定" />,
+      icon: Clock,
+      title: '迅速な結果報告',
+      description: '検査結果は約2週間でお渡しします'
     },
     {
-      name: '前立腺がん検診',
-      description: 'PSA検査（血液検査）',
-      price: <FutureUpdate message="料金は今後掲載予定" />,
-    },
+      icon: FileText,
+      title: '詳細な健康診断書',
+      description: '分かりやすい診断書と健康アドバイス'
+    }
   ]
 
-  const flow = [
-    {
-      step: '1',
-      title: 'お申し込み',
-      description: 'お電話にてご予約ください',
-    },
-    {
-      step: '2',
-      title: '問診票記入',
-      description: '事前にお送りする問診票をご記入',
-    },
-    {
-      step: '3',
-      title: '健診当日',
-      description: '受付後、各種検査を実施',
-    },
-    {
-      step: '4',
-      title: '結果説明',
-      description: '後日、結果をご説明します',
-    },
+  const process = [
+    { step: 1, title: '予約', description: '電話またはWebで予約' },
+    { step: 2, title: '検査前準備', description: '食事制限などの事前準備' },
+    { step: 3, title: '受診', description: '各種検査を実施' },
+    { step: 4, title: '結果説明', description: '医師による結果説明と健康相談' }
   ]
 
   return (
@@ -111,12 +110,12 @@ export default function HealthCheckupPage() {
       <div className="bg-primary-50 dark:bg-primary-900 py-16">
         <div className="container mx-auto px-4">
           <Breadcrumbs items={[
-            { label: '診療内容', href: '/departments' },
+            { label: '診療科', href: '/departments' },
             { label: '健康診断' }
           ]} />
           <SectionHeading 
             title="健康診断・人間ドック"
-            subtitle="病気の早期発見と健康維持をサポートします"
+            subtitle="定期的な健康チェックで病気の早期発見・予防を"
           />
         </div>
       </div>
@@ -124,164 +123,186 @@ export default function HealthCheckupPage() {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <Card className="p-8 mb-8">
-              <div className="flex items-start gap-6">
-                <div className="p-4 bg-primary/10 rounded-2xl">
-                  <Heart className="w-12 h-12 text-primary" />
-                </div>
-                <div className="flex-1">
-                  <h2 className="text-2xl font-bold mb-4">健康診断について</h2>
-                  <p className="text-gray-600 dark:text-gray-300 mb-4">
-                    当院では、特定健診、企業健診、人間ドック（局所的）など、各種健康診断を実施しています。
-                    定期的な健康チェックにより、病気の早期発見・早期治療が可能となり、健康寿命の延伸につながります。
-                  </p>
-                  <p className="text-gray-600 dark:text-gray-300">
-                    経験豊富な医師による診察と、必要に応じた精密検査により、皆様の健康管理をサポートいたします。
-                  </p>
-                </div>
+            <div className="mb-12">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                健康診断について
+              </h2>
+              <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
+                当院では、川口市の特定健診をはじめ、企業健診、人間ドックなど、
+                様々な健康診断に対応しています。定期的な健康チェックにより、
+                生活習慣病やがんなどの早期発見・早期治療が可能になります。
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+              {features.map((feature, index) => (
+                <Card key={index} className="p-6">
+                  <div className="flex items-start">
+                    <div className="w-12 h-12 bg-primary-100 dark:bg-primary-800 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                      <feature.icon className="w-6 h-6 text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                        {feature.title}
+                      </h3>
+                      <p className="text-gray-600 dark:text-gray-300">
+                        {feature.description}
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
+
+            <Card className="p-8 mb-12 border-l-4 border-primary bg-primary-50 dark:bg-primary-900/20">
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">
+                健診の種類と内容
+              </h3>
+              <div className="space-y-6">
+                {checkupTypes.map((type, index) => (
+                  <div key={index} className="border-b border-gray-200 dark:border-gray-700 pb-4 last:border-0">
+                    <h4 className="font-semibold text-lg text-primary mb-2">
+                      {type.title}
+                    </h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                      対象：{type.target}
+                    </p>
+                    <p className="text-gray-700 dark:text-gray-300 mb-2">
+                      {type.content}
+                    </p>
+                    <p className="text-sm font-medium text-gray-900 dark:text-white">
+                      料金：{type.price}
+                    </p>
+                  </div>
+                ))}
               </div>
             </Card>
 
             <div className="mb-12">
-              <h3 className="text-2xl font-semibold mb-6">健診コース</h3>
-              <div className="grid grid-cols-1 gap-6">
-                {checkupTypes.map((type, index) => (
-                  <Card key={index} className="overflow-hidden">
-                    <div className="flex items-start gap-4 p-6">
-                      <div className="p-3 bg-primary/10 rounded-lg">
-                        <type.icon className="w-8 h-8 text-primary" />
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-start justify-between mb-2">
-                          <div>
-                            <h4 className="text-xl font-semibold">{type.name}</h4>
-                            <p className="text-sm text-primary mt-1">{type.target}</p>
-                          </div>
-                        </div>
-                        <p className="text-gray-600 dark:text-gray-300 mb-4">
-                          {type.description}
-                        </p>
-                        <div className="bg-secondary/10 rounded-lg p-4">
-                          <h5 className="font-medium mb-2 flex items-center gap-2">
-                            <ClipboardCheck className="w-4 h-4 text-primary" />
-                            検査項目
-                          </h5>
-                          <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                            {type.items.map((item, idx) => (
-                              <li key={idx} className="text-sm text-gray-600 dark:text-gray-300 flex items-start gap-2">
-                                <CheckCircle className="w-3 h-3 text-primary mt-0.5 flex-shrink-0" />
-                                {item}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">
+                検査項目
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {examinations.map((category, index) => (
+                  <Card key={index} className="p-6">
+                    <h4 className="font-semibold text-primary mb-3">
+                      {category.category}
+                    </h4>
+                    <ul className="space-y-2">
+                      {category.items.map((item, itemIndex) => (
+                        <li key={itemIndex} className="flex items-start">
+                          <CheckCircle className="w-4 h-4 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
+                          <span className="text-sm text-gray-700 dark:text-gray-300">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </Card>
                 ))}
               </div>
             </div>
 
-            <Card className="p-8 mb-12">
-              <h3 className="text-2xl font-semibold mb-6">オプション検査</h3>
-              <p className="text-gray-600 dark:text-gray-300 mb-6">
-                基本健診に追加できる検査項目です。年齢や性別、ご家族の病歴などに応じてお選びください。
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {optionalTests.map((test, index) => (
-                  <div key={index} className="p-4 border rounded-lg">
-                    <h4 className="font-medium mb-1">{test.name}</h4>
-                    <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">
-                      {test.description}
-                    </p>
-                    <div className="text-sm">{test.price}</div>
-                  </div>
-                ))}
-              </div>
-            </Card>
-
-            <Card className="p-8 mb-12">
-              <h3 className="text-2xl font-semibold mb-6 flex items-center gap-2">
-                <FileText className="w-6 h-6 text-primary" />
-                健診の流れ
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                {flow.map((item, index) => (
-                  <div key={index} className="text-center">
-                    <div className="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-3 text-lg font-bold">
-                      {item.step}
-                    </div>
-                    <h4 className="font-medium mb-1">{item.title}</h4>
-                    <p className="text-sm text-gray-600 dark:text-gray-300">
-                      {item.description}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </Card>
-
-            <Card className="p-8 mb-12 border-l-4 border-amber-500 bg-amber-50 dark:bg-amber-900/20">
+            <Card className="bg-amber-50 dark:bg-amber-900/20 border-l-4 border-amber-500 p-8 mb-12">
               <div className="flex items-start gap-3">
                 <AlertCircle className="w-6 h-6 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
                 <div>
-                  <h3 className="font-semibold text-lg mb-2">健診を受ける際のご注意</h3>
-                  <ul className="space-y-2 text-gray-600 dark:text-gray-300">
-                    <li className="flex items-start gap-2">
-                      <span className="text-amber-600 dark:text-amber-400 mt-1">•</span>
-                      <span>前日の夜9時以降は絶食でお願いします（水分は可）</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-amber-600 dark:text-amber-400 mt-1">•</span>
-                      <span>当日の朝は禁煙でお願いします</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-amber-600 dark:text-amber-400 mt-1">•</span>
-                      <span>お薬を服用中の方は事前にご相談ください</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-amber-600 dark:text-amber-400 mt-1">•</span>
-                      <span>健康保険証を必ずお持ちください</span>
-                    </li>
+                  <h3 className="font-semibold text-lg mb-3">検査前の注意事項</h3>
+                  <ul className="space-y-2 text-gray-700 dark:text-gray-300">
+                    <li>• 検査前日の夜9時以降は絶食してください</li>
+                    <li>• 水分は水やお茶のみ可能です（検査2時間前まで）</li>
+                    <li>• 常用薬がある方は事前にご相談ください</li>
+                    <li>• 検査当日は楽な服装でお越しください</li>
+                    <li>• 健康保険証を必ずお持ちください</li>
                   </ul>
                 </div>
               </div>
             </Card>
 
-            <Card className="p-8 bg-gradient-to-r from-primary/5 to-accent/5">
-              <h3 className="text-xl font-semibold mb-4">健診のご予約・お問い合わせ</h3>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">
-                健康診断は予約制となっております。お電話にてお申し込みください。
+            <div className="mb-12">
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">
+                受診の流れ
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                {process.map((item, index) => (
+                  <div key={index} className="relative">
+                    <Card className="p-4 text-center">
+                      <div className="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold">
+                        {item.step}
+                      </div>
+                      <h4 className="font-semibold mb-2">{item.title}</h4>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        {item.description}
+                      </p>
+                    </Card>
+                    {index < process.length - 1 && (
+                      <div className="hidden md:block absolute top-1/2 -right-2 transform -translate-y-1/2">
+                        <svg className="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <Card className="p-8 mb-12">
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+                オプション検査
+              </h3>
+              <p className="text-gray-700 dark:text-gray-300 mb-6">
+                基本検査に加えて、以下のオプション検査もご用意しています。
               </p>
-              <div className="space-y-3 mb-6">
-                <div className="flex items-center gap-2">
-                  <Calendar className="w-5 h-5 text-primary" />
-                  <span className="text-gray-600 dark:text-gray-300">
-                    受付時間：診療時間内
-                  </span>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
+                  <h4 className="font-medium mb-2">腫瘍マーカー検査</h4>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    CEA、CA19-9、PSA（男性）、CA125（女性）など
+                  </p>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Users className="w-5 h-5 text-primary" />
-                  <span className="text-gray-600 dark:text-gray-300">
-                    団体健診も承っております
-                  </span>
+                <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
+                  <h4 className="font-medium mb-2">動脈硬化検査</h4>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    血管年齢測定、頸動脈エコー検査
+                  </p>
+                </div>
+                <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
+                  <h4 className="font-medium mb-2">骨密度検査</h4>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    骨粗しょう症の早期発見
+                  </p>
+                </div>
+                <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
+                  <h4 className="font-medium mb-2">アレルギー検査</h4>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    39項目のアレルゲン検査（View39）
+                  </p>
                 </div>
               </div>
-              <div className="p-4 bg-amber-50 dark:bg-amber-900/20 rounded-lg mb-6">
-                <FutureUpdate message="料金詳細・所要時間は今後掲載予定です" />
+            </Card>
+
+            <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+                予約・お問い合わせ
+              </h3>
+              <p className="text-gray-700 dark:text-gray-300 mb-4">
+                健康診断は予約制となっております。お電話でご予約ください。
+              </p>
+              <div className="space-y-2 text-gray-700 dark:text-gray-300 mb-6">
+                <p>受付時間：平日 9:00～17:30</p>
+                <p>電話番号：048-222-0700</p>
               </div>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button asChild>
-                  <a href="tel:048-222-0700">
-                    電話で予約する
+                  <a href="tel:048-222-0700" className="flex items-center gap-2">
+                    <Phone className="w-4 h-4" />
+                    電話で予約
                   </a>
                 </Button>
                 <Button variant="outline" asChild>
-                  <a href="/contact">
-                    お問い合わせ
-                  </a>
+                  <Link href="/contact">お問い合わせフォーム</Link>
                 </Button>
               </div>
-            </Card>
+            </div>
           </div>
         </div>
       </section>

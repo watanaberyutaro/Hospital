@@ -15,9 +15,9 @@ export function Footer() {
   ]
 
   const departments = [
-    { name: '一般内科', href: '#' },
-    { name: '消化器内科', href: '#' },
-    { name: '健康診断', href: '#' },
+    { name: '一般内科', href: '/departments/internal-medicine' },
+    { name: '消化器内科', href: '/departments/gastroenterology' },
+    { name: '健康診断', href: '/departments/health-checkup' },
     { name: '胃カメラ検査', href: '/endoscopy' },
     { name: '大腸カメラ検査', href: '/endoscopy' },
   ]
