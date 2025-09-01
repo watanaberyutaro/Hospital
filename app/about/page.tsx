@@ -55,12 +55,12 @@ export default function AboutPage() {
                 私たちの使命
               </h2>
               <p className="text-gray-600 dark:text-gray-300 mb-6">
-                新井町内科消化器科クリニックは、2001年の開院以来、地域の皆様の健康を守るかかりつけ医として診療を行ってまいりました。
+                新井町内科消化器クリニックは、2001年の開院以来、地域の皆様の健康を守るかかりつけ医として診療を行ってまいりました。
                 「患者様一人ひとりに寄り添い、分かりやすい説明と丁寧な診療」をモットーに、内科・消化器内科の専門医が診療を提供しています。
               </p>
               <p className="text-gray-600 dark:text-gray-300 mb-6">
                 特に内視鏡センターでは、上下部内視鏡検査（胃・大腸カメラ）を中心に、苦痛の少ない検査を心がけております。
-                採血、処方、総合健診、人間ドック（局所的）など、地域の皆様の健康管理をサポートします。
+                採血、処方、特定健診、人間ドックなど、地域の皆様の健康管理をサポートします。
               </p>
               <div className="rounded-lg overflow-hidden shadow-lg">
                 <img 
@@ -87,6 +87,58 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <section className="py-16 bg-white dark:bg-gray-900">
+        <div className="container mx-auto px-4">
+          <SectionHeading 
+            title="医療チーム"
+            subtitle="経験豊富な3名の医師が診療にあたります"
+          />
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div className="rounded-lg overflow-hidden shadow-xl">
+                <img 
+                  src="/images/3doctor.jpg" 
+                  alt="当院の医師陣"
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                  専門医による充実の診療体制
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300 mb-6">
+                  当院では、内科・消化器内科の専門医資格を持つ3名の医師が診療を担当しています。
+                  それぞれの専門性を活かしながら、チーム医療で患者様一人ひとりに最適な医療を提供いたします。
+                </p>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-primary rounded-full mt-2"></div>
+                    <div>
+                      <h4 className="font-semibold text-gray-900 dark:text-white mb-1">日本消化器病学会専門医</h4>
+                      <p className="text-sm text-gray-600 dark:text-gray-300">消化器疾患の診断・治療のスペシャリスト</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-primary rounded-full mt-2"></div>
+                    <div>
+                      <h4 className="font-semibold text-gray-900 dark:text-white mb-1">日本消化器内視鏡学会専門医</h4>
+                      <p className="text-sm text-gray-600 dark:text-gray-300">安全で正確な内視鏡検査を実施</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-primary rounded-full mt-2"></div>
+                    <div>
+                      <h4 className="font-semibold text-gray-900 dark:text-white mb-1">日本肝臓学会専門医</h4>
+                      <p className="text-sm text-gray-600 dark:text-gray-300">肝臓疾患の専門的な診療</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="py-16 bg-gray-50 dark:bg-gray-800">
         <div className="container mx-auto px-4">
           <SectionHeading 
@@ -97,12 +149,12 @@ export default function AboutPage() {
             <div className="rounded-lg overflow-hidden shadow-lg">
               <img 
                 src="/images/オペ.jpg" 
-                alt="手術室"
+                alt="内視鏡室"
                 className="w-full h-64 object-cover"
               />
               <div className="p-4 bg-white dark:bg-gray-700">
-                <h4 className="font-semibold text-gray-900 dark:text-white">手術室</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">最新の設備を備えた清潔な手術室</p>
+                <h4 className="font-semibold text-gray-900 dark:text-white">内視鏡室</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">最新の設備を備えた清潔な内視鏡室</p>
               </div>
             </div>
             <div className="rounded-lg overflow-hidden shadow-lg">
@@ -162,7 +214,7 @@ export default function AboutPage() {
               <div className="space-y-4">
                 <div className="flex justify-between">
                   <span className="text-gray-600 dark:text-gray-300">医院名</span>
-                  <span className="text-gray-900 dark:text-white">新井町内科消化器科クリニック</span>
+                  <span className="text-gray-900 dark:text-white">新井町内科消化器クリニック</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600 dark:text-gray-300">設立</span>
@@ -191,14 +243,8 @@ export default function AboutPage() {
                 <div>
                   <h4 className="font-medium text-gray-900 dark:text-white mb-2">住所</h4>
                   <p className="text-gray-600 dark:text-gray-300">
-                    〒333-0849<br />
+                    〒332-0005<br />
                     埼玉県川口市新井町16-1
-                  </p>
-                </div>
-                <div>
-                  <h4 className="font-medium text-gray-900 dark:text-white mb-2">メール</h4>
-                  <p className="text-gray-600 dark:text-gray-300">
-                    araityounaikasyoukaki25@gmail.com
                   </p>
                 </div>
                 <div>

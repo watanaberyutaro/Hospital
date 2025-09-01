@@ -59,11 +59,9 @@ export default function FAQPage() {
       items: [
         {
           question: '予約は必要ですか？',
-          answer: `予約なしでも受診可能ですが、予約優先となります。
-          予約をされた方が待ち時間が短くなりますので、事前のご予約をお勧めします。
+          answer: `予約制ではありません。受付順にて診察いたします。
           
-          電話予約: 048-222-0700
-          受付時間: 診療時間内`
+          お問い合わせ: 048-222-0700`
         },
         {
           question: '初診の際に必要なものは？',
@@ -103,12 +101,12 @@ export default function FAQPage() {
         },
         {
           question: '検査結果はいつ分かりますか？',
-          answer: `• 血液検査: 基本項目は当日、詳細項目は3-7日
+          answer: `• 血液検査: 基本項目は当日、詳細項目は3～7日後
           • 尿検査: 当日
           • 心電図: 当日
           • レントゲン: 当日
           • 内視鏡検査: 検査直後に説明
-          • 病理検査: 約2週間`
+          • 病理検査: 三週間後`
         },
         {
           question: 'CT検査はできますか？',
@@ -116,7 +114,7 @@ export default function FAQPage() {
         },
         {
           question: 'コロナ抗体検査はやっていますか？',
-          answer: 'はい、実施しています。ワクチン接種後の抗体価測定も可能です。費用は自費となります。'
+          answer: '実施してます。'
         }
       ]
     },
@@ -248,7 +246,7 @@ export default function FAQPage() {
               <h3 className="text-xl font-bold mb-4">その他のご質問</h3>
               <p className="text-gray-700 dark:text-gray-300 mb-6">
                 こちらに掲載されていないご質問がございましたら、
-                お電話またはお問い合わせフォームよりお気軽にご連絡ください。
+                お電話でお気軽にご連絡ください。
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
@@ -256,12 +254,6 @@ export default function FAQPage() {
                   className="inline-block bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors text-center"
                 >
                   電話で問い合わせる
-                </a>
-                <a
-                  href="/contact"
-                  className="inline-block bg-white dark:bg-gray-800 text-primary border border-primary px-6 py-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors text-center"
-                >
-                  お問い合わせフォーム
                 </a>
               </div>
             </Card>

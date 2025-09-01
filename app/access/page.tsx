@@ -9,26 +9,26 @@ export default function AccessPage() {
       icon: <Train className="w-6 h-6" />,
       title: '川口元郷駅から',
       content: [
-        '埼玉高速鉄道 川口元郷駅 2番出口より徒歩5分',
-        'バス利用の場合: のりば2から川11-02, 川11-04（約20分、220円）',
+        '川口元郷駅より徒歩13分もしくはバス約2分',
+        '（元郷一丁目下車徒歩3分。新井町交差点角）',
       ],
     },
     {
       icon: <Bus className="w-6 h-6" />,
       title: '川口駅東口から',
       content: [
-        '【のりば1】川11-02, 川11-02-2',
-        '【のりば2】川11-15, 川11-15-3',
-        '【のりば3】川11-04, 川11-14-2, 川11-16',
-        '所要時間: 約7分、運賃: 220円',
-        '「元郷一丁目」下車 徒歩3分',
+        '【のりば1】川０２・川０２－２',
+        '【のりば2】川１５・川１５－３',
+        '【のりば3】川０４・川１４－２・川１６',
+        '「元郷一丁目」下車徒歩3分',
+        '（元郷一丁目下車徒歩3分。新井町交差点角）',
       ],
     },
     {
       icon: <Car className="w-6 h-6" />,
       title: 'お車でお越しの方',
       content: [
-        'コインパーキング利用可（料金全額負担）',
+        '駐車場完備（軽自動蠒1台、普通車10台）',
         '※近隣のモスバーガーが目印です',
         'Google Map / ストリートビュー対応',
       ],
@@ -41,7 +41,7 @@ export default function AccessPage() {
         <div className="container mx-auto px-6">
           <SectionHeading
             title="アクセス"
-            subtitle="新井町内科消化器科クリニックへの交通案内"
+            subtitle="新井町内科消化器クリニックへの交通案内"
           />
         </div>
       </section>
@@ -59,9 +59,9 @@ export default function AccessPage() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div>
-                    <p className="text-lg font-semibold mb-2">新井町内科消化器科クリニック</p>
+                    <p className="text-lg font-semibold mb-2">新井町内科消化器クリニック</p>
                     <p className="text-muted-foreground">
-                      〒333-0849<br />
+                      〒332-0005<br />
                       埼玉県川口市新井町16-1
                     </p>
                   </div>
@@ -73,7 +73,7 @@ export default function AccessPage() {
                     <div className="flex items-start gap-2">
                       <Clock className="w-4 h-4 text-primary mt-0.5" />
                       <div className="text-sm">
-                        <p>診療時間: 9:00-12:30(最終受付) / 15:00-18:00(最終受付17:30)</p>
+                        <p>診療時間: 午前の部9:00～12:30 / 午後の部15:00～18:00</p>
                         <p>休診日: 日曜・祝日・その他</p>
                       </div>
                     </div>
@@ -114,7 +114,7 @@ export default function AccessPage() {
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
                     className="absolute inset-0"
-                    title="新井町内科消化器科クリニックの地図"
+                    title="新井町内科消化器クリニックの地図"
                   />
                 </div>
               </Card>
@@ -139,10 +139,6 @@ export default function AccessPage() {
                   普通車: 10台<br />
                   満車の場合は、お手数ですが近隣のコインパーキングをご利用ください。
                 </p>
-                <Button variant="outline" size="sm">
-                  <Phone className="w-4 h-4 mr-2" />
-                  駐車場の空き状況を確認
-                </Button>
               </Card>
             </div>
           </div>
@@ -157,7 +153,7 @@ export default function AccessPage() {
               <ul className="space-y-3 text-muted-foreground">
                 <li className="flex items-start gap-2">
                   <span className="text-primary">•</span>
-                  初診の方は保険証を必ずお持ちください
+                  初診の方は保険証もしくはマイナンバーカードを必ずお持ちください
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary">•</span>
@@ -169,7 +165,7 @@ export default function AccessPage() {
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary">•</span>
-                  受付時間は午前12:30まで、午後17:30までとなります
+                  終了30分前までの受付をお願いいたします
                 </li>
               </ul>
             </Card>

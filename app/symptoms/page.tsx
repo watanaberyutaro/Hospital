@@ -10,7 +10,7 @@ export default function SymptomsPage() {
       icon: Thermometer,
       title: '発熱・風邪症状',
       symptoms: ['38度以上の発熱', '咳・痰', '喉の痛み', '鼻水・鼻づまり'],
-      description: 'インフルエンザや風邪の可能性があります。早期の診断と適切な治療が重要です。',
+      description: 'インフルエンザ、溶連菌、新型コロナウイルスの抗体検査ができます。',
       alert: '高熱が3日以上続く場合は、すぐに受診してください。',
     },
     {
@@ -29,9 +29,9 @@ export default function SymptomsPage() {
     },
     {
       icon: Stethoscope,
-      title: '健診異常値',
-      symptoms: ['肝機能異常（GPT高値）', '血糖値異常', 'コレステロール高値', '尿酸値異常'],
-      description: '生活習慣病の可能性があります。詳しい検査と治療計画が必要です。',
+      title: '健康異常結果の再検査を勧められた方',
+      symptoms: ['肝機能異常', '血糖値異常', 'コレステロール高値', '尿酸値異常'],
+      description: '血液検査での異常や、胸部X線の影など、詳しい検査と治療を行います。',
       alert: '放置すると重大な疾患につながる可能性があります。',
     },
     {
@@ -47,10 +47,10 @@ export default function SymptomsPage() {
     {
       title: '実施可能な検査',
       items: [
-        { name: '胃カメラ（GF）', description: '食道・胃・十二指腸の検査' },
-        { name: '大腸カメラ（CF）', description: '大腸全体の検査' },
+        { name: '胃カメラ', description: '食道・胃・十二指腸の検査' },
+        { name: '大腸カメラ', description: '大腸全体の検査' },
         { name: '胸部X線', description: '肺・心臓の検査' },
-        { name: '心電図（EKG）', description: '不整脈・心疾患の検査' },
+        { name: '心電図', description: '不整脈・心疾患の検査' },
         { name: 'エコー検査', description: '腹部臓器の検査' },
         { name: '各種血液検査', description: '肝機能・腎機能・血糖値など' },
       ]
@@ -85,22 +85,8 @@ export default function SymptomsPage() {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="mb-12">
-              <Card className="p-6 bg-amber-50 dark:bg-amber-900/20 border-l-4 border-amber-500">
-                <div className="flex items-start gap-3">
-                  <AlertCircle className="w-6 h-6 text-amber-600 flex-shrink-0 mt-1" />
-                  <div>
-                    <h3 className="text-lg font-semibold mb-2">コロナ抗体検査 実施中</h3>
-                    <p className="text-gray-700 dark:text-gray-300">
-                      新型コロナウイルスの抗体検査を実施しています。
-                      ワクチン接種後の抗体価測定も可能です。
-                    </p>
-                  </div>
-                </div>
-              </Card>
-            </div>
 
-            <h2 className="text-2xl font-bold mb-8">よくある症状と解説</h2>
+            <h2 className="text-2xl font-bold mb-8">よくある症状</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
               {symptoms.map((symptom, index) => (
                 <Card key={index} className="p-6">
@@ -111,7 +97,7 @@ export default function SymptomsPage() {
                     <div className="flex-1">
                       <h3 className="text-xl font-semibold mb-3">{symptom.title}</h3>
                       <div className="mb-3">
-                        <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">主な症状：</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400 mb-2"></p>
                         <ul className="space-y-1">
                           {symptom.symptoms.map((s, i) => (
                             <li key={i} className="flex items-center text-sm">
@@ -173,7 +159,7 @@ export default function SymptomsPage() {
               </div>
               <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
                 <p className="text-sm text-blue-700 dark:text-blue-300">
-                  ※ワクチン接種は予約制です。お電話でご予約ください。
+                  ※ワクチン接種についてはお電話でご相談ください。
                 </p>
               </div>
             </Card>
@@ -188,11 +174,6 @@ export default function SymptomsPage() {
                     <Phone className="w-5 h-5" />
                     電話で相談する
                   </a>
-                </Button>
-                <Button size="lg" variant="outline" asChild>
-                  <Link href="/contact">
-                    お問い合わせフォーム
-                  </Link>
                 </Button>
               </div>
             </div>

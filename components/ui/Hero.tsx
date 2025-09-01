@@ -63,13 +63,13 @@ export function Hero() {
             </span>
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed animate-fade-in-up" style={{ animationDelay: '400ms' }}>
-            新井町内科消化器科クリニックでは、専門医資格を持つ医師が<br />
+            新井町内科消化器クリニックでは、専門医資格を持つ医師が<br />
             一般内科から消化器内科まで幅広く診療します。
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center mb-20 animate-fade-in-up" style={{ animationDelay: '600ms' }}>
             <Button size="lg" className="text-lg px-8 animate-bounce-in flex items-center gap-2" style={{ animationDelay: '800ms' }}>
               <Phone className="w-5 h-5" />
-              <a href="tel:048-222-0700">電話予約 048-222-0700</a>
+              <a href="tel:048-222-0700">お電話はこちら 048-222-0700</a>
             </Button>
             <Button variant="outline" size="lg" asChild className="text-lg px-8 animate-bounce-in" style={{ animationDelay: '1000ms' }}>
               <Link href="/about">病院概要</Link>

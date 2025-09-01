@@ -37,7 +37,7 @@ export default function HealthCheckupPage() {
       price: '各検診500円～1,500円（年齢により無料）'
     },
     {
-      title: '人間ドック（局所的）',
+      title: '人間ドック',
       target: '健康状態を詳しく調べたい方',
       content: '基本検査＋腹部超音波、胃カメラ、腫瘍マーカーなど',
       price: '30,000円～（検査内容により異なる）'
@@ -99,7 +99,7 @@ export default function HealthCheckupPage() {
   ]
 
   const process = [
-    { step: 1, title: '予約', description: '電話またはWebで予約' },
+    { step: 1, title: 'お問い合わせ', description: 'お電話でご相談' },
     { step: 2, title: '検査前準備', description: '食事制限などの事前準備' },
     { step: 3, title: '受診', description: '各種検査を実施' },
     { step: 4, title: '結果説明', description: '医師による結果説明と健康相談' }
@@ -285,7 +285,7 @@ export default function HealthCheckupPage() {
                 予約・お問い合わせ
               </h3>
               <p className="text-gray-700 dark:text-gray-300 mb-4">
-                健康診断は予約制となっております。お電話でご予約ください。
+                健康診断についてはお電話でご相談ください。
               </p>
               <div className="space-y-2 text-gray-700 dark:text-gray-300 mb-6">
                 <p>受付時間：平日 9:00～17:30</p>
@@ -295,11 +295,8 @@ export default function HealthCheckupPage() {
                 <Button asChild>
                   <a href="tel:048-222-0700" className="flex items-center gap-2">
                     <Phone className="w-4 h-4" />
-                    電話で予約
+                    お電話でご相談ください
                   </a>
-                </Button>
-                <Button variant="outline" asChild>
-                  <Link href="/contact">お問い合わせフォーム</Link>
                 </Button>
               </div>
             </div>

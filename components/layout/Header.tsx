@@ -31,7 +31,7 @@ export function Header() {
               </div>
               <div className="hidden sm:flex items-center gap-2 whitespace-nowrap group">
                 <Clock className="w-4 h-4 text-primary group-hover:scale-110 transition-transform flex-shrink-0" />
-                <span className="text-muted-foreground group-hover:text-primary transition-colors">9:00-12:30 / 15:00-17:30</span>
+                <span className="text-muted-foreground group-hover:text-primary transition-colors">午前の部9:00～12:30 午後の部15:00～18:00</span>
               </div>
               <div className="hidden lg:flex items-center gap-2 whitespace-nowrap group">
                 <MapPin className="w-4 h-4 text-primary group-hover:scale-110 transition-transform flex-shrink-0" />
@@ -48,7 +48,7 @@ export function Header() {
             <div className="relative w-14 h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 flex-shrink-0 bg-sky-100 rounded-xl shadow-md p-[5px] border border-sky-200">
               <Image
                 src="/images/Logo.png"
-                alt="新井町内科消化器科クリニック ロゴ"
+                alt="新井町内科消化器クリニック ロゴ"
                 fill
                 className="object-contain group-hover:scale-110 transition-transform duration-300 p-2"
                 priority
@@ -56,7 +56,7 @@ export function Header() {
             </div>
             <div className="hidden sm:block">
               <h1 className="text-lg md:text-xl lg:text-2xl font-bold text-foreground group-hover:text-primary transition-colors leading-tight">
-                新井町内科消化器科クリニック
+                新井町内科消化器クリニック
               </h1>
               <p className="text-xs md:text-sm text-muted-foreground hidden lg:block">
                 Araichō Internal Medicine & Gastroenterology Clinic
@@ -64,7 +64,7 @@ export function Header() {
             </div>
             <div className="sm:hidden">
               <h1 className="text-base font-bold text-foreground leading-tight">
-                新井町内科<br />消化器科クリニック
+                新井町内科<br />消化器クリニック
               </h1>
             </div>
           </Link>
@@ -81,7 +81,7 @@ export function Header() {
             ))}
             <Button className="ml-4 shadow-lg shadow-primary/20 flex items-center gap-2 text-sm xl:text-base">
               <Phone className="w-4 h-4" />
-              <a href="tel:048-222-0700">電話予約</a>
+              <a href="tel:048-222-0700">お電話はこちら</a>
             </Button>
           </nav>
 
@@ -109,7 +109,7 @@ export function Header() {
             ))}
             <Button className="mt-4 w-full shadow-lg flex items-center justify-center gap-2">
               <Phone className="w-4 h-4" />
-              <a href="tel:048-222-0700" className="w-full">電話予約</a>
+              <a href="tel:048-222-0700" className="w-full">お電話はこちら</a>
             </Button>
           </nav>
         </div>

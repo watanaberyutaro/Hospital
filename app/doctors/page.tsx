@@ -118,7 +118,7 @@ export default function DoctorsPage() {
                   看護スタッフ募集中
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  新井町内科消化器科クリニックでは、看護師を若干名募集しています。
+                  新井町内科消化器クリニックでは、看護師を若干名募集しています。
                   地域医療に貢献したい方、ぜひお問い合わせください。
                 </p>
                 <p className="text-sm text-muted-foreground mt-2">

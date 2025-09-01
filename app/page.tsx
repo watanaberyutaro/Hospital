@@ -6,6 +6,7 @@ import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Button } from '@/components/ui/Button'
 import { Calendar, Clock, MapPin, Phone, Thermometer, Stethoscope, Heart, AlertCircle } from 'lucide-react'
 import NewsSection from '@/components/NewsSection'
+import { ClinicCalendar } from '@/components/ui/ClinicCalendar'
 import { useState, useEffect } from 'react'
 
 interface SpecialHoliday {
@@ -39,28 +40,27 @@ export default function HomePage() {
     {
       icon: <Stethoscope className="w-8 h-8" />,
       title: '内科診療',
-      description: '川口市で予約なし対応可能。かぜ、発熱、頭痛、生活習慣病など日常的な健康問題にすぐに対応。地域の「かかりつけ医」として親身に診療いたします。',
+      description: '川口市ですぐに対応可能。かぜ、発熱、頭痛、生活習慣病など日常的な健康問題にすぐに対応。地域の「かかりつけ医」として親身に診療いたします。',
     },
     {
       icon: <Thermometer className="w-8 h-8" />,
       title: '発熱外来',
-      description: '川口市で発熱症状にすぐに対応。予約なしでも安心して受診できる体制を整えています。感染対策も万全です。',
+      description: 'インフルエンザ、新型コロナウイルス、溶連菌の検査ができます。安心して受診できる体制を整えています。',
     },
     {
       icon: <Heart className="w-8 h-8" />,
       title: '胃カメラ検査',
-      description: '川口市の消化器内科専門医による苦痛の少ない内視鏡検査。鎮静剤使用も可能で、早期発見・早期治療に努めます。',
+      description: '川口市の消化器内科専門医による苦痛の少ない内視鏡検査。鎮静剤使用も可能で、異常の早期発見・早期治療に努めます。',
     },
   ]
 
   const scheduleInfo = {
     regular: [
-      { day: '月・火・木・金', morning: '9:00 - 12:30', afternoon: '15:00 - 17:30' },
-      { day: '水', morning: '9:00 - 12:30', afternoon: '休診' },
-      { day: '土', morning: '9:00 - 12:30', afternoon: '休診' },
+      { day: '月・火・水・金', morning: '午前の部 9:00～12:30', afternoon: '午後の部 15:00～18:00' },
+      { day: '木・土', morning: '午前の部 9:00～12:30', afternoon: '午後休診' },
     ],
     holidays: '日曜日・祝日',
-    note: '※受付は診療終了の30分前まで',
+    note: '終了30分前までの受付をお願いいたします。',
   }
 
   // カレンダー用のデータ生成
@@ -159,8 +159,8 @@ export default function HomePage() {
   const quickAccess = [
     {
       icon: <Phone className="w-6 h-6" />,
-      title: '電話予約',
-      description: 'お電話で予約を承ります',
+      title: 'お電話はこちら',
+      description: 'お電話でご相談ください',
       href: 'tel:048-222-0700',
     },
     {
@@ -175,18 +175,12 @@ export default function HomePage() {
       description: '埼玉県川口市新井町16-1・駐車場11台完備',
       href: '/access',
     },
-    {
-      icon: <Phone className="w-6 h-6" />,
-      title: 'お問い合わせ',
-      description: 'ご質問やご相談はこちらから',
-      href: '/contact',
-    },
   ]
 
   const departments = [
     {
       name: '一般内科',
-      description: '川口市で予約なし対応。かぜ、発熱、生活習慣病管理など日常的な健康問題にすぐに診察',
+      description: '川口市ですぐに対応。かぜ、発熱、生活習慣病管理など日常的な健康問題にすぐに診察',
       image: '/images/doctor.jpg',
     },
     {
@@ -196,12 +190,12 @@ export default function HomePage() {
     },
     {
       name: '健康診断',
-      description: '川口市で即日対応可能な健康診断。総合健診・人間ドック(局所的)・各種検査',
+      description: '川口市で即日対応可能な健康診断。総合健診・人間ドック・各種検査',
       image: '/images/建物2.jpg',
     },
     {
       name: '内視鏡検査',
-      description: '川口市の内視鏡専門医による苦痛の少ない胃・大腸カメラ。予約制でポリープ切除にも対応',
+      description: '川口市の内視鏡専門医による苦痛の少ない胃・大腸カメラ。ポリープ切除にも対応',
       image: '/images/内視鏡センター.jpg',
     },
   ]
@@ -221,13 +215,13 @@ export default function HomePage() {
             <Card className="p-6">
               <h3 className="font-bold text-lg mb-2">初めて受診される方</h3>
               <p className="text-sm text-muted-foreground">
-                予約なしでも受診可能。急な体調不良でもすぐに対応いたします。
+                急な体調不良でもすぐに対応いたします。
               </p>
             </Card>
             <Card className="p-6">
-              <h3 className="font-bold text-lg mb-2">健診で異常を指摘された方</h3>
+              <h3 className="font-bold text-lg mb-2">健康診断で異常を指摘された方</h3>
               <p className="text-sm text-muted-foreground">
-                肝機能異常（GPT高値）、胸部X線の影など、詳しい検査と治療を行います。
+                血液検査での異常や、胸部X線の影など、詳しい検査と治療を行います。
               </p>
             </Card>
             <Card className="p-6">
@@ -249,9 +243,9 @@ export default function HomePage() {
       <section className="py-16 bg-gradient-to-b from-primary/5 to-background">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">川口市で予約なし・すぐに対応する内科クリニック</h2>
+            <h2 className="text-3xl font-bold mb-4">川口市ですぐに対応する内科クリニック</h2>
             <p className="text-lg text-muted-foreground">
-              予約なしで即日診察可能。内科診療から専門的な消化器検査まで、川口市の皆様にすぐに対応いたします
+              即日診察可能。内科診療から専門的な消化器検査まで、川口市の皆様にすぐに対応いたします
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -274,7 +268,7 @@ export default function HomePage() {
             <div>
               <SectionHeading 
                 title="診療時間・休診日"
-                subtitle="川口市で予約なしでも対応・予約優先で待ち時間短縮"
+                subtitle="川口市ですぐに対応・待ち時間短縮"
                 center={false}
               />
               <div className="space-y-6">
@@ -346,17 +340,7 @@ export default function HomePage() {
                         <Clock className="w-5 h-5 text-primary" />
                         診療時間
                       </h4>
-                      <div className="space-y-3">
-                        {scheduleInfo.regular.map((schedule, index) => (
-                          <div key={index} className="flex justify-between items-center py-2 border-b">
-                            <span className="font-medium">{schedule.day}</span>
-                            <div className="text-sm">
-                              <span className="mr-4">午前 {schedule.morning}</span>
-                              <span>午後 {schedule.afternoon}</span>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
+                      <ClinicCalendar />
                     </div>
                     <div>
                       <h4 className="font-semibold text-lg mb-2">休診日</h4>
@@ -366,7 +350,7 @@ export default function HomePage() {
                     <Button size="lg" className="w-full" asChild>
                       <a href="tel:048-222-0700">
                         <Phone className="w-4 h-4 mr-2" />
-                        電話で予約する
+                        お電話でご相談ください
                       </a>
                     </Button>
                   </div>
@@ -425,7 +409,7 @@ export default function HomePage() {
         <div className="container mx-auto px-6">
           <SectionHeading 
             title="診療内容"
-            subtitle="川口市の内科・消化器内科。予約なしですぐに対応・専門医が幅広く診療"
+            subtitle="川口市の内科・消化器内科。すぐに対応・専門医が幅広く診療"
           />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {departments.map((dept, index) => (
@@ -480,7 +464,7 @@ export default function HomePage() {
                     地域の皆様、こんにちは。新井町内科消化器クリニック院長の植村博之です。
                   </p>
                   <p className="text-muted-foreground leading-relaxed">
-                    2001年に川口市新井町で開院以来、地域の皆様の「かかりつけ医」として、予約なしですぐに対応できる体制で内科全般から消化器疾患まで幅広く診療を行っております。
+                    2001年に川口市新井町で開院以来、地域の皆様の「かかりつけ医」として、すぐに対応できる体制で内科全般から消化器疾患まで幅広く診療を行っております。
                     特に内視鏡センターでは、上下部内視鏡検査において長年の経験と最新の技術を活かし、苦痛の少ない検査を心がけております。
                   </p>
                   <p className="text-muted-foreground leading-relaxed">

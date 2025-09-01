@@ -275,11 +275,6 @@ export default function InternalMedicinePage() {
                     電話で相談する
                   </a>
                 </Button>
-                <Button variant="outline" asChild>
-                  <a href="/contact">
-                    お問い合わせ
-                  </a>
-                </Button>
               </div>
             </Card>
           </div>

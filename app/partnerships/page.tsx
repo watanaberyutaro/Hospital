@@ -1,7 +1,7 @@
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Card } from '@/components/ui/Card'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
-import { Building2, Users, ArrowRight, Hospital } from 'lucide-react'
+import { Building2, Users, ArrowRight, Hospital, Phone } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 
 export default function PartnershipsPage() {
@@ -169,7 +169,10 @@ export default function PartnershipsPage() {
               </div>
               <div className="mt-6">
                 <Button asChild>
-                  <a href="/contact">紹介状についてのお問い合わせ</a>
+                  <a href="tel:048-222-0700" className="flex items-center gap-2">
+                    <Phone className="w-4 h-4" />
+                    紹介状についてお電話でご相談
+                  </a>
                 </Button>
               </div>
             </div>

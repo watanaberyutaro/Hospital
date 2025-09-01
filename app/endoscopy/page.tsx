@@ -63,7 +63,7 @@ export default function EndoscopyPage() {
             </p>
             <Button size="lg" className="flex items-center gap-2 mx-auto">
               <Phone className="w-5 h-5" />
-              <a href="tel:048-222-0700">検査予約 048-222-0700</a>
+              <a href="tel:048-222-0700">お電話はこちら 048-222-0700</a>
             </Button>
           </div>
         </div>
@@ -139,9 +139,9 @@ export default function EndoscopyPage() {
                     1
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-2">検査予約</h4>
+                    <h4 className="font-semibold mb-2">検査のご相談</h4>
                     <p className="text-muted-foreground">
-                      お電話にて検査日時をご予約ください。事前診察で検査の説明を行います。
+                      お電話にて検査についてご相談ください。事前診察で検査の説明を行います。
                     </p>
                   </div>
                 </div>
@@ -186,9 +186,9 @@ export default function EndoscopyPage() {
 
       <section className="py-20 bg-primary/5">
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-4">内視鏡検査のご予約</h2>
+          <h2 className="text-3xl font-bold mb-4">内視鏡検査のご相談</h2>
           <p className="text-xl text-muted-foreground mb-8">
-            検査をご希望の方は、お電話にてご予約ください
+            検査をご希望の方は、お電話にてご相談ください
           </p>
           <div className="flex flex-col items-center gap-4">
             <Button size="lg" className="flex items-center gap-2">

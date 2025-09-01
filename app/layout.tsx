@@ -64,19 +64,18 @@ const structuredData = {
   "@context": "https://schema.org",
   "@type": "MedicalClinic",
   "name": "新井町内科消化器クリニック",
-  "alternateName": "新井町内科消化器科クリニック",
+  "alternateName": "新井町内科消化器クリニック",
   "url": "https://araityounaikasyoukaki.com",
   "logo": "/images/建物.jpg",
   "image": "/images/建物.jpg",
   "description": "川口市新井町の内科・消化器内科。予約なしですぐに対応。発熱・風邪・体調不良の即日診察可能。",
   "telephone": "048-222-0700",
-  "email": "araityounaikasyoukaki25@gmail.com",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "新井町16-1",
     "addressLocality": "川口市",
     "addressRegion": "埼玉県",
-    "postalCode": "333-0849",
+    "postalCode": "332-0005",
     "addressCountry": "JP"
   },
   "geo": {
@@ -94,8 +93,8 @@ const structuredData = {
     {
       "@type": "OpeningHoursSpecification",
       "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Friday"],
-      "opens": "16:00",
-      "closes": "18:30"
+      "opens": "15:00",
+      "closes": "18:00"
     },
     {
       "@type": "OpeningHoursSpecification",

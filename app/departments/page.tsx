@@ -42,15 +42,15 @@ export default function DepartmentsPage() {
       description: '苦痛の少ない上下部内視鏡検査（胃・大腸カメラ）を行います。',
       icon: Microscope,
       doctors: 3,
-      services: ['胃カメラ検査', '大腸カメラ検査', 'ポリープ切除', '鎮静下検査'],
+      services: ['胃カメラ検査　経口　経鼻', '大腸カメラ検査', 'ポリープ切除', '鎮静化検査', '川口市胃がん内視鏡健診'],
     },
     {
       slug: 'health-checkup',
-      name: '総合健診',
-      description: '人間ドック（局所的）・各種健康診断に対応しています。',
+      name: '健康診断',
+      description: '川口市特定検診、国保人間ドック、各種検診に対応しています。',
       icon: Heart,
       doctors: 3,
-      services: ['特定健診', '企業健診', '各種検診', '人間ドック'],
+      services: ['川口市特定検診', '国保人間ドック', '胃がん内視鏡検診', '大腸がん検診', '肺がん・結核検診', '前立腺がん検診', '各種検診（企業検診、入学時検診など）'],
     },
   ]
 

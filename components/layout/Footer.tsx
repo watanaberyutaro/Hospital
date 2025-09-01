@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { MapPin, Phone, Mail, Clock, Facebook, Twitter, Instagram, Youtube } from 'lucide-react'
+import { MapPin, Phone, Clock, Facebook, Twitter, Instagram, Youtube } from 'lucide-react'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
@@ -47,13 +47,13 @@ export function Footer() {
               <div className="relative w-20 h-20 flex-shrink-0 bg-sky-100 rounded-xl shadow-lg p-[5px] border border-sky-200">
                 <Image
                   src="/images/Logo.png"
-                  alt="新井町内科消化器科クリニック ロゴ"
+                  alt="新井町内科消化器クリニック ロゴ"
                   fill
                   className="object-contain p-2"
                 />
               </div>
               <div>
-                <h3 className="text-xl font-bold">新井町内科消化器科クリニック</h3>
+                <h3 className="text-xl font-bold">新井町内科消化器クリニック</h3>
                 <p className="text-sm text-white/70">Araichō Internal Medicine & Gastroenterology Clinic</p>
               </div>
             </div>
@@ -115,7 +115,7 @@ export function Footer() {
                   <MapPin className="w-4 h-4 text-primary" />
                 </div>
                 <div className="text-white/80">
-                  <p>〒333-0849</p>
+                  <p>〒332-0005</p>
                   <p>埼玉県川口市新井町16-1</p>
                 </div>
               </div>
@@ -125,20 +125,51 @@ export function Footer() {
                 </div>
                 <span className="text-white/80">TEL: 048-222-0700</span>
               </div>
-              <div className="flex items-center space-x-3 group">
-                <div className="p-2 bg-primary/20 rounded-lg group-hover:bg-primary/30 transition-colors">
-                  <Mail className="w-4 h-4 text-primary" />
-                </div>
-                <span className="text-white/80">araityounaikasyoukaki25@gmail.com</span>
-              </div>
               <div className="flex items-start space-x-3 group">
                 <div className="p-2 bg-primary/20 rounded-lg group-hover:bg-primary/30 transition-colors">
                   <Clock className="w-4 h-4 text-primary" />
                 </div>
                 <div className="text-white/80">
-                  <p>診療時間: 9:00-12:30 / 15:00-17:30</p>
-                  <p>受付: 午前12:30まで、午後17:30まで</p>
-                  <p>休診: 水曜午後・土曜午後・日曜・祝日</p>
+                  <p className="mb-3">診療時間: 午前の部9:00～12:30 / 午後の部15:00～18:00</p>
+                  <div className="bg-white/10 rounded-lg p-3 mb-2">
+                    <table className="w-full text-xs">
+                      <thead>
+                        <tr>
+                          <th className="text-left py-1 text-white/60">曜日</th>
+                          <th className="py-1 px-1 text-red-300">日</th>
+                          <th className="py-1 px-1">月</th>
+                          <th className="py-1 px-1">火</th>
+                          <th className="py-1 px-1">水</th>
+                          <th className="py-1 px-1">木</th>
+                          <th className="py-1 px-1">金</th>
+                          <th className="py-1 px-1 text-blue-300">土</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td className="py-1 text-white/60">午前</td>
+                          <td className="py-1 px-1 text-center text-white/40">×</td>
+                          <td className="py-1 px-1 text-center text-green-400">●</td>
+                          <td className="py-1 px-1 text-center text-green-400">●</td>
+                          <td className="py-1 px-1 text-center text-green-400">●</td>
+                          <td className="py-1 px-1 text-center text-green-400">●</td>
+                          <td className="py-1 px-1 text-center text-green-400">●</td>
+                          <td className="py-1 px-1 text-center text-green-400">●</td>
+                        </tr>
+                        <tr>
+                          <td className="py-1 text-white/60">午後</td>
+                          <td className="py-1 px-1 text-center text-white/40">×</td>
+                          <td className="py-1 px-1 text-center text-green-400">●</td>
+                          <td className="py-1 px-1 text-center text-green-400">●</td>
+                          <td className="py-1 px-1 text-center text-green-400">●</td>
+                          <td className="py-1 px-1 text-center text-white/40">×</td>
+                          <td className="py-1 px-1 text-center text-green-400">●</td>
+                          <td className="py-1 px-1 text-center text-white/40">×</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <p className="text-xs">受付: 終了30分前までの受付をお願いいたします。</p>
                 </div>
               </div>
             </div>
@@ -147,7 +178,7 @@ export function Footer() {
 
         <div className="border-t border-white/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-white/60 text-sm">
-            © {currentYear} 新井町内科消化器科クリニック. All rights reserved.
+            © {currentYear} 新井町内科消化器クリニック. All rights reserved.
           </p>
           <div className="mt-4 md:mt-0">
             <img 

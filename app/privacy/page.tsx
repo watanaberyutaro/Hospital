@@ -53,7 +53,7 @@ export default function PrivacyPage() {
       title: '7. お問い合わせ',
       content: `個人情報の取り扱いに関するお問い合わせは、以下までご連絡ください：
       
-      新井町内科消化器科クリニック
+      新井町内科消化器クリニック
       個人情報保護管理者
       TEL: 048-222-0700
       受付時間: 平日 9:00-17:30`
@@ -82,7 +82,7 @@ export default function PrivacyPage() {
                 <div>
                   <h2 className="text-2xl font-bold mb-4">個人情報保護方針</h2>
                   <p className="text-gray-700 dark:text-gray-300">
-                    新井町内科消化器科クリニック（以下「当院」）は、患者様の個人情報を適切に保護することが
+                    新井町内科消化器クリニック（以下「当院」）は、患者様の個人情報を適切に保護することが
                     医療機関としての重要な責務であると認識し、以下の方針に基づき個人情報の保護に努めます。
                   </p>
                 </div>
@@ -106,7 +106,7 @@ export default function PrivacyPage() {
                   制定日: 2001年4月1日<br />
                   最終改定日: 2024年4月1日<br />
                   <br />
-                  新井町内科消化器科クリニック<br />
+                  新井町内科消化器クリニック<br />
                   院長 植村 博之
                 </p>
               </div>

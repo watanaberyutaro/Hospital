@@ -13,7 +13,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/staff',
     '/facilities',
     '/news',
-    '/contact',
     '/faq',
     '/health-checkup',
   ]
