@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     maximumScale: 5,
   },
   verification: {
-    google: 'google-site-verification-code',
+    google: '4jtCXeZ1LbXOzFjqBvsXqKr5p8JQwTCsEpOajK8dti4',
   },
 }
 
