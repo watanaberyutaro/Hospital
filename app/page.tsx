@@ -21,12 +21,17 @@ interface HolidaysData {
     weekdays: number[]
     description: string
   }
+  halfDayHolidays?: {
+    weekdays: number[]
+    description: string
+  }
   specialHolidays: SpecialHoliday[]
 }
 
 export default function HomePage() {
   const [holidays, setHolidays] = useState<HolidaysData>({
-    regularHolidays: { weekdays: [0, 3], description: "毎週水曜日・日曜日" },
+    regularHolidays: { weekdays: [0], description: "毎週日曜日" },
+    halfDayHolidays: { weekdays: [3, 4, 6], description: "毎週水曜日・木曜日・土曜日" },
     specialHolidays: []
   })
 
@@ -71,7 +76,10 @@ export default function HomePage() {
     const firstDay = new Date(year, month, 1)
     const lastDay = new Date(year, month + 1, 0)
     const startDate = new Date(firstDay)
-    startDate.setDate(startDate.getDate() - firstDay.getDay())
+    // 月曜日始まりに調整（getDay()が0（日曜）の場合は6、それ以外は-1）
+    const firstDayOfWeek = firstDay.getDay()
+    const daysToSubtract = firstDayOfWeek === 0 ? 6 : firstDayOfWeek - 1
+    startDate.setDate(startDate.getDate() - daysToSubtract)
     
     const weeks = []
     let week = []
@@ -94,6 +102,9 @@ export default function HomePage() {
         // 定休日チェック
         const isRegularHoliday = holidays.regularHolidays.weekdays.includes(dayOfWeek)
         
+        // 午後休みチェック
+        const isHalfDayHoliday = holidays.halfDayHolidays?.weekdays.includes(dayOfWeek) || false
+        
         // 臨時休業日チェック
         const isSpecialHoliday = holidays.specialHolidays.some(h => h.date === dateString)
         const specialHolidayReason = holidays.specialHolidays.find(h => h.date === dateString)?.reason
@@ -105,6 +116,7 @@ export default function HomePage() {
           dateString,
           isCurrentMonth: true,
           isHoliday: isRegularHoliday || isSpecialHoliday,
+          isHalfDayHoliday,
           isSpecialHoliday,
           specialHolidayReason,
           isToday,
@@ -153,7 +165,7 @@ export default function HomePage() {
   }
   
   const calendarData = getCurrentMonthCalendar()
-  const weekDays = ['日', '月', '火', '水', '木', '金', '土']
+  const weekDays = ['月', '火', '水', '木', '金', '土', '日']
 
 
   const quickAccess = [
@@ -281,11 +293,15 @@ export default function HomePage() {
                     <table className="w-full">
                       <thead>
                         <tr className="bg-secondary/50">
-                          {weekDays.map((day, index) => (
-                            <th key={index} className={`py-2 text-sm font-medium ${index === 0 || index === 3 ? 'text-red-500' : ''}`}>
-                              {day}
-                            </th>
-                          ))}
+                          {weekDays.map((day, index) => {
+                            // 月曜始まりのインデックスを日曜始まりのインデックスに変換
+                            const dayOfWeekIndex = index === 6 ? 0 : index + 1
+                            return (
+                              <th key={index} className={`py-2 text-sm font-medium ${holidays.regularHolidays.weekdays.includes(dayOfWeekIndex) ? 'text-red-500' : ''}`}>
+                                {day}
+                              </th>
+                            )
+                          })}
                         </tr>
                       </thead>
                       <tbody>
@@ -299,14 +315,19 @@ export default function HomePage() {
                                       inline-flex items-center justify-center w-8 h-8 rounded-full text-sm
                                       ${day.isToday ? 'bg-primary text-white font-bold' : ''}
                                       ${day.isHoliday && !day.isToday ? 'text-red-500' : ''}
-                                      ${!day.isHoliday && !day.isToday ? 'text-foreground' : ''}
+                                      ${day.isHalfDayHoliday && !day.isHoliday && !day.isToday ? 'text-orange-500' : ''}
+                                      ${!day.isHoliday && !day.isHalfDayHoliday && !day.isToday ? 'text-foreground' : ''}
                                       ${day.isSpecialHoliday ? 'ring-2 ring-orange-400' : ''}
                                     `}
                                     title={day.specialHolidayReason || ''}>
                                       {day.date}
                                     </div>
-                                    {day.isHoliday && (
-                                      <div className={`absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full ${day.isSpecialHoliday ? 'bg-orange-500' : 'bg-red-500'}`}></div>
+                                    {(day.isHoliday || day.isHalfDayHoliday) && (
+                                      <div className={`absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full ${
+                                        day.isSpecialHoliday ? 'bg-orange-500' : 
+                                        day.isHoliday ? 'bg-red-500' : 
+                                        'bg-orange-400'
+                                      }`}></div>
                                     )}
                                   </div>
                                 )}
@@ -321,6 +342,10 @@ export default function HomePage() {
                     <div className="flex items-center gap-2">
                       <div className="w-3 h-3 bg-red-500 rounded-full"></div>
                       <span className="text-muted-foreground">定休日</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 bg-orange-400 rounded-full"></div>
+                      <span className="text-muted-foreground">午後休み</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <div className="w-3 h-3 bg-orange-500 rounded-full"></div>

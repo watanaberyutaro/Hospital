@@ -18,19 +18,28 @@ interface HolidaysData {
     weekdays: number[]
     description: string
   }
+  halfDayHolidays?: {
+    weekdays: number[]
+    description: string
+  }
   specialHolidays: SpecialHoliday[]
 }
 
 export default function AdminHolidaysPage() {
   const router = useRouter()
   const [holidays, setHolidays] = useState<HolidaysData>({
-    regularHolidays: { weekdays: [0, 3], description: "毎週水曜日・日曜日" },
+    regularHolidays: { weekdays: [0], description: "毎週日曜日" },
+    halfDayHolidays: { weekdays: [3, 4, 6], description: "毎週水曜日・木曜日・土曜日" },
     specialHolidays: []
   })
   const [isAddingHoliday, setIsAddingHoliday] = useState(false)
   const [newHolidayDate, setNewHolidayDate] = useState('')
   const [newHolidayReason, setNewHolidayReason] = useState('')
   const [loading, setLoading] = useState(true)
+  const [isEditingRegular, setIsEditingRegular] = useState(false)
+  const [selectedWeekdays, setSelectedWeekdays] = useState<number[]>([0])
+  const [isEditingHalfDay, setIsEditingHalfDay] = useState(false)
+  const [selectedHalfDayWeekdays, setSelectedHalfDayWeekdays] = useState<number[]>([3, 4, 6])
 
   useEffect(() => {
     fetchHolidays()
@@ -86,6 +95,73 @@ export default function AdminHolidaysPage() {
     } catch (error) {
       console.error('Failed to delete holiday:', error)
     }
+  }
+
+  const handleUpdateRegularHolidays = async () => {
+    try {
+      const weekdayNames = ['日', '月', '火', '水', '木', '金', '土']
+      const description = selectedWeekdays.length > 0
+        ? `毎週${selectedWeekdays.map(d => weekdayNames[d] + '曜日').join('・')}`
+        : '定休日なし'
+
+      const response = await fetch('/api/holidays/regular', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          weekdays: selectedWeekdays,
+          description: description,
+          halfDayWeekdays: holidays.halfDayHolidays?.weekdays || []
+        })
+      })
+
+      if (response.ok) {
+        fetchHolidays()
+        setIsEditingRegular(false)
+      }
+    } catch (error) {
+      console.error('Failed to update regular holidays:', error)
+    }
+  }
+
+  const handleUpdateHalfDayHolidays = async () => {
+    try {
+      const weekdayNames = ['日', '月', '火', '水', '木', '金', '土']
+      const description = selectedHalfDayWeekdays.length > 0
+        ? `毎週${selectedHalfDayWeekdays.map(d => weekdayNames[d] + '曜日').join('・')}`
+        : '午後休みなし'
+
+      const response = await fetch('/api/holidays/halfday', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          weekdays: selectedHalfDayWeekdays,
+          description: description
+        })
+      })
+
+      if (response.ok) {
+        fetchHolidays()
+        setIsEditingHalfDay(false)
+      }
+    } catch (error) {
+      console.error('Failed to update half-day holidays:', error)
+    }
+  }
+
+  const toggleWeekday = (day: number) => {
+    setSelectedWeekdays(prev => 
+      prev.includes(day) 
+        ? prev.filter(d => d !== day)
+        : [...prev, day].sort()
+    )
+  }
+
+  const toggleHalfDayWeekday = (day: number) => {
+    setSelectedHalfDayWeekdays(prev => 
+      prev.includes(day) 
+        ? prev.filter(d => d !== day)
+        : [...prev, day].sort()
+    )
   }
 
   const formatDate = (dateString: string) => {
@@ -152,19 +228,142 @@ export default function AdminHolidaysPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <Card className="p-6">
-            <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
-              <Calendar className="w-5 h-5 text-primary" />
-              定休日
-            </h2>
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-semibold flex items-center gap-2">
+                <Calendar className="w-5 h-5 text-primary" />
+                定休日
+              </h2>
+              {!isEditingRegular && (
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => {
+                    setIsEditingRegular(true)
+                    setSelectedWeekdays(holidays.regularHolidays.weekdays)
+                  }}
+                >
+                  編集
+                </Button>
+              )}
+            </div>
             <div className="space-y-4">
-              <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                <p className="text-lg font-medium mb-2">
-                  {holidays.regularHolidays.description}
-                </p>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  ※ 祝日も休診となります
-                </p>
-              </div>
+              {isEditingRegular ? (
+                <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <p className="text-sm font-medium mb-3">定休日を選択してください</p>
+                  <div className="flex flex-wrap gap-1 mb-4">
+                    {['日', '月', '火', '水', '木', '金', '土'].map((day, index) => (
+                      <button
+                        key={index}
+                        onClick={() => toggleWeekday(index)}
+                        className={`flex-1 min-w-[38px] p-2 rounded-lg text-sm font-medium transition-colors ${
+                          selectedWeekdays.includes(index)
+                            ? 'bg-primary text-white'
+                            : 'bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600'
+                        }`}
+                      >
+                        {day}
+                      </button>
+                    ))}
+                  </div>
+                  <div className="flex gap-2">
+                    <Button
+                      size="sm"
+                      onClick={handleUpdateRegularHolidays}
+                    >
+                      保存
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => {
+                        setIsEditingRegular(false)
+                        setSelectedWeekdays(holidays.regularHolidays.weekdays)
+                      }}
+                    >
+                      キャンセル
+                    </Button>
+                  </div>
+                </div>
+              ) : (
+                <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <p className="text-lg font-medium mb-2">
+                    {holidays.regularHolidays.description || '定休日なし'}
+                  </p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    ※ 祝日も休診となります
+                  </p>
+                </div>
+              )}
+            </div>
+          </Card>
+
+          <Card className="p-6">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-semibold flex items-center gap-2">
+                <Calendar className="w-5 h-5 text-orange-500" />
+                午後休み
+              </h2>
+              {!isEditingHalfDay && (
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => {
+                    setIsEditingHalfDay(true)
+                    setSelectedHalfDayWeekdays(holidays.halfDayHolidays?.weekdays || [])
+                  }}
+                >
+                  編集
+                </Button>
+              )}
+            </div>
+            <div className="space-y-4">
+              {isEditingHalfDay ? (
+                <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <p className="text-sm font-medium mb-3">午後休みの曜日を選択してください</p>
+                  <div className="flex flex-wrap gap-1 mb-4">
+                    {['日', '月', '火', '水', '木', '金', '土'].map((day, index) => (
+                      <button
+                        key={index}
+                        onClick={() => toggleHalfDayWeekday(index)}
+                        className={`flex-1 min-w-[38px] p-2 rounded-lg text-sm font-medium transition-colors ${
+                          selectedHalfDayWeekdays.includes(index)
+                            ? 'bg-orange-500 text-white'
+                            : 'bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600'
+                        }`}
+                      >
+                        {day}
+                      </button>
+                    ))}
+                  </div>
+                  <div className="flex gap-2">
+                    <Button
+                      size="sm"
+                      onClick={handleUpdateHalfDayHolidays}
+                    >
+                      保存
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => {
+                        setIsEditingHalfDay(false)
+                        setSelectedHalfDayWeekdays(holidays.halfDayHolidays?.weekdays || [])
+                      }}
+                    >
+                      キャンセル
+                    </Button>
+                  </div>
+                </div>
+              ) : (
+                <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <p className="text-lg font-medium mb-2">
+                    {holidays.halfDayHolidays?.description || '午後休みなし'}
+                  </p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    ※ 午前のみ診療（午後休診）
+                  </p>
+                </div>
+              )}
             </div>
           </Card>
 

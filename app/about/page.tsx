@@ -221,10 +221,6 @@ export default function AboutPage() {
                   <span className="text-gray-900 dark:text-white">2001年</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600 dark:text-gray-300">経営形態</span>
-                  <span className="text-gray-900 dark:text-white">個人経営</span>
-                </div>
-                <div className="flex justify-between">
                   <span className="text-gray-600 dark:text-gray-300">診療科</span>
                   <span className="text-gray-900 dark:text-white">一般内科・消化器内科</span>
                 </div>

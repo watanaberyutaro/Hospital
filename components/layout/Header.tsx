@@ -54,17 +54,24 @@ export function Header() {
                 priority
               />
             </div>
-            <div className="hidden sm:block">
-              <h1 className="text-lg md:text-xl lg:text-2xl font-bold text-foreground group-hover:text-primary transition-colors leading-tight">
+            <div className="hidden md:block">
+              <h1 className="text-lg lg:text-xl xl:text-2xl font-bold text-foreground group-hover:text-primary transition-colors leading-tight whitespace-nowrap">
                 新井町内科消化器クリニック
               </h1>
               <p className="text-xs md:text-sm text-muted-foreground hidden lg:block">
                 Araichō Internal Medicine & Gastroenterology Clinic
               </p>
             </div>
-            <div className="sm:hidden">
+            <div className="hidden sm:block md:hidden">
               <h1 className="text-base font-bold text-foreground leading-tight">
-                新井町内科<br />消化器クリニック
+                <span className="block">新井町内科</span>
+                <span className="block">消化器クリニック</span>
+              </h1>
+            </div>
+            <div className="sm:hidden">
+              <h1 className="text-sm font-bold text-foreground leading-tight">
+                <span className="block">新井町内科</span>
+                <span className="block">消化器クリニック</span>
               </h1>
             </div>
           </Link>

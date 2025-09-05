@@ -7,7 +7,10 @@ export async function GET() {
     
     // デフォルト値を確保
     if (!holidays.regularHolidays) {
-      holidays.regularHolidays = { weekdays: [0, 3], description: "毎週水曜日・日曜日" }
+      holidays.regularHolidays = { weekdays: [0], description: "毎週日曜日" }
+    }
+    if (!holidays.halfDayHolidays) {
+      holidays.halfDayHolidays = { weekdays: [3, 4, 6], description: "毎週水曜日・木曜日・土曜日" }
     }
     if (!holidays.specialHolidays) {
       holidays.specialHolidays = []
@@ -32,7 +35,10 @@ export async function POST(request: NextRequest) {
     
     // デフォルト値を確保
     if (!holidays.regularHolidays) {
-      holidays.regularHolidays = { weekdays: [0, 3], description: "毎週水曜日・日曜日" }
+      holidays.regularHolidays = { weekdays: [0], description: "毎週日曜日" }
+    }
+    if (!holidays.halfDayHolidays) {
+      holidays.halfDayHolidays = { weekdays: [3, 4, 6], description: "毎週水曜日・木曜日・土曜日" }
     }
     if (!holidays.specialHolidays) {
       holidays.specialHolidays = []

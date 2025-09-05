@@ -43,19 +43,19 @@ export function Footer() {
       <div className="container mx-auto px-6 py-16 relative">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           <div>
-            <div className="flex items-center space-x-4 mb-6">
-              <div className="relative w-20 h-20 flex-shrink-0 bg-sky-100 rounded-xl shadow-lg p-[5px] border border-sky-200">
-                <Image
-                  src="/images/Logo.png"
-                  alt="新井町内科消化器クリニック ロゴ"
-                  fill
-                  className="object-contain p-2"
-                />
+            <div className="flex flex-col items-center md:items-start mb-6">
+              <div className="flex items-center space-x-3 mb-2">
+                <div className="relative w-16 h-16 flex-shrink-0 bg-sky-100 rounded-xl shadow-lg p-[5px] border border-sky-200">
+                  <Image
+                    src="/images/Logo.png"
+                    alt="新井町内科消化器クリニック ロゴ"
+                    fill
+                    className="object-contain p-2"
+                  />
+                </div>
               </div>
-              <div>
-                <h3 className="text-xl font-bold">新井町内科消化器クリニック</h3>
-                <p className="text-sm text-white/70">Araichō Internal Medicine & Gastroenterology Clinic</p>
-              </div>
+              <h3 className="text-lg sm:text-xl font-bold text-center md:text-left">新井町内科消化器クリニック</h3>
+              <p className="text-xs sm:text-sm text-white/70 text-center md:text-left">Araichō Internal Medicine & Gastroenterology Clinic</p>
             </div>
             <p className="text-white/80 mb-6 leading-relaxed">
               2001年設立。内科・消化器内科の専門医が、<br />
