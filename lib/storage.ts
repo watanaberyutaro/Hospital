@@ -36,6 +36,10 @@ export interface HolidayData {
     weekdays: number[];
     description: string;
   };
+  halfDayHolidays?: {
+    weekdays: number[];
+    description: string;
+  };
   specialHolidays: Array<{
     id: string;
     date: string;
