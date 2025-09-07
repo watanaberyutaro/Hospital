@@ -289,16 +289,22 @@ export default function HomePage() {
                     <Calendar className="w-5 h-5 text-primary" />
                     {calendarData.year}年 {calendarData.monthName}
                   </h4>
-                  <div className="overflow-hidden rounded-lg border">
-                    <table className="w-full">
+                  <div className="overflow-x-auto rounded-lg border">
+                    <table className="w-full min-w-[280px]">
                       <thead>
                         <tr className="bg-secondary/50">
                           {weekDays.map((day, index) => {
                             // 月曜始まりのインデックスを日曜始まりのインデックスに変換
                             const dayOfWeekIndex = index === 6 ? 0 : index + 1
+                            const isRegular = holidays.regularHolidays.weekdays.includes(dayOfWeekIndex)
+                            const isHalfDay = holidays.halfDayHolidays?.weekdays.includes(dayOfWeekIndex) || false
                             return (
-                              <th key={index} className={`py-2 text-sm font-medium ${holidays.regularHolidays.weekdays.includes(dayOfWeekIndex) ? 'text-red-500' : ''}`}>
-                                {day}
+                              <th key={index} className={`py-1 sm:py-2 text-xs sm:text-sm font-medium px-1 ${
+                                isRegular ? 'text-red-500' : 
+                                isHalfDay ? 'text-orange-500' : ''
+                              }`}>
+                                <span className="block sm:hidden">{day.slice(0, 1)}</span>
+                                <span className="hidden sm:block">{day}</span>
                               </th>
                             )
                           })}
@@ -308,22 +314,22 @@ export default function HomePage() {
                         {calendarData.weeks.map((week, weekIndex) => (
                           <tr key={weekIndex}>
                             {week.map((day, dayIndex) => (
-                              <td key={dayIndex} className="border-t p-2 text-center relative">
+                              <td key={dayIndex} className="border-t p-1 sm:p-2 text-center relative">
                                 {day.isCurrentMonth && (
                                   <div className="relative">
                                     <div className={`
-                                      inline-flex items-center justify-center w-8 h-8 rounded-full text-sm
+                                      inline-flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 rounded-full text-xs sm:text-sm
                                       ${day.isToday ? 'bg-primary text-white font-bold' : ''}
                                       ${day.isHoliday && !day.isToday ? 'text-red-500' : ''}
                                       ${day.isHalfDayHoliday && !day.isHoliday && !day.isToday ? 'text-orange-500' : ''}
                                       ${!day.isHoliday && !day.isHalfDayHoliday && !day.isToday ? 'text-foreground' : ''}
-                                      ${day.isSpecialHoliday ? 'ring-2 ring-orange-400' : ''}
+                                      ${day.isSpecialHoliday ? 'ring-1 sm:ring-2 ring-orange-400' : ''}
                                     `}
                                     title={day.specialHolidayReason || ''}>
                                       {day.date}
                                     </div>
                                     {(day.isHoliday || day.isHalfDayHoliday) && (
-                                      <div className={`absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full ${
+                                      <div className={`absolute -bottom-0.5 sm:-bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full ${
                                         day.isSpecialHoliday ? 'bg-orange-500' : 
                                         day.isHoliday ? 'bg-red-500' : 
                                         'bg-orange-400'
