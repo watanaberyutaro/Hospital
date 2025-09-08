@@ -52,7 +52,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
-                私たちの使命
+                当院の理念
               </h2>
               <p className="text-gray-600 dark:text-gray-300 mb-6">
                 新井町内科消化器クリニックは、2001年の開院以来、地域の皆様の健康を守るかかりつけ医として診療を行ってまいりました。
@@ -90,8 +90,7 @@ export default function AboutPage() {
       <section className="py-16 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-4">
           <SectionHeading 
-            title="医療チーム"
-            subtitle="経験豊富な3名の医師が診療にあたります"
+            title="経験豊富な3名の医師が診療にあたります"
           />
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -108,29 +107,24 @@ export default function AboutPage() {
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300 mb-6">
                   当院では、内科・消化器内科の専門医資格を持つ3名の医師が診療を担当しています。
-                  それぞれの専門性を活かしながら、チーム医療で患者様一人ひとりに最適な医療を提供いたします。
+                  それぞれの専門性を活かしながら、患者様一人ひとりに最適な医療を提供いたします。
                 </p>
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-primary rounded-full mt-2"></div>
                     <div>
                       <h4 className="font-semibold text-gray-900 dark:text-white mb-1">日本消化器病学会専門医</h4>
-                      <p className="text-sm text-gray-600 dark:text-gray-300">消化器疾患の診断・治療のスペシャリスト</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-primary rounded-full mt-2"></div>
                     <div>
-                      <h4 className="font-semibold text-gray-900 dark:text-white mb-1">日本消化器内視鏡学会専門医</h4>
-                      <p className="text-sm text-gray-600 dark:text-gray-300">安全で正確な内視鏡検査を実施</p>
-                    </div>
+                      <h4 className="font-semibold text-gray-900 dark:text-white mb-1">日本消化器内視鏡学会専門医</h4>                    </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-primary rounded-full mt-2"></div>
                     <div>
-                      <h4 className="font-semibold text-gray-900 dark:text-white mb-1">日本肝臓学会専門医</h4>
-                      <p className="text-sm text-gray-600 dark:text-gray-300">肝臓疾患の専門的な診療</p>
-                    </div>
+                      <h4 className="font-semibold text-gray-900 dark:text-white mb-1">日本肝臓学会専門医</h4></div>
                   </div>
                 </div>
               </div>

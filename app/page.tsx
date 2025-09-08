@@ -403,7 +403,7 @@ export default function HomePage() {
                       新井町内科消化器クリニック
                     </h4>
                     <div className="space-y-3 text-muted-foreground">
-                      <p>〒332-0031</p>
+                      <p>〒332-0005</p>
                       <p>埼玉県川口市新井町16-1</p>
                       <p className="font-medium text-foreground">TEL: 048-222-0700</p>
                     </div>
