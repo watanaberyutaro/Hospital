@@ -141,13 +141,24 @@ export default function EndoscopyPage() {
                   <div>
                     <h4 className="font-semibold mb-2">検査のご相談</h4>
                     <p className="text-muted-foreground">
-                      お電話にて検査についてご相談ください。事前診察で検査の説明を行います。
+                      外来診察にて血液検査や画像検査を行い、内視鏡治療の適応について判断します。
                     </p>
                   </div>
                 </div>
                 <div className="flex gap-4">
                   <div className="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center flex-shrink-0">
                     2
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-2">検査の説明</h4>
+                    <p className="text-muted-foreground">
+                    看護師より検査の説明を行います。ご不明点がございましたら何なりとご質問ください。
+                    </p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center flex-shrink-0">
+                    3
                   </div>
                   <div>
                     <h4 className="font-semibold mb-2">検査前日〜当日</h4>
@@ -158,7 +169,7 @@ export default function EndoscopyPage() {
                 </div>
                 <div className="flex gap-4">
                   <div className="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center flex-shrink-0">
-                    3
+                    4
                   </div>
                   <div>
                     <h4 className="font-semibold mb-2">検査実施</h4>
@@ -169,12 +180,14 @@ export default function EndoscopyPage() {
                 </div>
                 <div className="flex gap-4">
                   <div className="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center flex-shrink-0">
-                    4
+                    5
                   </div>
                   <div>
                     <h4 className="font-semibold mb-2">結果説明</h4>
                     <p className="text-muted-foreground">
-                      検査画像を見ながら、分かりやすく結果をご説明します。必要に応じて治療方針もご相談します。
+                    検査画像を見ながら、わかりやすく結果をご説明します。
+必要に応じて治療方針もごそうだんします。
+病理検査結果には2〜3週間かかる場合がございますので、後日外来で結果説明を行うこともございます。
                     </p>
                   </div>
                 </div>

@@ -29,7 +29,6 @@ export default function AccessPage() {
       title: 'お車でお越しの方',
       content: [
         '駐車場完備（軽自動車1台、普通車10台）',
-        '※近隣のモスバーガーが目印です',
         'Google Map / ストリートビュー対応',
       ],
     },
