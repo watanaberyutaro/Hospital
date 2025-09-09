@@ -8,6 +8,7 @@ import { Calendar, Clock, MapPin, Phone, Thermometer, Stethoscope, Heart, AlertC
 import NewsSection from '@/components/NewsSection'
 import { ClinicCalendar } from '@/components/ui/ClinicCalendar'
 import { useState, useEffect } from 'react'
+import { getMonthlyHolidays, type Holiday } from '@/src/lib/holidays'
 
 interface SpecialHoliday {
   id: string
@@ -34,12 +35,18 @@ export default function HomePage() {
     halfDayHolidays: { weekdays: [3, 4, 6], description: "毎週水曜日・木曜日・土曜日" },
     specialHolidays: []
   })
+  const [nationalHolidays, setNationalHolidays] = useState<Holiday[]>([])
 
   useEffect(() => {
     fetch('/api/holidays')
       .then(res => res.json())
       .then(data => setHolidays(data))
       .catch(err => console.error('Failed to fetch holidays:', err))
+    
+    // 祝日データを取得
+    const today = new Date()
+    const holidays = getMonthlyHolidays(today.getFullYear(), today.getMonth() + 1)
+    setNationalHolidays(holidays)
   }, [])
   const medicalServices = [
     {
@@ -109,16 +116,23 @@ export default function HomePage() {
         const isSpecialHoliday = holidays.specialHolidays.some(h => h.date === dateString)
         const specialHolidayReason = holidays.specialHolidays.find(h => h.date === dateString)?.reason
         
+        // 祝日チェック
+        const nationalHoliday = nationalHolidays.find(h => h.date === dateString)
+        const isNationalHoliday = !!nationalHoliday
+        const nationalHolidayName = nationalHoliday?.name
+        
         const isToday = currentDate.toDateString() === today.toDateString()
         
         week.push({
           date: currentDate.getDate(),
           dateString,
           isCurrentMonth: true,
-          isHoliday: isRegularHoliday || isSpecialHoliday,
+          isHoliday: isRegularHoliday || isSpecialHoliday || isNationalHoliday,
           isHalfDayHoliday,
           isSpecialHoliday,
           specialHolidayReason,
+          isNationalHoliday,
+          nationalHolidayName,
           isToday,
           dayOfWeek,
         })
@@ -325,11 +339,12 @@ export default function HomePage() {
                                       ${!day.isHoliday && !day.isHalfDayHoliday && !day.isToday ? 'text-foreground' : ''}
                                       ${day.isSpecialHoliday ? 'ring-1 sm:ring-2 ring-orange-400' : ''}
                                     `}
-                                    title={day.specialHolidayReason || ''}>
+                                    title={day.nationalHolidayName || day.specialHolidayReason || ''}>
                                       {day.date}
                                     </div>
                                     {(day.isHoliday || day.isHalfDayHoliday) && (
                                       <div className={`absolute -bottom-0.5 sm:-bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full ${
+                                        day.isNationalHoliday ? 'bg-red-500' :
                                         day.isSpecialHoliday ? 'bg-orange-500' : 
                                         day.isHoliday ? 'bg-red-500' : 
                                         'bg-orange-400'
@@ -347,7 +362,7 @@ export default function HomePage() {
                   <div className="mt-4 flex items-center gap-4 text-sm flex-wrap">
                     <div className="flex items-center gap-2">
                       <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                      <span className="text-muted-foreground">定休日</span>
+                      <span className="text-muted-foreground">定休日・祝日</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <div className="w-3 h-3 bg-orange-400 rounded-full"></div>

@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { Calendar, Trash2, Plus, X } from 'lucide-react'
+import { Calendar, Trash2, Plus, X, Info } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
+import { getJapaneseHolidays, type Holiday } from '@/src/lib/holidays'
 
 interface SpecialHoliday {
   id: string
@@ -23,6 +24,7 @@ interface HolidaysData {
     description: string
   }
   specialHolidays: SpecialHoliday[]
+  autoDetectNationalHolidays?: boolean
 }
 
 export default function AdminHolidaysPage() {
@@ -30,8 +32,10 @@ export default function AdminHolidaysPage() {
   const [holidays, setHolidays] = useState<HolidaysData>({
     regularHolidays: { weekdays: [0], description: "毎週日曜日" },
     halfDayHolidays: { weekdays: [3, 4, 6], description: "毎週水曜日・木曜日・土曜日" },
-    specialHolidays: []
+    specialHolidays: [],
+    autoDetectNationalHolidays: true
   })
+  const [nationalHolidays, setNationalHolidays] = useState<Holiday[]>([])
   const [isAddingHoliday, setIsAddingHoliday] = useState(false)
   const [newHolidayDate, setNewHolidayDate] = useState('')
   const [newHolidayReason, setNewHolidayReason] = useState('')
@@ -43,6 +47,10 @@ export default function AdminHolidaysPage() {
 
   useEffect(() => {
     fetchHolidays()
+    // 今年の祝日を取得
+    const currentYear = new Date().getFullYear()
+    const holidays = getJapaneseHolidays(currentYear)
+    setNationalHolidays(holidays)
   }, [])
 
   const fetchHolidays = async () => {
@@ -225,6 +233,38 @@ export default function AdminHolidaysPage() {
             </Button>
           </div>
         </div>
+
+        <Card className="p-6 mb-8 bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800">
+          <div className="flex items-start gap-3">
+            <Info className="w-5 h-5 text-blue-500 mt-0.5" />
+            <div>
+              <h3 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">
+                祝日の自動反映について
+              </h3>
+              <p className="text-sm text-blue-800 dark:text-blue-200 mb-3">
+                日本の祝日は自動的に取得され、カレンダーに反映されます。
+              </p>
+              <div className="space-y-2">
+                <p className="text-xs font-medium text-blue-700 dark:text-blue-300">
+                  {new Date().getFullYear()}年の祝日：
+                </p>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                  {nationalHolidays.slice(0, 6).map((holiday, index) => (
+                    <div key={index} className="text-xs bg-white dark:bg-gray-800 rounded px-2 py-1">
+                      <span className="font-medium">{holiday.date.slice(5)}</span>
+                      <span className="text-gray-600 dark:text-gray-400 ml-1">{holiday.name}</span>
+                    </div>
+                  ))}
+                  {nationalHolidays.length > 6 && (
+                    <div className="text-xs text-gray-500 dark:text-gray-400 px-2 py-1">
+                      他{nationalHolidays.length - 6}件の祝日
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </Card>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <Card className="p-6">
@@ -505,8 +545,9 @@ export default function AdminHolidaysPage() {
         <Card className="mt-8 p-6">
           <h2 className="text-xl font-semibold mb-4">使い方</h2>
           <div className="space-y-3 text-sm text-gray-600 dark:text-gray-400">
-            <p>• 定休日（毎週水曜日・日曜日・祝日）は自動的にカレンダーに反映されます</p>
-            <p>• 臨時休業日を追加すると、トップページのカレンダーに赤色で表示されます</p>
+            <p>• 定休日は毎週指定した曜日が自動的にカレンダーに反映されます</p>
+            <p>• 日本の祝日は自動的に取得され、休診日としてカレンダーに表示されます</p>
+            <p>• 臨時休業日を追加すると、トップページのカレンダーに表示されます</p>
             <p>• 臨時休業日は理由を添えることができます（例：院内研修、設備点検など）</p>
             <p>• 過去の臨時休業日は自動的にグレーアウトされますが、手動で削除も可能です</p>
           </div>

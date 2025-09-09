@@ -29,7 +29,8 @@
       "Bash(find:*)",
       "Bash(grep:*)",
       "Bash(echo:*)",
-      "Bash(pkill:*)"
+      "Bash(pkill:*)",
+      "Bash(kill:*)"
     ],
     "deny": []
   }
