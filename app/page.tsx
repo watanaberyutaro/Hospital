@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/Button'
 import { Calendar, Clock, MapPin, Phone, Thermometer, Stethoscope, Heart, AlertCircle } from 'lucide-react'
 import NewsSection from '@/components/NewsSection'
 import { ClinicCalendar } from '@/components/ui/ClinicCalendar'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { getMonthlyHolidays, type Holiday } from '@/src/lib/holidays'
 
 interface SpecialHoliday {
@@ -36,6 +36,7 @@ export default function HomePage() {
     specialHolidays: []
   })
   const [nationalHolidays, setNationalHolidays] = useState<Holiday[]>([])
+  const [currentDate, setCurrentDate] = useState<Date>(new Date())
 
   useEffect(() => {
     fetch('/api/holidays')
@@ -44,10 +45,37 @@ export default function HomePage() {
       .catch(err => console.error('Failed to fetch holidays:', err))
     
     // 祝日データを取得
-    const today = new Date()
-    const holidays = getMonthlyHolidays(today.getFullYear(), today.getMonth() + 1)
+    const holidays = getMonthlyHolidays(currentDate.getFullYear(), currentDate.getMonth() + 1)
     setNationalHolidays(holidays)
-  }, [])
+  }, [currentDate])
+
+  // 毎日0時に日付を更新
+  useEffect(() => {
+    const checkDateChange = () => {
+      const now = new Date()
+      const today = new Date(currentDate)
+      
+      // 日付が変わったかチェック
+      if (now.toDateString() !== today.toDateString()) {
+        setCurrentDate(now)
+      }
+    }
+
+    // 初回チェック
+    checkDateChange()
+
+    // 1分ごとにチェック（0時を逃さないため）
+    const interval = setInterval(checkDateChange, 60000)
+
+    // ページがフォーカスされた時にもチェック
+    const handleFocus = () => checkDateChange()
+    window.addEventListener('focus', handleFocus)
+
+    return () => {
+      clearInterval(interval)
+      window.removeEventListener('focus', handleFocus)
+    }
+  }, [currentDate])
   const medicalServices = [
     {
       icon: <Stethoscope className="w-8 h-8" />,
@@ -76,10 +104,10 @@ export default function HomePage() {
   }
 
   // カレンダー用のデータ生成
-  const getCurrentMonthCalendar = () => {
-    const today = new Date()
-    const year = today.getFullYear()
-    const month = today.getMonth()
+  const calendarData = useMemo(() => {
+    const todayDate = new Date(currentDate)
+    const year = todayDate.getFullYear()
+    const month = todayDate.getMonth()
     const firstDay = new Date(year, month, 1)
     const lastDay = new Date(year, month + 1, 0)
     const startDate = new Date(firstDay)
@@ -90,21 +118,21 @@ export default function HomePage() {
     
     const weeks = []
     let week = []
-    let currentDate = new Date(startDate)
+    let iterDate = new Date(startDate)
     let safeguard = 0 // 無限ループ防止
     
-    while (currentDate <= lastDay || week.length > 0) {
+    while (iterDate <= lastDay || week.length > 0) {
       if (safeguard++ > 42) break // カレンダーの最大マス数（6週間）を超えたら終了
       
       if (week.length === 7) {
         weeks.push(week)
         week = []
-        if (currentDate > lastDay && week.length === 0) break
+        if (iterDate > lastDay && week.length === 0) break
       }
       
-      if (currentDate.getMonth() === month) {
-        const dayOfWeek = currentDate.getDay()
-        const dateString = `${year}-${String(month + 1).padStart(2, '0')}-${String(currentDate.getDate()).padStart(2, '0')}`
+      if (iterDate.getMonth() === month) {
+        const dayOfWeek = iterDate.getDay()
+        const dateString = `${year}-${String(month + 1).padStart(2, '0')}-${String(iterDate.getDate()).padStart(2, '0')}`
         
         // 定休日チェック
         const isRegularHoliday = holidays.regularHolidays.weekdays.includes(dayOfWeek)
@@ -121,10 +149,10 @@ export default function HomePage() {
         const isNationalHoliday = !!nationalHoliday
         const nationalHolidayName = nationalHoliday?.name
         
-        const isToday = currentDate.toDateString() === today.toDateString()
+        const isToday = iterDate.toDateString() === todayDate.toDateString()
         
         week.push({
-          date: currentDate.getDate(),
+          date: iterDate.getDate(),
           dateString,
           isCurrentMonth: true,
           isHoliday: isRegularHoliday || isSpecialHoliday || isNationalHoliday,
@@ -136,7 +164,7 @@ export default function HomePage() {
           isToday,
           dayOfWeek,
         })
-      } else if (currentDate > lastDay && week.length > 0) {
+      } else if (iterDate > lastDay && week.length > 0) {
         // 最終週の空きマスを埋める
         week.push({
           date: '',
@@ -146,11 +174,11 @@ export default function HomePage() {
           isSpecialHoliday: false,
           specialHolidayReason: '',
           isToday: false,
-          dayOfWeek: currentDate.getDay(),
+          dayOfWeek: iterDate.getDay(),
         })
       }
       
-      currentDate.setDate(currentDate.getDate() + 1)
+      iterDate.setDate(iterDate.getDate() + 1)
     }
     
     if (week.length > 0 && week.length < 7) {
@@ -176,9 +204,7 @@ export default function HomePage() {
       weeks,
       monthName: new Date(year, month).toLocaleDateString('ja-JP', { month: 'long' }),
     }
-  }
-  
-  const calendarData = getCurrentMonthCalendar()
+  }, [currentDate, holidays, nationalHolidays])
   const weekDays = ['月', '火', '水', '木', '金', '土', '日']
 
 
