@@ -125,8 +125,7 @@ export default function AccessPage() {
                 </h3>
                 <ul className="space-y-2 text-muted-foreground text-sm">
                   <li>• 新井町交差点の角</li>
-                  <li>• 川口元郷駅から徒歩10分</li>
-                  <li>• 国際興業バス「新井町」停留所前</li>
+                  <li>• モスバーガー川口新井町店横</li>
                 </ul>
               </Card>
 
@@ -135,8 +134,7 @@ export default function AccessPage() {
                 <p className="text-muted-foreground text-sm mb-4">
                   クリニック専用駐車場をご用意しております。<br />
                   軽自動車: 1台<br />
-                  普通車: 10台<br />
-                  満車の場合は、お手数ですが近隣のコインパーキングをご利用ください。
+                  普通車: 10台
                 </p>
               </Card>
             </div>
@@ -152,7 +150,7 @@ export default function AccessPage() {
               <ul className="space-y-3 text-muted-foreground">
                 <li className="flex items-start gap-2">
                   <span className="text-primary">•</span>
-                  初診の方は保険証もしくはマイナンバーカードを必ずお持ちください
+                  保険証もしくはマイナンバーカードを必ずお持ちください
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary">•</span>

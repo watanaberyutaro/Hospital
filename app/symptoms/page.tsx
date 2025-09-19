@@ -29,7 +29,7 @@ export default function SymptomsPage() {
     },
     {
       icon: Stethoscope,
-      title: '健康異常結果の再検査を勧められた方',
+      title: '健診・がん検診で再検査を勧められた方',
       symptoms: ['肝機能異常', '血糖値異常', 'コレステロール高値', '尿酸値異常'],
       description: '血液検査での異常や、胸部X線の影など、詳しい検査と治療を行います。',
       alert: '放置すると重大な疾患につながる可能性があります。',
@@ -51,15 +51,14 @@ export default function SymptomsPage() {
         { name: '大腸カメラ', description: '大腸全体の検査' },
         { name: '胸部X線', description: '肺・心臓の検査' },
         { name: '心電図', description: '不整脈・心疾患の検査' },
-        { name: 'エコー検査', description: '腹部臓器の検査' },
+        { name: '腹部エコー検査', description: '腹部臓器の検査' },
         { name: '各種血液検査', description: '肝機能・腎機能・血糖値など' },
       ]
     },
     {
       title: '連携検査',
       items: [
-        { name: 'CT検査', description: '近隣医療機関と連携して実施' },
-        { name: 'MRI検査', description: '精密検査が必要な場合' },
+        { name: 'CT・MRI検査', description: '近隣医療機関と連携して実施' },
       ]
     }
   ]

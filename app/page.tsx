@@ -263,7 +263,7 @@ export default function HomePage() {
             title="このような方はぜひご相談ください"
             subtitle="初めての方も安心して受診いただけます"
           />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
             <Card className="p-6">
               <h3 className="font-bold text-lg mb-2">初めて受診される方</h3>
               <p className="text-sm text-muted-foreground">
@@ -282,12 +282,6 @@ export default function HomePage() {
                 特定健診、がん検診など、生活習慣病の早期発見・予防に力を入れています。
               </p>
             </Card>
-            <Card className="p-6">
-              <h3 className="font-bold text-lg mb-2">急な不整脈でお困りの方</h3>
-              <p className="text-sm text-muted-foreground">
-                心電図検査をすぐに実施。循環器疾患の診断と治療を行います。
-              </p>
-            </Card>
           </div>
         </div>
       </section>
@@ -297,7 +291,7 @@ export default function HomePage() {
           <div className="max-w-4xl mx-auto text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">川口市ですぐに対応する内科クリニック</h2>
             <p className="text-lg text-muted-foreground">
-              即日診察可能。内科診療から専門的な消化器検査まで、川口市の皆様にすぐに対応いたします
+              内科診療から専門的な消化器検査まで、川口市の皆様にすぐに対応いたします
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -324,7 +318,7 @@ export default function HomePage() {
                 center={false}
               />
               <div className="space-y-6">
-                <Card className="p-6 bg-white/80 backdrop-blur">
+                <Card className="p-6 bg-white/80 backdrop-blur" key={currentDate.toDateString()}>
                   <h4 className="font-semibold text-lg mb-4 flex items-center gap-2">
                     <Calendar className="w-5 h-5 text-primary" />
                     {calendarData.year}年 {calendarData.monthName}
@@ -452,7 +446,7 @@ export default function HomePage() {
                   <div className="space-y-2">
                     <p className="flex items-start gap-2">
                       <span className="text-primary mt-1">•</span>
-                      <span className="text-sm">川口元郷駅より徒歩10分・川口駅東口より徒歩15分</span>
+                      <span className="text-sm">川口元郷駅より徒歩12分・川口駅よりバス7分。元郷一丁目下車。</span>
                     </p>
                     <p className="flex items-start gap-2">
                       <span className="text-primary mt-1">•</span>

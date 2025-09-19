@@ -42,7 +42,7 @@ export default function DepartmentsPage() {
       description: '苦痛の少ない上下部内視鏡検査（胃・大腸カメラ）を行います。',
       icon: Microscope,
       doctors: 3,
-      services: ['胃カメラ検査　経口　経鼻', '大腸カメラ検査', 'ポリープ切除', '鎮静化検査', '川口市胃がん内視鏡健診'],
+      services: ['胃カメラ検査　経口　経鼻', '大腸カメラ検査', 'ポリープ切除', '鎮静化検査', '川口市胃がん内視鏡検診'],
     },
     {
       slug: 'health-checkup',
