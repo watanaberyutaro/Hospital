@@ -34,9 +34,9 @@ export function Footer() {
   return (
     <footer className="relative bg-gradient-to-br from-foreground via-foreground/95 to-primary/20 text-white overflow-hidden">
       <div className="absolute inset-0 opacity-5">
-        <img 
-          src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1920&h=800&fit=crop" 
-          alt="病院の外観"
+        <img
+          src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1920&h=800&fit=crop"
+          alt="新井町内科消化器クリニック 外観 - 川口市新井町 内科 消化器内科"
           className="w-full h-full object-cover"
         />
       </div>
@@ -181,9 +181,9 @@ export function Footer() {
             © {currentYear} 新井町内科消化器クリニック. All rights reserved.
           </p>
           <div className="mt-4 md:mt-0">
-            <img 
-              src="https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?w=200&h=50&fit=crop" 
-              alt="医療認証マーク"
+            <img
+              src="https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?w=200&h=50&fit=crop"
+              alt="医療機関認証マーク - 日本医療機能評価機構認定"
               className="h-8 opacity-60 hover:opacity-80 transition-opacity"
             />
           </div>

@@ -481,9 +481,9 @@ export default function HomePage() {
             {departments.map((dept, index) => (
               <Card key={index} className="overflow-hidden group">
                 <div className="aspect-[4/3] relative overflow-hidden">
-                  <img 
-                    src={dept.image} 
-                    alt={dept.name}
+                  <img
+                    src={dept.image}
+                    alt={`${dept.name} - 新井町内科消化器クリニック 川口市`}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
@@ -510,9 +510,9 @@ export default function HomePage() {
                 <div className="md:w-1/3">
                   <div className="relative">
                     <div className="w-48 h-48 mx-auto rounded-2xl overflow-hidden shadow-lg">
-                      <img 
-                        src="/images/院長.jpg" 
-                        alt="院長 植村博之"
+                      <img
+                        src="/images/院長.jpg"
+                        alt="院長 植村博之 医学博士 - 新井町内科消化器クリニック 川口市"
                         className="w-full h-full object-cover"
                       />
                     </div>

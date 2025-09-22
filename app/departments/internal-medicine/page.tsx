@@ -2,18 +2,24 @@ import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
-import { 
-  Stethoscope, 
-  Heart, 
-  Activity, 
-  Shield, 
-  Users, 
+import {
+  Stethoscope,
+  Heart,
+  Activity,
+  Shield,
+  Users,
   ClipboardCheck,
   Pill,
   Calendar,
   AlertCircle,
   Microscope
 } from 'lucide-react'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: '一般内科 | 川口市 発熱 風邪 生活習慣病 | 新井町内科消化器クリニック',
+  description: '川口市新井町の一般内科。発熱・風邪・頭痛・腹痛・高血圧・糖尿病・脂質異常症など幅広く診療。予約なしで即日診察可能。土曜診療あり。',
+}
 
 export default function InternalMedicinePage() {
   // Updated: 2025-01-23

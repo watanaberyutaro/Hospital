@@ -2,6 +2,12 @@ import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import { Phone, CheckCircle, Clock, Shield, Heart } from 'lucide-react'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: '内視鏡検査 | 川口市 胃カメラ 大腸カメラ 専門医 | 新井町内科消化器クリニック',
+  description: '川口市新井町の内視鏡検査専門。日本消化器内視鏡学会専門医による苦痛の少ない胃カメラ・大腸カメラ検査。鎮静剤使用可能。ポリープ切除対応。',
+}
 
 export default function EndoscopyPage() {
   const examTypes = [
@@ -81,7 +87,7 @@ export default function EndoscopyPage() {
                 <div className="aspect-[16/9] relative overflow-hidden">
                   <img
                     src={exam.image}
-                    alt={exam.title}
+                    alt={`${exam.title} - 新井町内科消化器クリニック 川口市 内視鏡センター`}
                     className="w-full h-full object-cover"
                   />
                 </div>

@@ -3,10 +3,10 @@ import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import Link from 'next/link'
-import { 
+import {
   Activity,
-  CheckCircle, 
-  Clock, 
+  CheckCircle,
+  Clock,
   Users,
   Heart,
   Shield,
@@ -15,6 +15,12 @@ import {
   Microscope,
   Stethoscope
 } from 'lucide-react'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: '消化器内科 | 川口市 胃痛 腹痛 便秘 下痢 逆流性食道炎 | 新井町内科消化器クリニック',
+  description: '川口市新井町の消化器内科。胃痛・腹痛・便秘・下痢・逆流性食道炎などの消化器疾患を専門医が診療。予約なしで即日対応。内視鏡検査も実施。',
+}
 
 export default function GastroenterologyPage() {
   const symptoms = [

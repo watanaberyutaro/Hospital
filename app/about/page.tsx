@@ -63,9 +63,9 @@ export default function AboutPage() {
                 採血、処方、特定健診、人間ドックなど、地域の皆様の健康管理をサポートします。
               </p>
               <div className="rounded-lg overflow-hidden shadow-lg">
-                <img 
-                  src="/images/建物2.jpg" 
-                  alt="新井町内科消化器クリニック施設"
+                <img
+                  src="/images/建物2.jpg"
+                  alt="新井町内科消化器クリニック 施設外観 - 川口市新井町 内科 消化器内科 駐車場11台完備"
                   className="w-full h-auto object-cover"
                 />
               </div>
@@ -95,9 +95,9 @@ export default function AboutPage() {
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div className="rounded-lg overflow-hidden shadow-xl">
-                <img 
-                  src="/images/3doctor.jpg" 
-                  alt="当院の医師陣"
+                <img
+                  src="/images/3doctor.jpg"
+                  alt="新井町内科消化器クリニック 医師陣 - 3名の専門医による診療体制 川口市"
                   className="w-full h-auto object-cover"
                 />
               </div>
@@ -141,9 +141,9 @@ export default function AboutPage() {
           />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             <div className="rounded-lg overflow-hidden shadow-lg">
-              <img 
-                src="/images/オペ.jpg" 
-                alt="内視鏡室"
+              <img
+                src="/images/オペ.jpg"
+                alt="内視鏡検査室 - 新井町内科消化器クリニック 川口市 最新設備完備"
                 className="w-full h-64 object-cover"
               />
               <div className="p-4 bg-white dark:bg-gray-700">
@@ -152,9 +152,9 @@ export default function AboutPage() {
               </div>
             </div>
             <div className="rounded-lg overflow-hidden shadow-lg">
-              <img 
-                src="/images/内視鏡センター.jpg" 
-                alt="内視鏡センター"
+              <img
+                src="/images/内視鏡センター.jpg"
+                alt="内視鏡センター - 胃カメラ 大腸カメラ 専門設備 新井町内科消化器クリニック 川口市"
                 className="w-full h-64 object-cover"
               />
               <div className="p-4 bg-white dark:bg-gray-700">
@@ -163,9 +163,9 @@ export default function AboutPage() {
               </div>
             </div>
             <div className="rounded-lg overflow-hidden shadow-lg">
-              <img 
-                src="/images/art.jpg" 
-                alt="院内アート"
+              <img
+                src="/images/art.jpg"
+                alt="院内環境 - リラックスできる待合室 新井町内科消化器クリニック 川口市"
                 className="w-full h-64 object-cover"
               />
               <div className="p-4 bg-white dark:bg-gray-700">
