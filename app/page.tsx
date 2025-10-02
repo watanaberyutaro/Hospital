@@ -36,7 +36,11 @@ export default function HomePage() {
     specialHolidays: []
   })
   const [nationalHolidays, setNationalHolidays] = useState<Holiday[]>([])
-  const [currentDate, setCurrentDate] = useState<Date>(new Date())
+  const [currentDate, setCurrentDate] = useState<Date>(() => {
+    // 常に新しいDateオブジェクトを生成して最新の日付を取得
+    const now = new Date()
+    return new Date(now.getFullYear(), now.getMonth(), now.getDate())
+  })
 
   useEffect(() => {
     fetch('/api/holidays')
@@ -53,11 +57,11 @@ export default function HomePage() {
   useEffect(() => {
     const checkDateChange = () => {
       const now = new Date()
-      const today = new Date(currentDate)
-      
-      // 日付が変わったかチェック
-      if (now.toDateString() !== today.toDateString()) {
-        setCurrentDate(now)
+      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+
+      // 日付が変わったかチェック（時刻を無視して日付のみを比較）
+      if (today.getTime() !== currentDate.getTime()) {
+        setCurrentDate(today)
       }
     }
 
@@ -110,47 +114,44 @@ export default function HomePage() {
     const month = todayDate.getMonth()
     const firstDay = new Date(year, month, 1)
     const lastDay = new Date(year, month + 1, 0)
-    const startDate = new Date(firstDay)
-    // 月曜日始まりに調整（getDay()が0（日曜）の場合は6、それ以外は-1）
-    const firstDayOfWeek = firstDay.getDay()
-    const daysToSubtract = firstDayOfWeek === 0 ? 6 : firstDayOfWeek - 1
-    startDate.setDate(startDate.getDate() - daysToSubtract)
-    
+
+    // 月曜日始まりに調整
+    const firstDayOfWeek = firstDay.getDay() // 0(日) - 6(土)
+    // 月曜日を0として計算: 日曜は6、月曜は0、火曜は1...
+    const daysFromMonday = firstDayOfWeek === 0 ? 6 : firstDayOfWeek - 1
+    const startDate = new Date(year, month, 1 - daysFromMonday)
+
     const weeks = []
     let week = []
-    let iterDate = new Date(startDate)
-    let safeguard = 0 // 無限ループ防止
-    
-    while (iterDate <= lastDay || week.length > 0) {
-      if (safeguard++ > 42) break // カレンダーの最大マス数（6週間）を超えたら終了
-      
-      if (week.length === 7) {
-        weeks.push(week)
-        week = []
-        if (iterDate > lastDay && week.length === 0) break
-      }
-      
-      if (iterDate.getMonth() === month) {
-        const dayOfWeek = iterDate.getDay()
-        const dateString = `${year}-${String(month + 1).padStart(2, '0')}-${String(iterDate.getDate()).padStart(2, '0')}`
-        
+    const iterDate = new Date(startDate)
+
+    // カレンダーの全セルを生成（最大6週間）
+    for (let i = 0; i < 42; i++) {
+      const dayOfWeek = iterDate.getDay()
+      const dateString = `${iterDate.getFullYear()}-${String(iterDate.getMonth() + 1).padStart(2, '0')}-${String(iterDate.getDate()).padStart(2, '0')}`
+      const isCurrentMonth = iterDate.getMonth() === month
+
+      if (isCurrentMonth) {
         // 定休日チェック
         const isRegularHoliday = holidays.regularHolidays.weekdays.includes(dayOfWeek)
-        
+
         // 午後休みチェック
         const isHalfDayHoliday = holidays.halfDayHolidays?.weekdays.includes(dayOfWeek) || false
-        
+
         // 臨時休業日チェック
         const isSpecialHoliday = holidays.specialHolidays.some(h => h.date === dateString)
         const specialHolidayReason = holidays.specialHolidays.find(h => h.date === dateString)?.reason
-        
+
         // 祝日チェック
         const nationalHoliday = nationalHolidays.find(h => h.date === dateString)
         const isNationalHoliday = !!nationalHoliday
         const nationalHolidayName = nationalHoliday?.name
-        
-        const isToday = iterDate.toDateString() === todayDate.toDateString()
-        
+
+        // 今日かどうかのチェック（時刻を無視して日付のみで比較）
+        const isToday = iterDate.getFullYear() === todayDate.getFullYear() &&
+                        iterDate.getMonth() === todayDate.getMonth() &&
+                        iterDate.getDate() === todayDate.getDate()
+
         week.push({
           date: iterDate.getDate(),
           dateString,
@@ -164,40 +165,38 @@ export default function HomePage() {
           isToday,
           dayOfWeek,
         })
-      } else if (iterDate > lastDay && week.length > 0) {
-        // 最終週の空きマスを埋める
+      } else {
+        // 当月以外のセルは空にする
         week.push({
           date: '',
           dateString: '',
           isCurrentMonth: false,
           isHoliday: false,
+          isHalfDayHoliday: false,
           isSpecialHoliday: false,
           specialHolidayReason: '',
+          isNationalHoliday: false,
+          nationalHolidayName: '',
           isToday: false,
-          dayOfWeek: iterDate.getDay(),
+          dayOfWeek,
         })
       }
-      
+
+      // 1週間分たまったら週配列に追加
+      if (week.length === 7) {
+        weeks.push(week)
+        week = []
+      }
+
+      // 次の日へ
       iterDate.setDate(iterDate.getDate() + 1)
-    }
-    
-    if (week.length > 0 && week.length < 7) {
-      // 最終週が7日未満の場合、空きマスで埋める
-      while (week.length < 7) {
-        week.push({
-          date: '',
-          dateString: '',
-          isCurrentMonth: false,
-          isHoliday: false,
-          isSpecialHoliday: false,
-          specialHolidayReason: '',
-          isToday: false,
-          dayOfWeek: week.length,
-        })
+
+      // 当月を過ぎて最初の週の終わりに達したら終了
+      if (iterDate.getMonth() !== month && week.length === 0 && weeks.length > 0) {
+        break
       }
-      weeks.push(week)
     }
-    
+
     return {
       year,
       month,
