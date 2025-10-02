@@ -80,12 +80,12 @@ export default function InternalMedicinePage() {
     {
       name: '植村 博之',
       title: '院長',
-      qualification: '医学博士・総合内科専門医',
+      qualification: '医学博士',
     },
     {
       name: '植村 隼人',
       title: '副院長',
-      qualification: '内科認定医・糖尿病専門医',
+      qualification: '医学博士・内科認定医・消化器病専門医・内視鏡専門医・肝臓病専門医',
     },
     {
       name: '植村 伶央',
@@ -186,12 +186,6 @@ export default function InternalMedicinePage() {
                     <h4 className="font-medium mb-1">生活習慣病外来</h4>
                     <p className="text-sm text-gray-600 dark:text-gray-300">
                       高血圧・糖尿病・脂質異常症の専門的治療を行います
-                    </p>
-                  </div>
-                  <div className="p-4 bg-secondary/20 rounded-lg">
-                    <h4 className="font-medium mb-1">禁煙外来</h4>
-                    <p className="text-sm text-gray-600 dark:text-gray-300">
-                      禁煙治療薬を用いた専門的な禁煙サポートを提供します
                     </p>
                   </div>
                   <div className="p-4 bg-secondary/20 rounded-lg">
