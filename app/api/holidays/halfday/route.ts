@@ -47,16 +47,20 @@ export async function PUT(request: NextRequest) {
     const envInfo = storage.getEnvironmentInfo()
     console.log('Environment info:', envInfo)
 
-    if (envInfo.isVercel && !envInfo.hasBlobToken) {
+    // Vercel Blob Storage設定エラーの場合
+    if (error instanceof Error && error.message.includes('Vercel Blob Storage token')) {
       return NextResponse.json({
-        error: 'Vercel Blob Storageの設定が必要です。環境変数 BLOB_READ_WRITE_TOKEN を設定してください。',
-        info: 'https://vercel.com/docs/storage/vercel-blob を参照してください。'
+        error: 'Vercel Blob Storageの設定が必要です',
+        details: '環境変数 BLOB_READ_WRITE_TOKEN を設定してください',
+        info: 'https://vercel.com/docs/storage/vercel-blob'
       }, { status: 503 })
     }
 
+    // その他のエラー
     return NextResponse.json({
-      error: 'Failed to update half-day holidays',
-      details: error instanceof Error ? error.message : String(error)
+      error: '午後休みの更新に失敗しました',
+      details: error instanceof Error ? error.message : String(error),
+      environmentInfo: envInfo
     }, { status: 500 })
   }
 }

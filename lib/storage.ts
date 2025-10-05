@@ -91,30 +91,58 @@ class StorageService {
   // ニュースデータの保存
   async saveNews(data: NewsData): Promise<void> {
     try {
+      if (IS_VERCEL && !HAS_BLOB_TOKEN) {
+        console.error('Vercel environment detected but BLOB_READ_WRITE_TOKEN is not set');
+        throw new Error('Vercel Blob Storage token is not configured. Please set BLOB_READ_WRITE_TOKEN environment variable.');
+      }
+
       if (this.useBlob) {
         // Vercel Blobに保存
         const fileName = `news-${Date.now()}.json`;
+        console.log('Saving to Vercel Blob:', fileName);
+
         await put(fileName, JSON.stringify(data, null, 2), {
           access: 'public',
           addRandomSuffix: false,
         });
-        
+
+        console.log('Successfully saved to Vercel Blob');
+
         // 古いバージョンを削除（最新5件を保持）
         const { blobs } = await list({ prefix: 'news-' });
-        const sortedBlobs = blobs.sort((a, b) => 
+        const sortedBlobs = blobs.sort((a, b) =>
           new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime()
         );
-        
+
         for (let i = 5; i < sortedBlobs.length; i++) {
           await del(sortedBlobs[i].url);
         }
       } else {
         // ローカルファイルに保存
+        console.log('Saving to local file:', this.newsFilePath);
+
+        // ディレクトリが存在するか確認
+        const dir = path.dirname(this.newsFilePath);
+        try {
+          await fs.access(dir);
+        } catch {
+          console.log('Creating directory:', dir);
+          await fs.mkdir(dir, { recursive: true });
+        }
+
         await fs.writeFile(this.newsFilePath, JSON.stringify(data, null, 2));
+        console.log('Successfully saved to local file');
       }
     } catch (error) {
       console.error('Error saving news:', error);
-      throw new Error('Failed to save news data');
+      console.error('Error details:', error instanceof Error ? error.message : String(error));
+      console.error('useBlob:', this.useBlob, 'IS_VERCEL:', IS_VERCEL, 'HAS_BLOB_TOKEN:', HAS_BLOB_TOKEN);
+
+      if (error instanceof Error && error.message.includes('Vercel Blob Storage token')) {
+        throw error;
+      }
+
+      throw new Error(`Failed to save news data: ${error instanceof Error ? error.message : String(error)}`);
     }
   }
 
@@ -156,30 +184,58 @@ class StorageService {
   // 休日データの保存
   async saveHolidays(data: HolidayData): Promise<void> {
     try {
+      if (IS_VERCEL && !HAS_BLOB_TOKEN) {
+        console.error('Vercel environment detected but BLOB_READ_WRITE_TOKEN is not set');
+        throw new Error('Vercel Blob Storage token is not configured. Please set BLOB_READ_WRITE_TOKEN environment variable.');
+      }
+
       if (this.useBlob) {
         // Vercel Blobに保存
         const fileName = `holidays-${Date.now()}.json`;
+        console.log('Saving to Vercel Blob:', fileName);
+
         await put(fileName, JSON.stringify(data, null, 2), {
           access: 'public',
           addRandomSuffix: false,
         });
-        
+
+        console.log('Successfully saved to Vercel Blob');
+
         // 古いバージョンを削除（最新5件を保持）
         const { blobs } = await list({ prefix: 'holidays-' });
-        const sortedBlobs = blobs.sort((a, b) => 
+        const sortedBlobs = blobs.sort((a, b) =>
           new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime()
         );
-        
+
         for (let i = 5; i < sortedBlobs.length; i++) {
           await del(sortedBlobs[i].url);
         }
       } else {
         // ローカルファイルに保存
+        console.log('Saving to local file:', this.holidaysFilePath);
+
+        // ディレクトリが存在するか確認
+        const dir = path.dirname(this.holidaysFilePath);
+        try {
+          await fs.access(dir);
+        } catch {
+          console.log('Creating directory:', dir);
+          await fs.mkdir(dir, { recursive: true });
+        }
+
         await fs.writeFile(this.holidaysFilePath, JSON.stringify(data, null, 2));
+        console.log('Successfully saved to local file');
       }
     } catch (error) {
       console.error('Error saving holidays:', error);
-      throw new Error('Failed to save holiday data');
+      console.error('Error details:', error instanceof Error ? error.message : String(error));
+      console.error('useBlob:', this.useBlob, 'IS_VERCEL:', IS_VERCEL, 'HAS_BLOB_TOKEN:', HAS_BLOB_TOKEN);
+
+      if (error instanceof Error && error.message.includes('Vercel Blob Storage token')) {
+        throw error;
+      }
+
+      throw new Error(`Failed to save holiday data: ${error instanceof Error ? error.message : String(error)}`);
     }
   }
 

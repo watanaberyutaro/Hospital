@@ -36,6 +36,33 @@ git push origin main
 
 このエラーが表示される場合は、環境変数が正しく設定されていません。上記の手順を確認してください。
 
+**確認項目：**
+1. Vercel Blob Storageが作成されているか
+2. 環境変数 `BLOB_READ_WRITE_TOKEN` が存在するか
+3. 環境変数が正しいプロジェクトに設定されているか
+4. 最新のコードがデプロイされているか
+
+**環境変数の確認方法：**
+1. Vercelダッシュボードでプロジェクトを選択
+2. 「Settings」→「Environment Variables」
+3. `BLOB_READ_WRITE_TOKEN` が存在し、値が設定されていることを確認
+
+### エラー：「Failed to save holiday data」
+
+このエラーが出る場合、以下を確認してください：
+
+1. **Vercel環境の場合**: 上記の「Vercel Blob Storageの設定が必要です」エラーと同じ対処法
+2. **ローカル環境の場合**: `public/data/` ディレクトリが存在し、書き込み権限があることを確認
+
+### ログの確認方法
+
+Vercelでのエラーログを確認する：
+1. Vercelダッシュボードでプロジェクトを選択
+2. 「Deployments」タブをクリック
+3. 最新のデプロイメントをクリック
+4. 「Functions」タブで関数のログを確認
+5. または「Runtime Logs」でリアルタイムログを確認
+
 ### データの移行
 
 既存のJSONファイルのデータをVercel Blobに移行したい場合は、以下の手順で行えます：
