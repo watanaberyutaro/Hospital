@@ -53,33 +53,16 @@ export default function HomePage() {
     setNationalHolidays(holidays)
   }, [currentDate])
 
-  // 毎日0時に日付を更新
+  // ページ読み込み時に日付を更新（マウント時のみ実行）
   useEffect(() => {
-    const checkDateChange = () => {
-      const now = new Date()
-      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+    const now = new Date()
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
 
-      // 日付が変わったかチェック（時刻を無視して日付のみを比較）
-      if (today.getTime() !== currentDate.getTime()) {
-        setCurrentDate(today)
-      }
+    // 初回マウント時に最新の日付を設定
+    if (today.getTime() !== currentDate.getTime()) {
+      setCurrentDate(today)
     }
-
-    // 初回チェック
-    checkDateChange()
-
-    // 1分ごとにチェック（0時を逃さないため）
-    const interval = setInterval(checkDateChange, 60000)
-
-    // ページがフォーカスされた時にもチェック
-    const handleFocus = () => checkDateChange()
-    window.addEventListener('focus', handleFocus)
-
-    return () => {
-      clearInterval(interval)
-      window.removeEventListener('focus', handleFocus)
-    }
-  }, [currentDate])
+  }, [])
   const medicalServices = [
     {
       icon: <Stethoscope className="w-8 h-8" />,
