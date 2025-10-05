@@ -117,17 +117,21 @@ export default function AdminHolidaysPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           weekdays: selectedWeekdays,
-          description: description,
-          halfDayWeekdays: holidays.halfDayHolidays?.weekdays || []
+          description: description
         })
       })
 
       if (response.ok) {
         fetchHolidays()
         setIsEditingRegular(false)
+      } else {
+        const errorData = await response.json()
+        console.error('Failed to update regular holidays:', errorData)
+        alert(`定休日の更新に失敗しました: ${errorData.error || '不明なエラー'}\n${errorData.details || ''}`)
       }
     } catch (error) {
       console.error('Failed to update regular holidays:', error)
+      alert(`定休日の更新に失敗しました: ${error instanceof Error ? error.message : '不明なエラー'}`)
     }
   }
 
@@ -150,9 +154,14 @@ export default function AdminHolidaysPage() {
       if (response.ok) {
         fetchHolidays()
         setIsEditingHalfDay(false)
+      } else {
+        const errorData = await response.json()
+        console.error('Failed to update half-day holidays:', errorData)
+        alert(`午後休みの更新に失敗しました: ${errorData.error || '不明なエラー'}\n${errorData.details || ''}`)
       }
     } catch (error) {
       console.error('Failed to update half-day holidays:', error)
+      alert(`午後休みの更新に失敗しました: ${error instanceof Error ? error.message : '不明なエラー'}`)
     }
   }
 
