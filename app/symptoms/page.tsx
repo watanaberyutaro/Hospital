@@ -64,7 +64,7 @@ export default function SymptomsPage() {
   ]
 
   const vaccines = [
-    { name: 'インフルエンザワクチン', period: '10月～1月', target: '全年齢対象' },
+    { name: 'インフルエンザワクチン', period: '10月～1月', target: '13歳以上の中学生以上' },
     { name: '肺炎球菌ワクチン', period: '通年', target: '65歳以上推奨' },
     { name: '帯状疱疹ワクチン', period: '通年', target: '50歳以上推奨' },
     { name: 'B型肝炎ワクチン', period: '通年', target: '医療従事者・リスクのある方' },
