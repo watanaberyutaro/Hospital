@@ -124,7 +124,7 @@ export default function GastroenterologyPage() {
                 消化器系全般の疾患を専門的に診断・治療しています。
               </p>
               <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                日本消化器病学会専門医、日本消化器内視鏡学会専門医、日本肝臓学会専門医の資格を持つ院長が、
+                日本消化器病学会専門医、日本消化器内視鏡学会専門医、日本肝臓学会専門医の資格を持つ医師が、
                 最新の知識と技術で診療にあたります。
               </p>
             </div>
@@ -282,7 +282,7 @@ export default function GastroenterologyPage() {
                 診療時間
               </h3>
               <div className="space-y-2 text-gray-700 dark:text-gray-300">
-                <p>午前：9:00～12:30（受付12:30まで）</p>
+                <p>午前：9:00～12:30（受付12:00まで）</p>
                 <p>午後：15:00～18:00（受付17:30まで）</p>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mt-3">
                   ※日曜・祝日・その他休診

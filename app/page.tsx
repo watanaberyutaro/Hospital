@@ -67,7 +67,7 @@ export default function HomePage() {
     {
       icon: <Stethoscope className="w-8 h-8" />,
       title: '内科診療',
-      description: '川口市ですぐに対応可能。かぜ、発熱、頭痛、生活習慣病など日常的な健康問題にすぐに対応。地域の「かかりつけ医」として親身に診療いたします。',
+      description: 'かぜ、発熱、頭痛、生活習慣病など日常的な健康問題にすぐに対応。地域の「かかりつけ医」として親身に診療いたします。',
     },
     {
       icon: <Thermometer className="w-8 h-8" />,
@@ -214,17 +214,17 @@ export default function HomePage() {
   const departments = [
     {
       name: '一般内科',
-      description: '川口市ですぐに対応。かぜ、発熱、生活習慣病管理など日常的な健康問題にすぐに診察',
+      description: 'かぜ、発熱、生活習慣病管理など日常的な健康問題にすぐに診察',
       image: '/images/doctor.jpg',
     },
     {
       name: '消化器内科',
-      description: '川口市の消化器内科専門医。胃痛・腹痛、便通異常、肝胆膵疾患にすぐに対応',
+      description: '川口市の消化器内科専門医。胃痛・腹痛、便通異常、肝胆膵疾患に対応',
       image: '/images/内視鏡センター個室.jpg',
     },
     {
       name: '健康診断',
-      description: '川口市で即日対応可能な健康診断。総合健診・人間ドック・各種検査',
+      description: '川口市で対応可能な健康診断。総合健診など各種検査',
       image: '/images/建物2.jpg',
     },
     {
@@ -249,7 +249,7 @@ export default function HomePage() {
             <Card className="p-6">
               <h3 className="font-bold text-lg mb-2">初めて受診される方</h3>
               <p className="text-sm text-muted-foreground">
-                急な体調不良でもすぐに対応いたします。
+                急な体調不良にも対応いたします。
               </p>
             </Card>
             <Card className="p-6">
@@ -271,9 +271,9 @@ export default function HomePage() {
       <section className="py-16 bg-gradient-to-b from-primary/5 to-background">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">川口市ですぐに対応する内科クリニック</h2>
+            <h2 className="text-3xl font-bold mb-4">川口市に寄り添う内科クリニック</h2>
             <p className="text-lg text-muted-foreground">
-              内科診療から専門的な消化器検査まで、川口市の皆様にすぐに対応いたします
+              一般内科から専門的な消化器検査まで、幅広く対応いたします
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -296,7 +296,7 @@ export default function HomePage() {
             <div>
               <SectionHeading 
                 title="診療時間・休診日"
-                subtitle="川口市ですぐに対応・待ち時間短縮"
+                subtitle=""
                 center={false}
               />
               <div className="space-y-6">
@@ -457,7 +457,7 @@ export default function HomePage() {
         <div className="container mx-auto px-6">
           <SectionHeading 
             title="診療内容"
-            subtitle="川口市の内科・消化器内科。すぐに対応・専門医が幅広く診療"
+            subtitle="川口市の内科・消化器内科。専門医が幅広く診療"
           />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {departments.map((dept, index) => (

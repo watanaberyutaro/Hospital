@@ -18,7 +18,7 @@ export default function EndoscopyPage() {
         '経鼻内視鏡で苦痛を軽減',
         '鎮静剤使用可能（経口の場合）',
         'ピロリ菌検査も同時実施可能',
-        '検査時間約5〜10分',
+        '所要時間約1時間（検査時間5~10分)',
       ],
       image: '/images/内視鏡センター.jpg',
     },
@@ -29,7 +29,7 @@ export default function EndoscopyPage() {
         '鎮静下で苦痛の少ない検査',
         'ポリープ発見時は即日切除可能',
         '下剤の服用法を個別指導',
-        '検査時間約15〜30分',
+        '所要時間約90分（検査時間15~30分)',
       ],
       image: '/images/内視鏡センター個室.jpg',
     },
@@ -147,7 +147,7 @@ export default function EndoscopyPage() {
                   <div>
                     <h4 className="font-semibold mb-2">検査のご相談</h4>
                     <p className="text-muted-foreground">
-                      外来診察にて血液検査や画像検査を行い、内視鏡治療の適応について判断します。
+                      外来診察にて血液検査や画像検査を行い、内視鏡治療の適応について判断します。（他院で内服治療中の方はお薬手帳をご持参ください。）
                     </p>
                   </div>
                 </div>
@@ -180,7 +180,7 @@ export default function EndoscopyPage() {
                   <div>
                     <h4 className="font-semibold mb-2">検査実施</h4>
                     <p className="text-muted-foreground">
-                      リラックスした状態で検査を受けていただきます。鎮静剤使用時は回復室でお休みいただきます。
+                      リラックスした状態で検査を受けていただきます。鎮静剤使用時は回復室でお休みいただきます。※鎮静剤を使用した際は、お車や自転車などの運転は道路交通法によりできないことをご理解ください。
                     </p>
                   </div>
                 </div>
@@ -192,31 +192,13 @@ export default function EndoscopyPage() {
                     <h4 className="font-semibold mb-2">結果説明</h4>
                     <p className="text-muted-foreground">
                     検査画像を見ながら、わかりやすく結果をご説明します。
-必要に応じて治療方針もごそうだんします。
+必要に応じて治療方針もご相談します。
 病理検査結果には2〜3週間かかる場合がございますので、後日外来で結果説明を行うこともございます。
                     </p>
                   </div>
                 </div>
               </div>
             </Card>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 bg-primary/5">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-4">内視鏡検査のご相談</h2>
-          <p className="text-xl text-muted-foreground mb-8">
-            検査をご希望の方は、お電話にてご相談ください
-          </p>
-          <div className="flex flex-col items-center gap-4">
-            <Button size="lg" className="flex items-center gap-2">
-              <Phone className="w-5 h-5" />
-              <a href="tel:048-222-0700">048-222-0700</a>
-            </Button>
-            <p className="text-sm text-muted-foreground">
-              受付時間：月火水金 9:00-12:30 / 16:00-18:30、木土 9:00-12:30
-            </p>
           </div>
         </div>
       </section>

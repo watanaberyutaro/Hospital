@@ -7,7 +7,7 @@ export function Hero() {
     {
       icon: <Heart className="w-10 h-10" />,
       title: '専門医による診療',
-      description: '消化器病・内視鏡・肝臓の専門医資格を持つ院長',
+      description: '消化器病・内視鏡・肝臓の専門医資格を持つ医師',
     },
     {
       icon: <Users className="w-10 h-10" />,

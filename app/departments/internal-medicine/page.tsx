@@ -124,7 +124,7 @@ export default function InternalMedicinePage() {
                     「体調が悪いけれど、どの科を受診すればよいかわからない」という場合も、まずは一般内科にご相談ください。
                   </p>
                   <p className="text-gray-600 dark:text-gray-300 mb-4">
-                    当院では、総合内科専門医・糖尿病専門医が在籍し、幅広い内科疾患に対して専門的な診療を提供しています。
+                    当院では、内科専門医・消化器・肝臓病病専門医、内視鏡専門医が在籍し、幅広い内科疾患に対して専門的な診療を提供しています。
                     急性疾患から慢性疾患まで、患者様一人ひとりの症状に合わせた適切な治療を行います。
                   </p>
                   <p className="text-gray-600 dark:text-gray-300">
@@ -258,10 +258,6 @@ export default function InternalMedicinePage() {
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
-                  <span>胸の痛みや動悸がする</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">•</span>
                   <span>健康診断で異常を指摘された</span>
                 </li>
                 <li className="flex items-start gap-2">
@@ -269,13 +265,6 @@ export default function InternalMedicinePage() {
                   <span>体重の急激な増減がある</span>
                 </li>
               </ul>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button asChild>
-                  <a href="tel:048-222-0700">
-                    電話で相談する
-                  </a>
-                </Button>
-              </div>
             </Card>
           </div>
         </div>
