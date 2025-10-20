@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/Button'
 import { Calendar, Clock, MapPin, Phone, Thermometer, Stethoscope, Heart, AlertCircle } from 'lucide-react'
 import NewsSection from '@/components/NewsSection'
 import { ClinicCalendar } from '@/components/ui/ClinicCalendar'
+import { DoctorSchedule } from '@/components/ui/DoctorSchedule'
 import { useState, useEffect, useMemo } from 'react'
 import { getMonthlyHolidays, type Holiday } from '@/src/lib/holidays'
 
@@ -403,6 +404,8 @@ export default function HomePage() {
                     </Button>
                   </div>
                 </Card>
+
+                <DoctorSchedule />
               </div>
             </div>
             

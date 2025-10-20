@@ -1,8 +1,9 @@
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
-import { Phone, CheckCircle, Clock, Shield, Heart } from 'lucide-react'
+import { Phone, CheckCircle, Clock, Shield, Heart, FileText } from 'lucide-react'
 import type { Metadata } from 'next'
+import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: '内視鏡検査 | 川口市 胃カメラ 大腸カメラ 専門医 | 新井町内科消化器クリニック',
@@ -198,6 +199,29 @@ export default function EndoscopyPage() {
                   </div>
                 </div>
               </div>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-secondary/10">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto">
+            <Card className="p-8 text-center">
+              <div className="flex justify-center mb-6 text-primary">
+                <FileText className="w-12 h-12" />
+              </div>
+              <h3 className="text-2xl font-semibold mb-4">大腸内視鏡検査をご検討の方へ</h3>
+              <p className="text-muted-foreground mb-6 leading-relaxed">
+                当院での大腸内視鏡検査には院内規定がございます。<br />
+                安全な検査のため、事前にご確認ください。
+              </p>
+              <Link href="/colonoscopy-guideline">
+                <Button size="lg" variant="outline" className="flex items-center gap-2 mx-auto">
+                  <FileText className="w-5 h-5" />
+                  大腸内視鏡検査・院内規定はこちら
+                </Button>
+              </Link>
             </Card>
           </div>
         </div>
