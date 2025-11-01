@@ -181,7 +181,10 @@ export default function EndoscopyPage() {
                   <div>
                     <h4 className="font-semibold mb-2">検査実施</h4>
                     <p className="text-muted-foreground">
-                      リラックスした状態で検査を受けていただきます。鎮静剤使用時は回復室でお休みいただきます。※鎮静剤を使用した際は、お車や自転車などの運転は道路交通法によりできないことをご理解ください。
+                      リラックスした状態で検査を受けていただきます。鎮静剤使用時は回復室でお休みいただきます。
+                    </p>
+                     <p className="text-muted-foreground">
+                      ※鎮静剤を使用した際は、お車や自転車などの運転は道路交通法によりできないことをご理解ください。
                     </p>
                   </div>
                 </div>
