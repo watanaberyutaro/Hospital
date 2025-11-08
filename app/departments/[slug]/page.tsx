@@ -154,7 +154,6 @@ export default async function DepartmentPage({ params }: { params: { slug: strin
 
 export async function generateStaticParams() {
   return [
-    { slug: 'internal-medicine' },
     { slug: 'surgery' },
     { slug: 'pediatrics' },
     { slug: 'orthopedics' },
