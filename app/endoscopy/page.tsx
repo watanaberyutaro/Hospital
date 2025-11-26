@@ -1,7 +1,7 @@
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
-import { Phone, CheckCircle, Clock, Shield, Heart, FileText } from 'lucide-react'
+import { Phone, CheckCircle, Clock, Shield, Heart, FileText, TrendingUp } from 'lucide-react'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
@@ -202,6 +202,127 @@ export default function EndoscopyPage() {
                   </div>
                 </div>
               </div>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-primary/5">
+        <div className="container mx-auto px-6">
+          <SectionHeading
+            title="内視鏡検査実績"
+            subtitle="2012年から2024年までの検査件数推移"
+          />
+          <div className="max-w-5xl mx-auto">
+            <p className="text-center text-muted-foreground mb-8">
+              当院では開院以来、多くの患者様に内視鏡検査をご利用いただいております。<br />
+              豊富な経験と実績に基づき、安心・安全な検査を提供いたします。
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+              <Card className="p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                    <TrendingUp className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold">胃カメラ（GF）</h3>
+                    <p className="text-sm text-muted-foreground">上部消化管内視鏡検査</p>
+                  </div>
+                </div>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="border-b">
+                        <th className="py-2 px-2 text-left font-medium text-muted-foreground">年度</th>
+                        <th className="py-2 px-2 text-right font-medium text-muted-foreground">件数</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {[
+                        { year: '2012', count: 692 },
+                        { year: '2013', count: 779 },
+                        { year: '2014', count: 713 },
+                        { year: '2015', count: 740 },
+                        { year: '2016', count: 715 },
+                        { year: '2017', count: 720 },
+                        { year: '2018', count: 710 },
+                        { year: '2019', count: 659 },
+                        { year: '2020', count: 693 },
+                        { year: '2021', count: 690 },
+                        { year: '2022', count: 681 },
+                        { year: '2023', count: 783 },
+                        { year: '2024', count: 1186 },
+                      ].map((item) => (
+                        <tr key={item.year} className="border-b border-muted/30">
+                          <td className="py-2 px-2">{item.year}年</td>
+                          <td className="py-2 px-2 text-right font-medium">{item.count.toLocaleString()}件</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <div className="mt-4 pt-4 border-t">
+                  <p className="text-center">
+                    <span className="text-muted-foreground">累計実績：</span>
+                    <span className="text-2xl font-bold text-primary ml-2">9,761件</span>
+                  </p>
+                </div>
+              </Card>
+
+              <Card className="p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center">
+                    <TrendingUp className="w-6 h-6 text-accent" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold">大腸カメラ（CF）</h3>
+                    <p className="text-sm text-muted-foreground">下部消化管内視鏡検査</p>
+                  </div>
+                </div>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="border-b">
+                        <th className="py-2 px-2 text-left font-medium text-muted-foreground">年度</th>
+                        <th className="py-2 px-2 text-right font-medium text-muted-foreground">件数</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {[
+                        { year: '2012', count: 391 },
+                        { year: '2013', count: 369 },
+                        { year: '2014', count: 393 },
+                        { year: '2015', count: 365 },
+                        { year: '2016', count: 371 },
+                        { year: '2017', count: 377 },
+                        { year: '2018', count: 366 },
+                        { year: '2019', count: 378 },
+                        { year: '2020', count: 330 },
+                        { year: '2021', count: 371 },
+                        { year: '2022', count: 388 },
+                        { year: '2023', count: 423 },
+                        { year: '2024', count: 596 },
+                      ].map((item) => (
+                        <tr key={item.year} className="border-b border-muted/30">
+                          <td className="py-2 px-2">{item.year}年</td>
+                          <td className="py-2 px-2 text-right font-medium">{item.count.toLocaleString()}件</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <div className="mt-4 pt-4 border-t">
+                  <p className="text-center">
+                    <span className="text-muted-foreground">累計実績：</span>
+                    <span className="text-2xl font-bold text-accent ml-2">5,118件</span>
+                  </p>
+                </div>
+              </Card>
+            </div>
+            <Card className="p-6 text-center bg-gradient-to-r from-primary/10 to-accent/10">
+              <p className="text-lg mb-2">内視鏡検査 総実績</p>
+              <p className="text-4xl font-bold text-primary">14,879<span className="text-2xl">件以上</span></p>
+              <p className="text-sm text-muted-foreground mt-2">（2012年〜2024年）</p>
             </Card>
           </div>
         </div>
