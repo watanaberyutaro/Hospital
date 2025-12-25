@@ -13,7 +13,9 @@ import {
   Phone,
   AlertCircle,
   Microscope,
-  Stethoscope
+  Stethoscope,
+  TrendingUp,
+  ArrowRight
 } from 'lucide-react'
 import type { Metadata } from 'next'
 
@@ -212,6 +214,45 @@ export default function GastroenterologyPage() {
                     </p>
                   </div>
                 ))}
+              </div>
+            </Card>
+
+            <Card className="p-8 mb-12 bg-gradient-to-br from-primary/5 via-background to-accent/5">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">
+                内視鏡検査実績
+              </h3>
+              <p className="text-center text-gray-600 dark:text-gray-300 mb-8">
+                当院では開院以来、豊富な内視鏡検査実績を誇ります
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 text-center">
+                  <div className="flex items-center justify-center gap-3 mb-4">
+                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                      <TrendingUp className="w-6 h-6 text-primary" />
+                    </div>
+                    <h4 className="text-xl font-semibold">胃カメラ</h4>
+                  </div>
+                  <p className="text-4xl font-bold text-primary mb-2">15,191件</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">2003年〜2024年累計</p>
+                </div>
+                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 text-center">
+                  <div className="flex items-center justify-center gap-3 mb-4">
+                    <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center">
+                      <TrendingUp className="w-6 h-6 text-accent" />
+                    </div>
+                    <h4 className="text-xl font-semibold">大腸カメラ</h4>
+                  </div>
+                  <p className="text-4xl font-bold text-accent mb-2">7,606件</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">2003年〜2024年累計</p>
+                </div>
+              </div>
+              <div className="text-center">
+                <Button asChild variant="default">
+                  <Link href="/endoscopy" className="flex items-center gap-2 mx-auto">
+                    詳しい検査実績を見る
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </Button>
               </div>
             </Card>
 

@@ -4,12 +4,13 @@ import { Hero } from '@/components/ui/Hero'
 import { Card } from '@/components/ui/Card'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Button } from '@/components/ui/Button'
-import { Calendar, Clock, MapPin, Phone, Thermometer, Stethoscope, Heart, AlertCircle } from 'lucide-react'
+import { Calendar, Clock, MapPin, Phone, Thermometer, Stethoscope, Heart, AlertCircle, TrendingUp, ArrowRight } from 'lucide-react'
 import NewsSection from '@/components/NewsSection'
 import { ClinicCalendar } from '@/components/ui/ClinicCalendar'
 import { DoctorSchedule } from '@/components/ui/DoctorSchedule'
 import { useState, useEffect, useMemo } from 'react'
 import { getMonthlyHolidays, type Holiday } from '@/src/lib/holidays'
+import Link from 'next/link'
 
 interface SpecialHoliday {
   id: string
@@ -287,6 +288,72 @@ export default function HomePage() {
                 <p className="text-muted-foreground leading-relaxed">{service.description}</p>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-gradient-to-br from-primary/5 via-background to-accent/5">
+        <div className="container mx-auto px-6">
+          <SectionHeading
+            title="内視鏡検査実績"
+            subtitle="豊富な経験と実績に基づく、安心・安全な検査"
+          />
+          <div className="max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <Card className="p-8 bg-gradient-to-br from-white to-primary/5 dark:from-gray-800 dark:to-primary/10">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                    <TrendingUp className="w-8 h-8 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold">胃カメラ</h3>
+                    <p className="text-sm text-muted-foreground">上部消化管内視鏡検査</p>
+                  </div>
+                </div>
+                <div className="text-center py-6">
+                  <p className="text-5xl font-bold text-primary mb-2">15,191</p>
+                  <p className="text-muted-foreground">件以上の実績</p>
+                  <p className="text-sm text-muted-foreground mt-1">（2003年〜2024年）</p>
+                </div>
+              </Card>
+
+              <Card className="p-8 bg-gradient-to-br from-white to-accent/5 dark:from-gray-800 dark:to-accent/10">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
+                    <TrendingUp className="w-8 h-8 text-accent" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold">大腸カメラ</h3>
+                    <p className="text-sm text-muted-foreground">下部消化管内視鏡検査</p>
+                  </div>
+                </div>
+                <div className="text-center py-6">
+                  <p className="text-5xl font-bold text-accent mb-2">7,606</p>
+                  <p className="text-muted-foreground">件以上の実績</p>
+                  <p className="text-sm text-muted-foreground mt-1">（2003年〜2024年）</p>
+                </div>
+              </Card>
+            </div>
+
+            <Card className="p-8 text-center bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10">
+              <div className="mb-4">
+                <p className="text-lg text-muted-foreground mb-2">内視鏡検査 総実績</p>
+                <p className="text-6xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                  22,797<span className="text-3xl">件以上</span>
+                </p>
+                <p className="text-sm text-muted-foreground mt-2">（2003年〜2024年）</p>
+              </div>
+              <p className="text-muted-foreground mb-6 leading-relaxed max-w-2xl mx-auto">
+                20年以上にわたる豊富な経験と実績を持つ日本消化器内視鏡学会専門医が、
+                最新の内視鏡システムを用いて苦痛の少ない検査を実施しています。
+              </p>
+              <Link href="/endoscopy">
+                <Button size="lg" variant="default" className="flex items-center gap-2 mx-auto">
+                  内視鏡検査の詳細を見る
+                  <ArrowRight className="w-5 h-5" />
+                </Button>
+              </Link>
+            </Card>
           </div>
         </div>
       </section>

@@ -3,19 +3,21 @@ import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
-import { 
-  Heart, 
-  Stethoscope, 
-  Baby, 
-  Bone, 
-  Eye, 
-  Ear, 
-  Brain, 
+import {
+  Heart,
+  Stethoscope,
+  Baby,
+  Bone,
+  Eye,
+  Ear,
+  Brain,
   Activity,
   Users,
   Microscope,
   Pill,
-  Zap
+  Zap,
+  TrendingUp,
+  ArrowRight
 } from 'lucide-react'
 
 export default function DepartmentsPage() {
@@ -114,6 +116,68 @@ export default function DepartmentsPage() {
                 </div>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 bg-gradient-to-br from-primary/5 via-background to-accent/5">
+        <div className="container mx-auto px-4">
+          <SectionHeading
+            title="内視鏡検査実績"
+            subtitle="20年以上の豊富な経験と実績"
+          />
+          <div className="max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <Card className="p-6 text-center bg-white dark:bg-gray-800">
+                <div className="flex justify-center mb-4">
+                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
+                    <TrendingUp className="w-8 h-8 text-primary" />
+                  </div>
+                </div>
+                <h3 className="text-lg font-semibold mb-2">胃カメラ</h3>
+                <p className="text-4xl font-bold text-primary mb-1">15,191</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">件以上の実績</p>
+                <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">（2003年〜2024年）</p>
+              </Card>
+
+              <Card className="p-6 text-center bg-white dark:bg-gray-800">
+                <div className="flex justify-center mb-4">
+                  <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center">
+                    <TrendingUp className="w-8 h-8 text-accent" />
+                  </div>
+                </div>
+                <h3 className="text-lg font-semibold mb-2">大腸カメラ</h3>
+                <p className="text-4xl font-bold text-accent mb-1">7,606</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">件以上の実績</p>
+                <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">（2003年〜2024年）</p>
+              </Card>
+
+              <Card className="p-6 text-center bg-gradient-to-br from-primary/10 to-accent/10">
+                <div className="flex justify-center mb-4">
+                  <div className="w-16 h-16 bg-white/50 dark:bg-gray-800/50 rounded-full flex items-center justify-center">
+                    <Microscope className="w-8 h-8 text-primary" />
+                  </div>
+                </div>
+                <h3 className="text-lg font-semibold mb-2">総実績</h3>
+                <p className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-1">22,797</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">件以上</p>
+                <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">（2003年〜2024年）</p>
+              </Card>
+            </div>
+
+            <Card className="p-8 text-center bg-white dark:bg-gray-800">
+              <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed max-w-3xl mx-auto">
+                日本消化器内視鏡学会専門医による豊富な経験と実績に基づき、
+                最新の内視鏡システムを用いて苦痛の少ない検査を実施しています。
+                開院以来、多くの患者様に安心・安全な検査を提供し続けております。
+              </p>
+              <Link href="/endoscopy">
+                <Button size="lg" className="flex items-center gap-2 mx-auto">
+                  内視鏡検査の詳細を見る
+                  <ArrowRight className="w-5 h-5" />
+                </Button>
+              </Link>
+            </Card>
           </div>
         </div>
       </section>

@@ -211,7 +211,7 @@ export default function EndoscopyPage() {
         <div className="container mx-auto px-6">
           <SectionHeading
             title="内視鏡検査実績"
-            subtitle="2012年から2024年までの検査件数推移"
+            subtitle="2003年から2024年までの検査件数推移"
           />
           <div className="max-w-5xl mx-auto">
             <p className="text-center text-muted-foreground mb-8">
@@ -239,7 +239,16 @@ export default function EndoscopyPage() {
                     </thead>
                     <tbody>
                       {[
-                        { year: '2012', count: 692 },
+                        { year: '2003', count: 552 },
+                        { year: '2004', count: 442 },
+                        { year: '2005', count: 455 },
+                        { year: '2006', count: 585 },
+                        { year: '2007', count: 676 },
+                        { year: '2008', count: 657 },
+                        { year: '2009', count: 685 },
+                        { year: '2010', count: 660 },
+                        { year: '2011', count: 739 },
+                        { year: '2012', count: 671 },
                         { year: '2013', count: 779 },
                         { year: '2014', count: 713 },
                         { year: '2015', count: 740 },
@@ -264,7 +273,7 @@ export default function EndoscopyPage() {
                 <div className="mt-4 pt-4 border-t">
                   <p className="text-center">
                     <span className="text-muted-foreground">累計実績：</span>
-                    <span className="text-2xl font-bold text-primary ml-2">9,761件</span>
+                    <span className="text-2xl font-bold text-primary ml-2">15,191件</span>
                   </p>
                 </div>
               </Card>
@@ -289,7 +298,16 @@ export default function EndoscopyPage() {
                     </thead>
                     <tbody>
                       {[
-                        { year: '2012', count: 391 },
+                        { year: '2003', count: 191 },
+                        { year: '2004', count: 166 },
+                        { year: '2005', count: 193 },
+                        { year: '2006', count: 237 },
+                        { year: '2007', count: 304 },
+                        { year: '2008', count: 350 },
+                        { year: '2009', count: 353 },
+                        { year: '2010', count: 358 },
+                        { year: '2011', count: 361 },
+                        { year: '2012', count: 366 },
                         { year: '2013', count: 369 },
                         { year: '2014', count: 393 },
                         { year: '2015', count: 365 },
@@ -314,15 +332,15 @@ export default function EndoscopyPage() {
                 <div className="mt-4 pt-4 border-t">
                   <p className="text-center">
                     <span className="text-muted-foreground">累計実績：</span>
-                    <span className="text-2xl font-bold text-accent ml-2">5,118件</span>
+                    <span className="text-2xl font-bold text-accent ml-2">7,606件</span>
                   </p>
                 </div>
               </Card>
             </div>
             <Card className="p-6 text-center bg-gradient-to-r from-primary/10 to-accent/10">
               <p className="text-lg mb-2">内視鏡検査 総実績</p>
-              <p className="text-4xl font-bold text-primary">14,879<span className="text-2xl">件以上</span></p>
-              <p className="text-sm text-muted-foreground mt-2">（2012年〜2024年）</p>
+              <p className="text-4xl font-bold text-primary">22,797<span className="text-2xl">件以上</span></p>
+              <p className="text-sm text-muted-foreground mt-2">（2003年〜2024年）</p>
             </Card>
           </div>
         </div>
