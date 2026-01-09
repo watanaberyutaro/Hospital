@@ -260,18 +260,6 @@ export default function HealthCheckupPage() {
                   </p>
                 </div>
                 <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
-                  <h4 className="font-medium mb-2">動脈硬化検査</h4>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    血管年齢測定、頸動脈エコー検査
-                  </p>
-                </div>
-                <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
-                  <h4 className="font-medium mb-2">骨密度検査</h4>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    骨粗しょう症の早期発見
-                  </p>
-                </div>
-                <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
                   <h4 className="font-medium mb-2">アレルギー検査</h4>
                   <p className="text-sm text-gray-600 dark:text-gray-400">
                     39項目のアレルゲン検査（View39）
