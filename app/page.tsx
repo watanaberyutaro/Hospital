@@ -38,33 +38,29 @@ export default function HomePage() {
     specialHolidays: []
   })
   const [nationalHolidays, setNationalHolidays] = useState<Holiday[]>([])
-  const [currentDate, setCurrentDate] = useState<Date>(() => {
-    // 常に新しいDateオブジェクトを生成して最新の日付を取得
+  const [currentDate, setCurrentDate] = useState<Date | null>(null)
+  const [isClient, setIsClient] = useState(false)
+
+  // クライアント側でのみ日付を設定（SSRハイドレーションミスマッチを回避）
+  useEffect(() => {
+    setIsClient(true)
     const now = new Date()
-    return new Date(now.getFullYear(), now.getMonth(), now.getDate())
-  })
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+    setCurrentDate(today)
+  }, [])
 
   useEffect(() => {
+    if (!currentDate) return
+
     fetch('/api/holidays')
       .then(res => res.json())
       .then(data => setHolidays(data))
       .catch(err => console.error('Failed to fetch holidays:', err))
-    
+
     // 祝日データを取得
     const holidays = getMonthlyHolidays(currentDate.getFullYear(), currentDate.getMonth() + 1)
     setNationalHolidays(holidays)
   }, [currentDate])
-
-  // ページ読み込み時に日付を更新（マウント時のみ実行）
-  useEffect(() => {
-    const now = new Date()
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
-
-    // 初回マウント時に最新の日付を設定
-    if (today.getTime() !== currentDate.getTime()) {
-      setCurrentDate(today)
-    }
-  }, [])
   const medicalServices = [
     {
       icon: <Stethoscope className="w-8 h-8" />,
@@ -94,6 +90,15 @@ export default function HomePage() {
 
   // カレンダー用のデータ生成
   const calendarData = useMemo(() => {
+    if (!currentDate) {
+      return {
+        year: 0,
+        month: 0,
+        weeks: [],
+        monthName: '',
+      }
+    }
+
     const todayDate = new Date(currentDate)
     const year = todayDate.getFullYear()
     const month = todayDate.getMonth()
@@ -368,10 +373,10 @@ export default function HomePage() {
                 center={false}
               />
               <div className="space-y-6">
-                <Card className="p-6 bg-white/80 backdrop-blur" key={currentDate.toDateString()}>
+                <Card className="p-6 bg-white/80 backdrop-blur" key={currentDate?.toDateString() || 'loading'}>
                   <h4 className="font-semibold text-lg mb-4 flex items-center gap-2">
                     <Calendar className="w-5 h-5 text-primary" />
-                    {calendarData.year}年 {calendarData.monthName}
+                    {isClient && currentDate ? `${calendarData.year}年 ${calendarData.monthName}` : '読み込み中...'}
                   </h4>
                   <div className="overflow-x-auto rounded-lg border">
                     <table className="w-full min-w-[280px]">
