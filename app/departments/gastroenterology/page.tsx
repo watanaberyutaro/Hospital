@@ -232,8 +232,8 @@ export default function GastroenterologyPage() {
                     </div>
                     <h4 className="text-xl font-semibold">胃カメラ</h4>
                   </div>
-                  <p className="text-4xl font-bold text-primary mb-2">15,191件</p>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">2003年〜2024年累計</p>
+                  <p className="text-4xl font-bold text-primary mb-2">16,301件</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">2003年〜2025年累計</p>
                 </div>
                 <div className="bg-white dark:bg-gray-800 rounded-lg p-6 text-center">
                   <div className="flex items-center justify-center gap-3 mb-4">
@@ -242,8 +242,8 @@ export default function GastroenterologyPage() {
                     </div>
                     <h4 className="text-xl font-semibold">大腸カメラ</h4>
                   </div>
-                  <p className="text-4xl font-bold text-accent mb-2">7,606件</p>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">2003年〜2024年累計</p>
+                  <p className="text-4xl font-bold text-accent mb-2">8,197件</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">2003年〜2025年累計</p>
                 </div>
               </div>
               <div className="text-center">
