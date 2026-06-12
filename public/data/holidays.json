@@ -1,0 +1,16 @@
+{
+  "regularHolidays": {
+    "weekdays": [
+      0
+    ],
+    "description": "毎週日曜日"
+  },
+  "halfDayHolidays": {
+    "weekdays": [
+      4,
+      6
+    ],
+    "description": "毎週木曜日・土曜日"
+  },
+  "specialHolidays": []
+}
